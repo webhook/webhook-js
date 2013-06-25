@@ -1,0 +1,32 @@
+{
+  "name": "webhook-js",
+  "version": "0.0.1",
+  "description": "Utility jQuery plugins for Webhook",
+  "keywords": [
+    "jquery-plugin"
+  ],
+  "homepage": "https://github.com/webhook/webhook-js",
+  "author": {
+    "name": "Mike Horn",
+    "email": "mike@webhook.com",
+    "url": "https://github.com/gpbmike"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/webhook/webhook-js.git"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ],
+  "devDependencies": {
+    "grunt-contrib-jshint": "~0.1.1",
+    "grunt-contrib-qunit": "~0.1.1",
+    "grunt-contrib-concat": "~0.1.2",
+    "grunt-contrib-uglify": "~0.1.1",
+    "grunt-contrib-watch": "~0.2.0",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-connect": "~0.3.0"
+  }
+}
