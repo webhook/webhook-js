@@ -1,9 +1,12 @@
 {
   "name": "webhook-js",
-  "version": "",
-  "dependencies": {},
+  "version": "0.0.0",
+  "main": "dist/jquery.webhook-js.js",
+  "dependencies": {
+    "jquery": "~1.10.1"
+  },
   "devDependencies": {
     "qunit": "~1.11.0",
-    "jquery": "latest"
+    "jquery": "~1.10.1"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "webhook-js",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "Utility jQuery plugins for Webhook",
   "keywords": [
     "jquery-plugin"

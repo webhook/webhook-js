@@ -6,8 +6,8 @@ The best jQuery plugin ever.
 
 Download the [production version][min] or the [development version][max].
 
-[min]: https://raw.github.com//jquery-webhook-js/master/dist/jquery.webhook-js.min.js
-[max]: https://raw.github.com//jquery-webhook-js/master/dist/jquery.webhook-js.js
+[min]: https://raw.github.com/webhook/webhook-js/master/dist/jquery.webhook-js.min.js
+[max]: https://raw.github.com/webhook/webhook-js/master/dist/jquery.webhook-js.js
 
 In your web page:
 

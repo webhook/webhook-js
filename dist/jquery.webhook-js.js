@@ -1,4 +1,4 @@
-/*! webhook-js - v0.0.1 - 2013-06-25
+/*! webhook-js - v0.0.0 - 2013-06-25
 * https://github.com/webhook/webhook-js
 * Copyright (c) 2013 Mike Horn; Licensed MIT */
 (function ($) {
