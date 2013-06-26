@@ -1,13 +1,27 @@
 {
   "name": "webhook-js",
   "version": "0.0.1",
-  "main": "dist/jquery.webhook-js.js",
+  "main": ["dist/*.js", "dist/*.css"],
+  "ignore": [
+    "demo",
+    "src",
+    "test",
+    ".bowerrc",
+    ".editorconfig",
+    ".gitignore",
+    ".jshintrc",
+    ".travis.yml",
+    "bower.json",
+    "CONTRIBUTING.md",
+    "Gruntfile.js",
+    "package.json"
+  ],
   "dependencies": {
-    "jquery": "~1.10.1",
-    "normalize-css": "~2.1.2"
+    "jquery": "~1.10.1"
   },
   "devDependencies": {
     "qunit": "~1.11.0",
-    "jquery": "~1.10.1"
+    "jquery": "~1.10.1",
+    "normalize-css": "~2.1.2"
   }
 }
