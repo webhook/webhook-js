@@ -83,23 +83,26 @@ module.exports = function (grunt) {
       }
     },
     connect: {
-      server: {
-        options: {
-          hostname: '*',
-          port: 9000
-        }
+      options: {
+        hostname: '*',
+        port: 9000
       },
       livereload: {
         options: {
           middleware: function (connect) {
-            return [lrSnippet, mountFolder(connect, 'demo')];
+            return [
+              lrSnippet,
+              mountFolder(connect, 'bower_components'),
+              mountFolder(connect, 'src'),
+              mountFolder(connect, 'demo')
+            ];
           }
         }
       }
     },
     open: {
       server: {
-        path: 'http://localhost:<%= connect.server.options.port %>'
+        path: 'http://localhost:<%= connect.options.port %>'
       }
     },
     sass: {
@@ -128,5 +131,5 @@ module.exports = function (grunt) {
   // Default task.
   grunt.registerTask('default', ['jshint', 'qunit', 'clean', 'concat', 'uglify']);
   grunt.registerTask('test', ['jshint', 'qunit']);
-  grunt.registerTask('server', ['livereload-start', 'connect:livereload', 'open', 'watch']);
+  grunt.registerTask('server', ['livereload-start', 'connect:livereload', 'watch']);
 };
