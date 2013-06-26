@@ -26,7 +26,7 @@ module.exports = function (grunt) {
         stripBanners: true
       },
       dist: {
-        src: ['src/<%= pkg.name %>.js'],
+        src: ['src/*.js'],
         dest: 'dist/jquery.<%= pkg.name %>.js'
       }
     },
@@ -93,7 +93,7 @@ module.exports = function (grunt) {
             return [
               lrSnippet,
               mountFolder(connect, 'bower_components'),
-              mountFolder(connect, 'src'),
+              mountFolder(connect, 'dist'),
               mountFolder(connect, 'demo')
             ];
           }
@@ -111,7 +111,7 @@ module.exports = function (grunt) {
           style: 'expanded'
         },
         src: ['src/webhook-js.sass'],
-        dest: 'src/webhook-js.css'
+        dest: 'dist/webhook-js.css'
       }
     }
   });
@@ -129,7 +129,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-open');
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'qunit', 'clean', 'concat', 'uglify']);
+  grunt.registerTask('default', ['jshint', 'qunit', 'clean', 'sass', 'concat', 'uglify']);
   grunt.registerTask('test', ['jshint', 'qunit']);
   grunt.registerTask('server', ['livereload-start', 'connect:livereload', 'watch']);
 };
