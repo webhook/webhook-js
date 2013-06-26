@@ -1,7 +1,5 @@
 # Utility jQuery plugins for Webhook
 
-The best jQuery plugin ever.
-
 ## Getting Started
 
 Download the [production version][min] or the [development version][max].
@@ -14,11 +12,6 @@ In your web page:
 ```html
 <script src="jquery.js"></script>
 <script src="dist/webhook-js.min.js"></script>
-<script>
-jQuery(function($) {
-  $.awesome(); // "awesome"
-});
-</script>
 ```
 
 ## Documentation
