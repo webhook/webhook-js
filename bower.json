@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "main": "dist/jquery.webhook-js.js",
   "dependencies": {
-    "jquery": "~1.10.1"
+    "jquery": "~1.10.1",
+    "normalize-css": "~2.1.2"
   },
   "devDependencies": {
     "qunit": "~1.11.0",

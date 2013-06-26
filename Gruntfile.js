@@ -1,5 +1,10 @@
 'use strict';
 
+var lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
+var mountFolder = function (connect, dir) {
+  return connect.static(require('path').resolve(dir));
+};
+
 module.exports = function (grunt) {
 
   // Project configuration.
@@ -63,12 +68,18 @@ module.exports = function (grunt) {
         tasks: ['jshint:gruntfile']
       },
       src: {
-        files: '<%= jshint.src.src %>',
-        tasks: ['jshint:src', 'qunit']
+        files: ['<%= jshint.src.src %>', '<%= sass.dev.src %>'],
+        tasks: ['jshint:src', 'sass', 'livereload', 'qunit']
       },
       test: {
         files: '<%= jshint.test.src %>',
         tasks: ['jshint:test', 'qunit']
+      },
+      livereload: {
+        files: [
+          'demo/*.html'
+        ],
+        tasks: ['livereload']
       }
     },
     connect: {
@@ -77,6 +88,27 @@ module.exports = function (grunt) {
           hostname: '*',
           port: 9000
         }
+      },
+      livereload: {
+        options: {
+          middleware: function (connect) {
+            return [lrSnippet, mountFolder(connect, 'demo')];
+          }
+        }
+      }
+    },
+    open: {
+      server: {
+        path: 'http://localhost:<%= connect.server.options.port %>'
+      }
+    },
+    sass: {
+      dev: {
+        options: {
+          style: 'expanded'
+        },
+        src: ['src/webhook-js.sass'],
+        dest: 'src/webhook-js.css'
       }
     }
   });
@@ -89,9 +121,12 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-contrib-livereload');
+  grunt.loadNpmTasks('grunt-open');
 
   // Default task.
   grunt.registerTask('default', ['jshint', 'qunit', 'clean', 'concat', 'uglify']);
   grunt.registerTask('test', ['jshint', 'qunit']);
-  grunt.registerTask('server', ['connect', 'watch']);
+  grunt.registerTask('server', ['livereload-start', 'connect:livereload', 'open', 'watch']);
 };

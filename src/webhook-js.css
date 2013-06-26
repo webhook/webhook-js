@@ -1,0 +1,9 @@
+.tooltip {
+  position: absolute;
+  display: none;
+  background: #111111;
+  color: white;
+}
+.tooltip.on {
+  display: block;
+}
