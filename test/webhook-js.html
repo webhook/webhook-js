@@ -3,14 +3,40 @@
 <head>
   <meta charset="utf-8">
   <title>Utility jQuery plugins for Webhook Test Suite</title>
+
   <!-- Load local jQuery. -->
   <script src="../bower_components/jquery/jquery.js"></script>
+
   <!-- Load local QUnit. -->
   <link rel="stylesheet" href="../bower_components/qunit/qunit.css" media="screen">
   <script src="../bower_components/qunit/qunit.js"></script>
-  <!-- Load local lib and tests. -->
+
+  <!-- plugin sources -->
+  <script src="../src/webhook-affix.js"></script>
+  <script src="../src/webhook-autocomplete.js"></script>
+  <script src="../src/webhook-button.js"></script>
+  <script src="../src/webhook-calendar.js"></script>
+  <script src="../src/webhook-defer.js"></script>
+  <script src="../src/webhook-menu.js"></script>
+  <script src="../src/webhook-modal.js"></script>
+  <script src="../src/webhook-tab.js"></script>
+  <script src="../src/webhook-toc.js"></script>
   <script src="../src/webhook-tooltip.js"></script>
+  <script src="../src/webhook-validate.js"></script>
+
+  <!-- unit tests -->
+  <script src="webhook-affix.js"></script>
+  <script src="webhook-autocomplete.js"></script>
+  <script src="webhook-button.js"></script>
+  <script src="webhook-calendar.js"></script>
+  <script src="webhook-defer.js"></script>
+  <script src="webhook-menu.js"></script>
+  <script src="webhook-modal.js"></script>
+  <script src="webhook-tab.js"></script>
+  <script src="webhook-toc.js"></script>
   <script src="webhook-tooltip.js"></script>
+  <script src="webhook-validate.js"></script>
+
   <!-- Removing access to jQuery and $. But it'll still be available as _$, if
        you REALLY want to mess around with jQuery in the console. REMEMBER WE
        ARE TESTING A PLUGIN HERE, THIS HELPS ENSURE BEST PRACTICES. REALLY. -->
@@ -18,8 +44,6 @@
 </head>
 <body>
   <div id="qunit"></div>
-  <div id="qunit-fixture">
-    <span data-toggle="tooltip" title="This is a tooltip">?</span>
-  </div>
+  <div id="qunit-fixture"></div>
 </body>
 </html>

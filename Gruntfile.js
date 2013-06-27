@@ -106,6 +106,14 @@ module.exports = function (grunt) {
       }
     },
     sass: {
+      dist: {
+        options: {
+          style: 'compressed'
+        },
+        files: {
+          'dist/webhook-js.min.css': 'src/webhook-js.sass'
+        }
+      },
       dev: {
         options: {
           style: 'expanded'
