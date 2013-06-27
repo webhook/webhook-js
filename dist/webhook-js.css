@@ -7,3 +7,14 @@
 .tooltip.on {
   display: block;
 }
+
+[data-toggle-group] .active {
+  background: lime;
+}
+
+[data-toggle-target-group] > * {
+  display: none;
+}
+[data-toggle-target-group] > *.active {
+  display: block;
+}

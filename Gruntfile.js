@@ -1,9 +1,6 @@
 'use strict';
 
-var lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
-var mountFolder = function (connect, dir) {
-  return connect.static(require('path').resolve(dir));
-};
+var path = require('path');
 
 module.exports = function (grunt) {
 
@@ -63,38 +60,41 @@ module.exports = function (grunt) {
       }
     },
     watch: {
+      options: {
+        livereload: true
+      },
       gruntfile: {
         files: '<%= jshint.gruntfile.src %>',
         tasks: ['jshint:gruntfile']
       },
-      src: {
-        files: ['<%= jshint.src.src %>', '<%= sass.dev.src %>'],
-        tasks: ['jshint:src', 'sass', 'livereload', 'qunit']
+      js: {
+        files: '<%= jshint.src.src %>',
+        tasks: ['jshint:src']
+      },
+      sass: {
+        files: '<%= sass.dev.src %>',
+        tasks: ['sass']
       },
       test: {
         files: '<%= jshint.test.src %>',
         tasks: ['jshint:test', 'qunit']
       },
       livereload: {
-        files: [
-          'demo/*.html'
-        ],
-        tasks: ['livereload']
+        files: ['demo/*.html']
       }
     },
     connect: {
-      options: {
-        hostname: '*',
-        port: 9000
-      },
-      livereload: {
+      server: {
         options: {
-          middleware: function (connect) {
+          middleware: function(connect) {
             return [
-              lrSnippet,
-              mountFolder(connect, 'bower_components'),
-              mountFolder(connect, 'dist'),
-              mountFolder(connect, 'demo')
+              // livereload
+              require('connect-livereload')(),
+              // Serve static files.
+              connect.static(path.resolve('demo')),
+              connect.static(path.resolve('bower_components')),
+              connect.static(path.resolve('src')),
+              connect.static(path.resolve('dist'))
             ];
           }
         }
@@ -133,11 +133,11 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-sass');
-  grunt.loadNpmTasks('grunt-contrib-livereload');
   grunt.loadNpmTasks('grunt-open');
 
   // Default task.
   grunt.registerTask('default', ['jshint', 'qunit', 'clean', 'sass', 'concat', 'uglify']);
   grunt.registerTask('test', ['jshint', 'qunit']);
-  grunt.registerTask('server', ['livereload-start', 'connect:livereload', 'watch']);
+  grunt.registerTask('server', ['connect', 'watch']);
+
 };

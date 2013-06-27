@@ -1,4 +1,3 @@
-
 .tooltip
   position: absolute
   display: none
@@ -7,3 +6,13 @@
 
   &.on
     display: block
+
+[data-toggle-group]
+  .active
+    background: #0f0
+
+[data-toggle-target-group]
+  > *
+    display: none
+    &.active
+      display: block

@@ -1,4 +1,4 @@
-/*! webhook-js - v0.0.1 - 2013-06-26
+/*! webhook-js - v0.0.1 - 2013-06-27
 * https://github.com/webhook/webhook-js
 * Copyright (c) 2013 Mike Horn; Licensed MIT */
 (function ($) {
@@ -278,27 +278,39 @@
 
   "use strict";
 
-  var Tab = function (element, options) {
-    this.init(element, options);
+  var Tab = function (element) {
+    this.$element = $(element);
   };
 
   Tab.prototype = {
-    init: function (element, options) {
-      return [element, options];
+    show: function () {
+
+      var selector, $target;
+
+      this.$element.closest('[data-toggle-group]').find('[data-toggle]').removeClass('active');
+      this.$element.addClass('active');
+
+      selector = this.$element.attr('href');
+      selector = selector && selector.replace(/.*(?=#[^\s]*$)/, '');
+
+      $target = $(selector);
+
+      $target.closest('[data-toggle-target-group]').children().removeClass('active');
+      $target.addClass('active');
+
     }
   };
 
-  /* TAB PLUGIN DEFINITION
-   * ===================== */
+ /* TAB PLUGIN DEFINITION
+  * ===================== */
 
   $.fn.tab = function (option) {
     return this.each(function () {
       var $this   = $(this),
-          data    = $this.data('tab'),
-          options = typeof option === 'object' && option;
+          data    = $this.data('tab');
 
       if (!data) {
-        $this.data('tab', (data = new Tab(this, options)));
+        $this.data('tab', (data = new Tab(this)));
       }
 
       if (typeof option === 'string') {
@@ -309,7 +321,13 @@
 
   $.fn.tab.Constructor = Tab;
 
-  $.fn.tab.defaults = {};
+ /* TAB DATA-API
+  * ============ */
+
+  $(document).on('click.tab.data-api', '[data-toggle]', function (e) {
+    e.preventDefault();
+    $(this).tab('show');
+  });
 
 }(window.jQuery));
 
@@ -349,45 +367,6 @@
   $.fn.toc.Constructor = Toc;
 
   $.fn.toc.defaults = {};
-
-}(window.jQuery));
-
-(function ($) {
-
-  "use strict";
-
-  var Toggle = function (element, options) {
-    this.init(element, options);
-  };
-
-  Toggle.prototype = {
-    init: function (element, options) {
-      return [element, options];
-    }
-  };
-
-  /* TOGGLE PLUGIN DEFINITION
-   * ======================== */
-
-  $.fn.toggle = function (option) {
-    return this.each(function () {
-      var $this   = $(this),
-          data    = $this.data('toggle'),
-          options = typeof option === 'object' && option;
-
-      if (!data) {
-        $this.data('toggle', (data = new Toggle(this, options)));
-      }
-
-      if (typeof option === 'string') {
-        data[option]();
-      }
-    });
-  };
-
-  $.fn.toggle.Constructor = Toggle;
-
-  $.fn.toggle.defaults = {};
 
 }(window.jQuery));
 

@@ -7,15 +7,37 @@
   <link rel="stylesheet" href="webhook-js.css" media="screen">
   <style>
     body { margin: 1em; }
+    body > section { margin: 2em 0; border-bottom: 2px dashed #ccc; padding-bottom: 2em; }
   </style>
 </head>
 <body>
 
-  <span data-toggle="tooltip" title="Hey Dave">Hover over me!</span>
+  <section>
+    <header>Tab</header>
+    <nav>
+      <ul data-toggle-group>
+        <li><a href="#one" data-toggle class="active">One</a></li>
+        <li><a href="#two" data-toggle>Two</a></li>
+        <li><a href="#three" data-toggle>Three</a></li>
+      </ul>
+    </nav>
+    <section data-toggle-target-group>
+      <section id="one" class="active">One, singular sensation</section>
+      <section id="two">Every little step you take</section>
+      <section id="three">One, thrilling combination</section>
+    </section>
+  </section>
+
+  <section>
+    <header>Tooltip</header>
+    <span data-toggle="tooltip" title="Hey Dave">Hover over me!</span>
+  </section>
 
   <!-- Load local jQuery. -->
   <script src="jquery/jquery.js"></script>
-  <!-- Load local lib and tests. -->
-  <script src="jquery.webhook-js.js"></script>
+
+  <!-- Load local lib. -->
+  <script src="webhook-tab.js"></script>
+  <script src="webhook-tooltip.js"></script>
 </body>
 </html>
