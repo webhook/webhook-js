@@ -20,7 +20,7 @@
       throws(block, [expected], [message])
   */
 
-  module('basic jQuery');
+  module('Tab');
 
   test('is defined on jQuery object', function () {
     ok($('<div></div>').tab, 'tooltip plugin is defined');
@@ -30,8 +30,6 @@
     var elems = $('<div></div>');
     strictEqual(elems.tab(), elems, 'should be chainable');
   });
-
-  module('active tab');
 
   test('show makes tag active', function () {
     var elems = $('<a>').tab('show');

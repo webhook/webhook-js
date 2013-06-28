@@ -20,7 +20,7 @@
       throws(block, [expected], [message])
   */
 
-  module('basic jQuery');
+  module('Defer');
 
   test('is defined on jQuery object', function () {
     ok($('<div></div>').defer, 'tooltip plugin is defined');

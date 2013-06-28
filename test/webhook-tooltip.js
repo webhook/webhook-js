@@ -20,7 +20,7 @@
       throws(block, [expected], [message])
   */
 
-  module('basic jQuery');
+  module('Tooltip');
 
   test('is defined on jQuery object', function () {
     ok($('<div></div>').tooltip, 'tooltip plugin is defined');
@@ -30,8 +30,6 @@
     var elems = $('<div></div>');
     strictEqual(elems.tooltip(), elems, 'should be chainable');
   });
-
-  module('title manipulation');
 
   test("should empty title attribute", function () {
     var tooltip = $('<a href="#" title="Another tooltip"></a>').tooltip();

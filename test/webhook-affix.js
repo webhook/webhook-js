@@ -20,7 +20,7 @@
       throws(block, [expected], [message])
   */
 
-  module('basic jQuery');
+  module('Affix');
 
   test('is defined on jQuery object', function () {
     ok($('<div></div>').affix, 'tooltip plugin is defined');

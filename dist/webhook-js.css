@@ -18,3 +18,14 @@
 [data-toggle-target-group] > *.active {
   display: block;
 }
+
+.webhook-calendar {
+  background: #eeeeee;
+  display: inline-block;
+}
+.webhook-calendar td:not(:empty) {
+  cursor: pointer;
+}
+.webhook-calendar td:not(:empty):hover {
+  background: #cccccc;
+}

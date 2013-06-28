@@ -20,7 +20,7 @@
       throws(block, [expected], [message])
   */
 
-  module('basic jQuery');
+  module('Autocomplete');
 
   test('is defined on jQuery object', function () {
     ok($('<div></div>').autocomplete, 'tooltip plugin is defined');

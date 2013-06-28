@@ -20,15 +20,44 @@
       throws(block, [expected], [message])
   */
 
-  module('basic jQuery');
+  module('Calendar', {
+    setup: function () {
+      this.input = $('<input value="June 27, 2013">').appendTo('#qunit-fixture');
+    },
+    teardown: function () {
+      this.input.remove();
+    }
+  });
 
   test('is defined on jQuery object', function () {
-    ok($('<div></div>').calendar, 'tooltip plugin is defined');
+    ok(this.input.calendar, 'calendar plugin is defined');
   });
 
   test('is chainable', function () {
-    var elems = $('<div></div>');
-    strictEqual(elems.calendar(), elems, 'should be chainable');
+    strictEqual(this.input.calendar(), this.input, 'should be chainable');
+  });
+
+  test('show and hide manually', function () {
+    this.input.calendar('show');
+    ok(this.input.calendar('widget').is(':visible'), 'should show manually');
+    this.input.calendar('hide');
+    ok(!this.input.calendar('widget').is(':visible'), 'should hide manually');
+  });
+
+  test('show on focus, hide when clicking on document', function () {
+    this.input.calendar();
+
+    this.input.trigger("focus");
+    ok(this.input.calendar('widget').is(':visible'), 'should show on focus');
+
+    this.input.trigger('click');
+    ok(this.input.calendar('widget').is(':visible'), 'do not hide when clicking on input');
+
+    this.input.calendar('widget').trigger('click');
+    ok(this.input.calendar('widget').is(':visible'), 'do not hide when clicking on calendar');
+
+    $(document).trigger('click');
+    ok(!this.input.calendar('widget').is(':visible'), 'hide calendar if click makes it to document');
   });
 
 }(jQuery));

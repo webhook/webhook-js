@@ -1,7 +1,10 @@
 {
   "name": "webhook-js",
   "version": "0.0.1",
-  "main": ["dist/*.js", "dist/*.css"],
+  "main": [
+    "dist/*.js",
+    "dist/*.css"
+  ],
   "ignore": [
     "demo",
     "src",
@@ -17,7 +20,8 @@
     "package.json"
   ],
   "dependencies": {
-    "jquery": "~1.10.1"
+    "jquery": "~1.10.1",
+    "moment": "~2.0.0"
   },
   "devDependencies": {
     "qunit": "~1.11.0",

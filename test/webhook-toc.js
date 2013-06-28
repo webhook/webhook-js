@@ -20,7 +20,7 @@
       throws(block, [expected], [message])
   */
 
-  module('basic jQuery');
+  module('Toc');
 
   test('is defined on jQuery object', function () {
     ok($('<div></div>').toc, 'tooltip plugin is defined');

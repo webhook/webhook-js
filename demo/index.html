@@ -33,10 +33,19 @@
     <span data-toggle="tooltip" title="Hey Dave">Hover over me!</span>
   </section>
 
+  <section>
+    <header>Calendar</header>
+    <input data-calendar>
+    <input data-calendar value="Dec 25, 1995">
+    <input data-calendar value="July 1, 2004">
+  </section>
+
   <!-- Load local jQuery. -->
   <script src="jquery/jquery.js"></script>
+  <script src="moment/moment.js"></script>
 
   <!-- Load local lib. -->
+  <script src="webhook-calendar.js"></script>
   <script src="webhook-tab.js"></script>
   <script src="webhook-tooltip.js"></script>
 </body>

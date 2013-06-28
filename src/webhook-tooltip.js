@@ -111,8 +111,8 @@
   };
 
 
-  /* TOOLTIP DATA-API
-   * ================ */
+ /* TOOLTIP DATA-API
+  * ================ */
 
   $(window).on('load', function () {
     $('[data-toggle="tooltip"]').each(function () {

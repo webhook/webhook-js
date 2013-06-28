@@ -86,7 +86,7 @@ module.exports = function (grunt) {
     connect: {
       server: {
         options: {
-          middleware: function(connect) {
+          middleware: function(connect, options) {
             return [
               // livereload
               require('connect-livereload')(),
@@ -94,7 +94,8 @@ module.exports = function (grunt) {
               connect.static(path.resolve('demo')),
               connect.static(path.resolve('bower_components')),
               connect.static(path.resolve('src')),
-              connect.static(path.resolve('dist'))
+              connect.static(path.resolve('dist')),
+              connect.static(path.resolve(options.base))
             ];
           }
         }
