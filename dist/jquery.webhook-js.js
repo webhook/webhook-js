@@ -1,4 +1,4 @@
-/*! webhook-js - v0.0.1 - 2013-06-27
+/*! webhook-js - v0.0.1 - 2013-06-28
 * https://github.com/webhook/webhook-js
 * Copyright (c) 2013 Mike Horn; Licensed MIT */
 (function ($) {
@@ -128,10 +128,15 @@
 
   Calendar.prototype = {
     init: function (element, options) {
+
       this.$element = $(element);
+
       this.options  = this.getOptions(options);
 
-      this.fixDatetime();
+      this.$element.attr('placeholder', this.options.format);
+
+      this.setDatetime(this.$element.val());
+      this.updateInput();
 
       this.$element.on({
         'focus.calendar': $.proxy(this.show, this),
@@ -156,16 +161,20 @@
       }
     },
 
-    fixDatetime: function () {
-      this.setDatetime(this.$element.val());
-    },
-
     setDatetime: function (datetime) {
-      this.datetime = datetime ? moment(datetime) : moment();
+      this.datetime = moment(datetime);
     },
 
     getDatetime: function () {
       return this.datetime;
+    },
+
+    getFormattedDatetime: function () {
+      return this.datetime && this.datetime.format(this.options.format);
+    },
+
+    updateInput: function () {
+      this.$element.val(this.getFormattedDatetime());
     },
 
     calendar: function () {
@@ -176,21 +185,26 @@
         this.$calendar.remove();
       }
 
-      this.calendarDate = this.datetime;
+      this.calendarDate = this.datetime || moment();
 
       var template,
           verbose_day,
-          daysInMonth = this.datetime.daysInMonth(),
-          leadDays = moment(this.datetime).date(1).day(),
+          daysInMonth = this.calendarDate.daysInMonth(),
+          leadDays = moment(this.calendarDate).date(1).day(),
           numWeeks = Math.ceil((leadDays + daysInMonth) / 7),
-          today = this.datetime.date(),
+          targetDate = this.calendarDate.date(),
+          thisMoment = moment(),
+          today = thisMoment.month() === this.calendarDate.month() && thisMoment.year() === this.calendarDate.year() && moment().date(),
           dow, wom, calendarPosition = 1, printDate = '';
 
-      template = "<span>" + this.datetime.format('MMMM YYYY') + "</span>";
+      template = "<header>";
+      template += "<span>" + this.calendarDate.format('MMMM YYYY') + "</span>";
+      template += "<nav><button>&lt;</button><button>&middot;</button><button>&gt;</button></nav>";
+      template += "</header>";
 
       template += '<table><thead><tr>';
       for (dow = 0; dow < 7; dow++) {
-        verbose_day = moment(this.datetime).day(dow).format('dd');
+        verbose_day = moment(this.calendarDate).day(dow).format('dd');
         template += '<th>' + verbose_day + '</th>';
       }
       template += '</tr></thead>';
@@ -207,10 +221,18 @@
           }
 
           if (printDate === today) {
-            template += '<td><strong>' + printDate + '</strong></td>';
+            template += '<td class="today">';
           } else {
-            template += '<td>' + printDate + '</td>';
+            template += '<td>';
           }
+
+          if (printDate === targetDate) {
+            template += '<strong>' + printDate + '</strong>';
+          } else {
+            template += printDate;
+          }
+
+          template += '</td>';
 
           calendarPosition++;
 
@@ -242,9 +264,15 @@
     },
 
     show: function () {
-      this.fixDatetime();
-      var $calendar = this.calendar();
-      $calendar.insertAfter(this.$element);
+      var $calendar = this.calendar(),
+          offset = this.$element.offset();
+
+      $calendar.offset({
+        top: offset.top + this.$element.outerHeight(),
+        left: offset.left
+      });
+
+      $calendar.appendTo('body');
     },
 
     hide: function () {
@@ -281,7 +309,8 @@
   $.fn.calendar.Constructor = Calendar;
 
   $.fn.calendar.defaults = {
-    format: 'MMM D, YYYY'
+    polyfill: true,
+    format: 'MM/DD/YYYY hh:mm A'
   };
 
 
@@ -289,11 +318,18 @@
   * ================= */
 
   $(window).on('load', function () {
-    $('[data-calendar]:input').each(function () {
+    $('[type=datetime-local]').each(function () {
+
+      // automatic polyfill
+      if ($.fn.calendar.defaults.polyfill && this.type === 'datetime-local') {
+        return;
+      }
+
       var $element = $(this),
-          data = $element.data();
+          data     = $element.data();
 
       $element.calendar(data);
+
     });
   });
 
