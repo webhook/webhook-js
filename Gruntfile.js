@@ -69,18 +69,18 @@ module.exports = function (grunt) {
       },
       js: {
         files: '<%= jshint.src.src %>',
-        tasks: ['jshint:src']
+        tasks: ['jshint:src', 'copy']
       },
       sass: {
         files: '<%= sass.dev.src %>',
-        tasks: ['sass']
+        tasks: ['sass', 'copy']
       },
       test: {
         files: '<%= jshint.test.src %>',
         tasks: ['jshint:test', 'qunit']
       },
       livereload: {
-        files: ['demo/*.html']
+        files: ['gh-pages/*.html']
       }
     },
     connect: {
@@ -91,19 +91,19 @@ module.exports = function (grunt) {
               // livereload
               require('connect-livereload')(),
               // Serve static files.
-              connect.static(path.resolve('demo')),
-              connect.static(path.resolve('bower_components')),
-              connect.static(path.resolve('src')),
-              connect.static(path.resolve('dist')),
+              connect.static(path.resolve('gh-pages')),
               connect.static(path.resolve(options.base))
             ];
           }
         }
       }
     },
-    open: {
-      server: {
-        path: 'http://localhost:<%= connect.options.port %>'
+    copy: {
+      main: {
+        files: [
+          {expand: true, cwd: 'src/', src: ['*.js'], dest: 'gh-pages/js/'},
+          {expand: true, cwd: 'dist/', src: ['*.css'], dest: 'gh-pages/css/'}
+        ]
       }
     },
     sass: {
@@ -134,7 +134,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-sass');
-  grunt.loadNpmTasks('grunt-open');
+  grunt.loadNpmTasks('grunt-contrib-copy');
 
   // Default task.
   grunt.registerTask('default', ['jshint', 'qunit', 'clean', 'sass', 'concat', 'uglify']);
