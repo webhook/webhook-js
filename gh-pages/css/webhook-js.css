@@ -21,11 +21,14 @@
 
 .webhook-calendar {
   background: #eeeeee;
-  display: inline-block;
+  position: absolute;
 }
 .webhook-calendar td:not(:empty) {
   cursor: pointer;
 }
 .webhook-calendar td:not(:empty):hover {
   background: #cccccc;
+}
+.webhook-calendar .today {
+  border: 1px solid #cccccc;
 }

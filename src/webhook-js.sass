@@ -19,8 +19,10 @@
 
 .webhook-calendar
   background: #eee
-  display: inline-block
+  position: absolute
   td:not(:empty)
     cursor: pointer
     &:hover
       background: #ccc
+  .today
+    border: 1px solid #ccc
