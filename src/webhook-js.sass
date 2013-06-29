@@ -20,9 +20,19 @@
 .webhook-calendar
   background: #eee
   position: absolute
-  td:not(:empty)
-    cursor: pointer
-    &:hover
-      background: #ccc
+  nav
+    display: inline-block
+  table
+    text-align: center
+    font-size: 10px
+  th
+    font-weight: normal
+  td
+    line-height: 1.5
+    width: 30px
+    &:not(:empty)
+      cursor: pointer
+      &:hover
+        background: #ccc
   .today
-    border: 1px solid #ccc
+    outline: 1px solid #ccc
