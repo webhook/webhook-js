@@ -23,6 +23,20 @@
   background: #eeeeee;
   position: absolute;
 }
+.webhook-calendar nav {
+  display: inline-block;
+}
+.webhook-calendar table {
+  text-align: center;
+  font-size: 10px;
+}
+.webhook-calendar th {
+  font-weight: normal;
+}
+.webhook-calendar td {
+  line-height: 1.5;
+  width: 30px;
+}
 .webhook-calendar td:not(:empty) {
   cursor: pointer;
 }
@@ -30,5 +44,5 @@
   background: #cccccc;
 }
 .webhook-calendar .today {
-  border: 1px solid #cccccc;
+  outline: 1px solid #cccccc;
 }

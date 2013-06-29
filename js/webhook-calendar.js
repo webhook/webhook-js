@@ -51,6 +51,7 @@
 
     setDatetime: function (datetime) {
       this.datetime = moment(datetime);
+      this.updateInput();
     },
 
     getDatetime: function () {
@@ -63,6 +64,7 @@
 
     updateInput: function () {
       this.$element.val(this.getFormattedDatetime());
+      this.$element.trigger('change');
     },
 
     calendar: function () {
@@ -87,12 +89,12 @@
 
       template = "<header>";
       template += "<span>" + this.calendarDate.format('MMMM YYYY') + "</span>";
-      template += "<nav><button>&lt;</button><button>&middot;</button><button>&gt;</button></nav>";
+      template += "<nav><button data-prev>&lt;</button><button data-today>&middot;</button><button data-next>&gt;</button></nav>";
       template += "</header>";
 
       template += '<table><thead><tr>';
       for (dow = 0; dow < 7; dow++) {
-        verbose_day = moment(this.calendarDate).day(dow).format('dd');
+        verbose_day = moment(this.calendarDate).day(dow).format('ddd');
         template += '<th>' + verbose_day + '</th>';
       }
       template += '</tr></thead>';
@@ -134,9 +136,21 @@
       this.$calendar.on('click.calendar.day', 'td:not(:empty)', $.proxy(function (event) {
         var datetime = moment(this.calendarDate).date(parseInt($(event.target).text(), 10));
         if (datetime && datetime.isValid()) {
-          this.$element.val(datetime.format(this.options.format));
-          this.$element.trigger('change');
+          this.setDatetime(datetime);
+
         }
+      }, this));
+
+      this.$calendar.on('click.calendar.nav', 'button', $.proxy(function (event) {
+        var data = $(event.target).data(), datetime;
+        if (data.prev !== undefined) {
+          datetime = moment(this.calendarDate).subtract('months', 1);
+        } else if (data.next !== undefined) {
+          datetime = moment(this.calendarDate).add('months', 1);
+        } else if (data.today !== undefined) {
+          datetime = moment();
+        }
+        this.setDatetime(datetime);
       }, this));
 
       this.$calendar.on('click.calendar', function (event) {
