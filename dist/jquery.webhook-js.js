@@ -1,4 +1,4 @@
-/*! webhook-js - v0.0.1 - 2013-06-28
+/*! webhook-js - v0.0.1 - 2013-07-01
 * https://github.com/webhook/webhook-js
 * Copyright (c) 2013 Mike Horn; Licensed MIT */
 (function ($) {
@@ -281,12 +281,12 @@
       var $calendar = this.calendar(),
           offset = this.$element.offset();
 
+      $calendar.appendTo('body');
+
       $calendar.offset({
         top: offset.top + this.$element.outerHeight(),
         left: offset.left
       });
-
-      $calendar.appendTo('body');
     },
 
     hide: function () {
@@ -582,12 +582,14 @@
       this.type     = type;
       this.$element = $(element);
       this.options  = this.getOptions(options);
+      window.console.log('after', this.options);
       this.enabled  = true;
 
       this.fixTitle();
 
       this.$element.on('mouseenter.tooltip', $.proxy(this.show, this));
       this.$element.on('mouseleave.tooltip', $.proxy(this.hide, this));
+
     },
 
     getOptions: function (options) {
@@ -607,6 +609,40 @@
       return this.$tip = this.$tip || $(this.options.template);
     },
 
+    adjustPosition: function () {
+      var $tip = this.tip(),
+          elementOffset = this.$element.offset(),
+          tipOffset = {},
+          placement = this.options.placement;
+
+      if (placement === "top" || placement === "bottom") {
+        tipOffset.left = elementOffset.left - (($tip.outerWidth() - this.$element.outerWidth()) / 2);
+      }
+
+      if (placement === "right" || placement === "left") {
+        tipOffset.top = elementOffset.top - (($tip.outerHeight() - this.$element.outerHeight()) / 2);
+      }
+
+      if (placement === "top") {
+        tipOffset.top = elementOffset.top - $tip.outerHeight() - 5;
+      }
+
+      if (placement === "bottom") {
+        tipOffset.top = elementOffset.top + this.$element.outerHeight() + 5;
+      }
+
+      if (placement === "right") {
+        tipOffset.left = elementOffset.left + this.$element.outerWidth() + 5;
+      }
+
+      if (placement === "left") {
+        tipOffset.left = elementOffset.left - this.$tip.outerWidth() - 5;
+      }
+
+      $tip.offset(tipOffset).removeClass("top right bottom left").addClass(placement);
+
+    },
+
     setContent: function (content) {
       this.tip().find('.tooltip-inner')[this.options.html ? 'html' : 'text'](content || this.getTitle());
     },
@@ -616,6 +652,7 @@
       this.setContent();
       $tip.addClass('on');
       $tip.insertAfter(this.$element);
+      this.adjustPosition();
     },
 
     hide: function () {
@@ -674,7 +711,7 @@
   $(window).on('load', function () {
     $('[data-toggle="tooltip"]').each(function () {
       var $element = $(this),
-          data = $element.data();
+          data     = $element.data();
 
       $element.tooltip(data);
     });

@@ -169,8 +169,6 @@
       var $calendar = this.calendar(),
           offset = this.$element.offset();
 
-      window.console.log(offset.top + this.$element.outerHeight());
-
       $calendar.appendTo('body');
 
       $calendar.offset({
