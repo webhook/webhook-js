@@ -30,7 +30,12 @@
       var selector;
 
       selector = this.$element.attr('href');
-      selector = selector && selector.replace(/.*(?=#[^\s]*$)/, '');
+      if (selector.indexOf('#') === 0) {
+        selector = selector && selector.replace(/.*(?=#[^\s]*$)/, '');
+      } else {
+        this.getModal().load(selector);
+        selector = '<div>loading</div>';
+      }
 
       return this.$target = $(selector);
 

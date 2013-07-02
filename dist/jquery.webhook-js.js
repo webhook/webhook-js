@@ -1,4 +1,4 @@
-/*! webhook-js - v0.0.1 - 2013-07-01
+/*! webhook-js - v0.0.1 - 2013-07-02
 * https://github.com/webhook/webhook-js
 * Copyright (c) 2013 Mike Horn; Licensed MIT */
 (function ($) {
@@ -554,12 +554,56 @@
 
   Modal.prototype = {
     init: function (element, options) {
-      return [element, options];
+      this.$element = $(element);
+      this.options  = this.getOptions(options);
+      this.$body    = $('body');
+    },
+
+    getOptions: function (options) {
+      return $.extend({}, $.fn.modal.defaults, this.$element.data(), options);
+    },
+
+    getTarget: function () {
+
+      var selector;
+
+      selector = this.$element.attr('href');
+      if (selector.indexOf('#') === 0) {
+        selector = selector && selector.replace(/.*(?=#[^\s]*$)/, '');
+      } else {
+        this.getModal().load(selector);
+        selector = '<div>loading</div>';
+      }
+
+      return this.$target = $(selector);
+
+    },
+
+    getModal: function () {
+      this.$modal = this.$modal || $(this.options.template);
+      this.$modal.one('click.modal', function (event) { event.stopPropagation(); });
+      return this.$modal;
+    },
+
+    getScreen: function () {
+      this.$screen = this.$screen || $(this.options.screentemplate);
+      this.$screen.one('click.modal', $.proxy(this.hide, this));
+      return this.$screen;
+    },
+
+    show: function () {
+      this.$body.append(this.getScreen(), this.getModal().append(this.getTarget()));
+    },
+
+    hide: function () {
+      this.getScreen().detach();
+      this.getModal().detach();
     }
   };
 
-  /* MODAL PLUGIN DEFINITION
-   * ======================= */
+
+ /* MODAL PLUGIN DEFINITION
+  * ======================= */
 
   $.fn.modal = function (option) {
     return this.each(function () {
@@ -579,7 +623,20 @@
 
   $.fn.modal.Constructor = Modal;
 
-  $.fn.modal.defaults = {};
+  $.fn.modal.defaults = {
+    cache: true,
+    template: "<div class='wh-modal'></div>",
+    screentemplate: "<div class='wh-modal-screen'></div>"
+  };
+
+
+ /* MODAL DATA API
+  * ============== */
+
+  $(document).on('click.modal.data-api', '[data-toggle=modal]', function (e) {
+    e.preventDefault();
+    $(this).modal('show');
+  });
 
 }(window.jQuery));
 
