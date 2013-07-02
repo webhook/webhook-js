@@ -20,7 +20,7 @@
       throws(block, [expected], [message])
   */
 
-  module('Calendar', {
+  module('Datetime', {
     setup: function () {
       this.input = $('<input value="June 27, 2013">').appendTo('#qunit-fixture');
     },
@@ -30,34 +30,34 @@
   });
 
   test('is defined on jQuery object', function () {
-    ok(this.input.calendar, 'calendar plugin is defined');
+    ok(this.input.datetime, 'datetime plugin is defined');
   });
 
   test('is chainable', function () {
-    strictEqual(this.input.calendar(), this.input, 'should be chainable');
+    strictEqual(this.input.datetime(), this.input, 'should be chainable');
   });
 
   test('show and hide manually', function () {
-    this.input.calendar('show');
-    ok(this.input.calendar('widget').is(':visible'), 'should show manually');
-    this.input.calendar('hide');
-    ok(!this.input.calendar('widget').is(':visible'), 'should hide manually');
+    this.input.datetime('show');
+    ok(this.input.datetime('widget').is(':visible'), 'should show manually');
+    this.input.datetime('hide');
+    ok(!this.input.datetime('widget').is(':visible'), 'should hide manually');
   });
 
   test('show on focus, hide when clicking on document', function () {
-    this.input.calendar();
+    this.input.datetime();
 
     this.input.trigger("focus");
-    ok(this.input.calendar('widget').is(':visible'), 'should show on focus');
+    ok(this.input.datetime('widget').is(':visible'), 'should show on focus');
 
     this.input.trigger('click');
-    ok(this.input.calendar('widget').is(':visible'), 'do not hide when clicking on input');
+    ok(this.input.datetime('widget').is(':visible'), 'do not hide when clicking on input');
 
-    this.input.calendar('widget').trigger('click');
-    ok(this.input.calendar('widget').is(':visible'), 'do not hide when clicking on calendar');
+    this.input.datetime('widget').trigger('click');
+    ok(this.input.datetime('widget').is(':visible'), 'do not hide when clicking on datetime');
 
     $(document).trigger('click');
-    ok(!this.input.calendar('widget').is(':visible'), 'hide calendar if click makes it to document');
+    ok(!this.input.datetime('widget').is(':visible'), 'hide datetime if click makes it to document');
   });
 
 }(jQuery));

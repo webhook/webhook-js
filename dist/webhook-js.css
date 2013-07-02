@@ -15,31 +15,31 @@
   display: block;
 }
 
-.webhook-calendar {
+.wh-datetime {
   background: #eeeeee;
   position: absolute;
 }
-.webhook-calendar nav {
+.wh-datetime nav {
   display: inline-block;
 }
-.webhook-calendar table {
+.wh-datetime table {
   text-align: center;
   font-size: 10px;
 }
-.webhook-calendar th {
+.wh-datetime th {
   font-weight: normal;
 }
-.webhook-calendar td {
+.wh-datetime td {
   line-height: 1.5;
   width: 30px;
 }
-.webhook-calendar td:not(:empty) {
+.wh-datetime td:not(:empty) {
   cursor: pointer;
 }
-.webhook-calendar td:not(:empty):hover {
+.wh-datetime td:not(:empty):hover {
   background: #cccccc;
 }
-.webhook-calendar .today {
+.wh-datetime .today {
   outline: 1px solid #cccccc;
 }
 

@@ -19,6 +19,15 @@
       this.$element = $(element);
       this.options  = this.getOptions(options);
       this.$body    = $('body');
+
+      // dismiss the modal when ESC is pressed.
+      // TODO: only dismiss the top modal
+      $(document).on('keyup.modal.dismiss', $.proxy(function (event) {
+        if (event.keyCode === 27) {
+          this.hide();
+        }
+      }, this));
+
     },
 
     getOptions: function (options) {
@@ -44,6 +53,7 @@
     getModal: function () {
       this.$modal = this.$modal || $(this.options.template);
       this.$modal.one('click.modal', function (event) { event.stopPropagation(); });
+      this.$modal.one('click.modal.dismiss', '[data-dismiss="modal"]', $.proxy(this.hide, this));
       return this.$modal;
     },
 
