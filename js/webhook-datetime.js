@@ -10,11 +10,11 @@
 
   "use strict";
 
-  var Calendar = function (element, options) {
+  var Datetime = function (element, options) {
     this.init(element, options);
   };
 
-  Calendar.prototype = {
+  Datetime.prototype = {
     init: function (element, options) {
 
       this.$element = $(element);
@@ -27,19 +27,19 @@
       this.updateInput();
 
       this.$element.on({
-        'focus.calendar': $.proxy(this.show, this),
-        'keyup.calendar': $.proxy(this.tryDatetime, this),
-        'change.calendar': $.proxy(this.tryDatetime, this),
-        'click.calendar': function (event) {
+        'focus.datetime': $.proxy(this.show, this),
+        'keyup.datetime': $.proxy(this.tryDatetime, this),
+        'change.datetime': $.proxy(this.tryDatetime, this),
+        'click.datetime': function (event) {
           event.stopPropagation();
         }
       });
 
-      $(document).on('click.calendar', $.proxy(this.hide, this));
+      $(document).on('click.datetime', $.proxy(this.hide, this));
     },
 
     getOptions: function (options) {
-      return $.extend({}, $.fn.calendar.defaults, this.$element.data(), options);
+      return $.extend({}, $.fn.datetime.defaults, this.$element.data(), options);
     },
 
     tryDatetime: function () {
@@ -69,32 +69,32 @@
 
     calendar: function () {
 
-      if (this.calendarDate === this.datetime) {
+      if (this.datetimeDate === this.datetime) {
         return this.$calendar;
-      } else if (this.calendarDate) {
+      } else if (this.datetimeDate) {
         this.$calendar.remove();
       }
 
-      this.calendarDate = this.datetime || moment();
+      this.datetimeDate = this.datetime || moment();
 
       var template,
           verbose_day,
-          daysInMonth = this.calendarDate.daysInMonth(),
-          leadDays = moment(this.calendarDate).date(1).day(),
+          daysInMonth = this.datetimeDate.daysInMonth(),
+          leadDays = moment(this.datetimeDate).date(1).day(),
           numWeeks = Math.ceil((leadDays + daysInMonth) / 7),
-          targetDate = this.calendarDate.date(),
+          targetDate = this.datetimeDate.date(),
           thisMoment = moment(),
-          today = thisMoment.month() === this.calendarDate.month() && thisMoment.year() === this.calendarDate.year() && moment().date(),
-          dow, wom, calendarPosition = 1, printDate = '';
+          today = thisMoment.month() === this.datetimeDate.month() && thisMoment.year() === this.datetimeDate.year() && moment().date(),
+          dow, wom, datetimePosition = 1, printDate = '';
 
       template = "<header>";
-      template += "<span>" + this.calendarDate.format('MMMM YYYY') + "</span>";
+      template += "<span>" + this.datetimeDate.format('MMMM YYYY') + "</span>";
       template += "<nav><button data-prev>&lt;</button><button data-today>&middot;</button><button data-next>&gt;</button></nav>";
       template += "</header>";
 
       template += '<table><thead><tr>';
       for (dow = 0; dow < 7; dow++) {
-        verbose_day = moment(this.calendarDate).day(dow).format('ddd');
+        verbose_day = moment(this.datetimeDate).day(dow).format('ddd');
         template += '<th>' + verbose_day + '</th>';
       }
       template += '</tr></thead>';
@@ -104,8 +104,8 @@
         template += '<tr>';
         for (dow = 0; dow < 7; dow++) {
 
-          if (calendarPosition > leadDays && calendarPosition <= daysInMonth + leadDays) {
-            printDate = calendarPosition - leadDays;
+          if (datetimePosition > leadDays && datetimePosition <= daysInMonth + leadDays) {
+            printDate = datetimePosition - leadDays;
           } else {
             printDate = '';
           }
@@ -124,36 +124,36 @@
 
           template += '</td>';
 
-          calendarPosition++;
+          datetimePosition++;
 
         }
         template += '</tr>';
       }
       template += '</tbody></table>';
 
-      this.$calendar = $("<div class='webhook-calendar'>" + template + "</div>");
+      this.$calendar = $("<div class='wh-datetime'>" + template + "</div>");
 
-      this.$calendar.on('click.calendar.day', 'td:not(:empty)', $.proxy(function (event) {
-        var datetime = moment(this.calendarDate).date(parseInt($(event.target).text(), 10));
+      this.$calendar.on('click.datetime.day', 'td:not(:empty)', $.proxy(function (event) {
+        var datetime = moment(this.datetimeDate).date(parseInt($(event.target).text(), 10));
         if (datetime && datetime.isValid()) {
           this.setDatetime(datetime);
 
         }
       }, this));
 
-      this.$calendar.on('click.calendar.nav', 'button', $.proxy(function (event) {
+      this.$calendar.on('click.datetime.nav', 'button', $.proxy(function (event) {
         var data = $(event.target).data(), datetime;
         if (data.prev !== undefined) {
-          datetime = moment(this.calendarDate).subtract('months', 1);
+          datetime = moment(this.datetimeDate).subtract('months', 1);
         } else if (data.next !== undefined) {
-          datetime = moment(this.calendarDate).add('months', 1);
+          datetime = moment(this.datetimeDate).add('months', 1);
         } else if (data.today !== undefined) {
           datetime = moment();
         }
         this.setDatetime(datetime);
       }, this));
 
-      this.$calendar.on('click.calendar', function (event) {
+      this.$calendar.on('click.datetime', function (event) {
         event.stopPropagation();
       });
 
@@ -187,19 +187,19 @@
  /* CALENDAR PLUGIN DEFINITION
   * ========================== */
 
-  $.fn.calendar = function (option) {
+  $.fn.datetime = function (option) {
 
     if (typeof option === "string" && option === "widget") {
-      return $(this).data('calendar')[option]();
+      return $(this).data('datetime')[option]();
     }
 
     return this.each(function () {
       var $this   = $(this),
-          data    = $this.data('calendar'),
+          data    = $this.data('datetime'),
           options = typeof option === 'object' && option;
 
       if (!data) {
-        $this.data('calendar', (data = new Calendar(this, options)));
+        $this.data('datetime', (data = new Datetime(this, options)));
       }
 
       if (typeof option === 'string') {
@@ -208,9 +208,9 @@
     });
   };
 
-  $.fn.calendar.Constructor = Calendar;
+  $.fn.datetime.Constructor = Datetime;
 
-  $.fn.calendar.defaults = {
+  $.fn.datetime.defaults = {
     polyfill: true,
     format: 'MM/DD/YYYY hh:mm A'
   };
@@ -223,14 +223,14 @@
     $('[type=datetime-local]').each(function () {
 
       // automatic polyfill
-      if ($.fn.calendar.defaults.polyfill && this.type === 'datetime-local') {
+      if ($.fn.datetime.defaults.polyfill && this.type === 'datetime-local') {
         return;
       }
 
       var $element = $(this),
           data     = $element.data();
 
-      $element.calendar(data);
+      $element.datetime(data);
 
     });
   });
