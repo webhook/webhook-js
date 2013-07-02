@@ -8,10 +8,6 @@
   display: block;
 }
 
-[data-toggle-group] .active {
-  background: lime;
-}
-
 [data-toggle-target-group] > * {
   display: none;
 }
@@ -45,4 +41,8 @@
 }
 .webhook-calendar .today {
   outline: 1px solid #cccccc;
+}
+
+.affix {
+  position: fixed;
 }
