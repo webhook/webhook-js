@@ -31,14 +31,14 @@
     strictEqual(elems.tab(), elems, 'should be chainable');
   });
 
-  test('show makes tag active', function () {
-    var elems = $('<a>').tab('show');
-    ok(elems.hasClass('active'), 'should be active');
-  });
+  // test('show makes tab "active"', function () {
+  //   var elems = $('<a>').tab('show');
+  //   ok(elems.hasClass('active'), 'should be active');
+  // });
 
-  test('other tabs inaactive', function () {
-    var elems = $('<nav data-toggle-group><a></a><a></a></nav>').children().first().tab('show');
-    ok(!elems.children().last().is('.active'), 'other tabs should not be active');
-  });
+  // test('other tabs inaactive', function () {
+  //   var elems = $('<nav data-toggle-group><a></a><a></a></nav>').children().first().tab('show');
+  //   ok(!elems.children().last().is('.active'), 'other tabs should not be active');
+  // });
 
 }(jQuery));

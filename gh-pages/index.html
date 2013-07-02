@@ -3,48 +3,89 @@
 <head>
   <meta charset="utf-8">
   <title>Webhook JS Demo</title>
-  <link rel="stylesheet" href="//yui.yahooapis.com/pure/0.2.0/base-min.css">
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.2.0/pure-min.css">
   <link rel="stylesheet" href="css/webhook-js.css" media="screen">
   <style>
-    body { margin: 1em; }
+    body > header { background: #eee; height: 200px; }
+    .docs { width: 1170px; margin-left: auto; margin-right: auto; height: 2000px; }
+    .sidebar { box-sizing: border-box; padding-right: 1em; }
+    .pure-menu.pure-menu-open { width: 279px; }
     .widget { margin: 2em 0; border-bottom: 2px dashed #ccc; padding-bottom: 2em; }
+    .affix { top: 10px; }
+    [data-toggle-target-group] > * { display: none; }
+    [data-toggle-target-group] > .pure-menu { display: none; }
   </style>
 </head>
 <body>
 
-  <div class="pure-g">
+  <header>
+    Just a header taking up room to check if the affix is working properly.
+  </header>
 
-    <section class="widget">
-      <header>Tab</header>
-      <nav>
-        <ul data-toggle-group>
-          <li><a href="#one" data-toggle class="active">One</a></li>
-          <li><a href="#two" data-toggle>Two</a></li>
-          <li><a href="#three" data-toggle>Three</a></li>
-        </ul>
-      </nav>
-      <section data-toggle-target-group>
-        <section id="one" class="active">One, singular sensation</section>
-        <section id="two">Every little step you take</section>
-        <section id="three">One, thrilling combination</section>
+  <div class="pure-g docs">
+
+    <div class="pure-u-1-4 sidebar">
+
+      <div class="pure-menu pure-menu-open" data-spy="affix">
+          <a class="pure-menu-heading">Widgets</a>
+
+          <ul>
+              <li><a href="#tab">Tab</a></li>
+              <li><a href="#affix">Affix</a></li>
+              <li><a href="#tooltip">Tooltip</a></li>
+              <li><a href="#calendar">Calendar</a></li>
+              <!-- <li class="pure-menu-heading">More Sites!</li>
+              <li><a href="#">Games</a></li>
+              <li><a href="#">News</a></li>
+              <li><a href="#">OMG!</a></li> -->
+          </ul>
+      </div>
+
+    </div>
+
+    <div class="pure-u-3-4 main">
+
+      <section class="widget">
+        <header id="tab">Tab</header>
+
+        <div class="pure-menu pure-menu-open pure-menu-horizontal">
+          <ul data-toggle-group data-activetabclass="pure-menu-selected">
+            <li class="pure-menu-selected"><a href="#one" data-toggle="tab">One</a></li>
+            <li><a href="#two" data-toggle="tab">Two</a></li>
+            <li><a href="#three" data-toggle="tab">Three</a></li>
+          </ul>
+        </div>
+
+        <section data-toggle-target-group>
+          <section id="one" class="active">One, singular sensation</section>
+          <section id="two">Every little step you take</section>
+          <section id="three">One, thrilling combination</section>
+        </section>
+
       </section>
-    </section>
 
-    <section class="widget">
-      <header>Tooltip</header>
-      <ul>
-        <li><span data-toggle="tooltip" title="Hey Dave">Tooltip on top</span></li>
-        <li><span data-toggle="tooltip" data-placement="right" title="Hey Dave">Tooltip on right</span></li>
-        <li><span data-toggle="tooltip" data-placement="bottom" title="Hey Dave">Tooltip on bottom</span></li>
-        <li><span data-toggle="tooltip" data-placement="left" title="Hey Dave">Tooltip on left</span></li>
-      <ul>
-    </section>
+      <section class="widget">
+        <header id="affix">Affix</header>
+        <code>data-spy="affix"</code>
+      </section>
 
-    <section class="widget">
-      <header>Datetime Polyfill</header>
-      <input type="datetime-local">
-      <input type="datetime-local" value="2012-07-01T15:04">
-    </section>
+      <section class="widget">
+        <header id="tooltip">Tooltip</header>
+        <ul>
+          <li><span data-toggle="tooltip" title="Hey Dave">Tooltip on top</span></li>
+          <li><span data-toggle="tooltip" data-placement="right" title="Hey Dave">Tooltip on right</span></li>
+          <li><span data-toggle="tooltip" data-placement="bottom" title="Hey Dave">Tooltip on bottom</span></li>
+          <li><span data-toggle="tooltip" data-placement="left" title="Hey Dave">Tooltip on left</span></li>
+        <ul>
+      </section>
+
+      <section class="widget">
+        <header id="calendar">Datetime Polyfill</header>
+        <input type="datetime-local">
+        <input type="datetime-local" value="2012-07-01T15:04">
+      </section>
+
+    </div>
 
   </div>
 
@@ -53,6 +94,7 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.0.0/moment.min.js"></script>
 
   <!-- Load local lib. -->
+  <script src="js/webhook-affix.js"></script>
   <script src="js/webhook-calendar.js"></script>
   <script src="js/webhook-tab.js"></script>
   <script src="js/webhook-tooltip.js"></script>

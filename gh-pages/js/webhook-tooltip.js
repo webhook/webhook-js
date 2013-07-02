@@ -25,7 +25,6 @@
       this.type     = type;
       this.$element = $(element);
       this.options  = this.getOptions(options);
-      window.console.log('after', this.options);
       this.enabled  = true;
 
       this.fixTitle();

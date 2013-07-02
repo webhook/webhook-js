@@ -11,12 +11,74 @@
 
   Affix.prototype = {
     init: function (element, options) {
-      return [element, options];
+      this.$element = $(element);
+      this.options  = this.getOptions(options);
+      this.$window  = $(window);
+
+      if (!this.options.offset.top) {
+        this.options.offset.top = this.$element.offset().top - 10;
+      }
+
+      this.$window.on({
+        'scroll.affix': $.proxy(this.checkPosition, this),
+        'click.affix': $.proxy(function () {
+          setTimeout($.proxy(this.checkPosition, this), 1);
+        }, this)
+      });
+
+      this.checkPosition();
+    },
+
+    getOptions: function (options) {
+      return $.extend({}, $.fn.affix.defaults, this.$element.data(), options);
+    },
+
+    checkPosition: function () {
+      if (!this.$element.is(':visible')) {
+        return;
+      }
+
+      var scrollHeight = $(document).height(),
+          scrollTop    = this.$window.scrollTop(),
+          position     = this.$element.offset(),
+          offset       = this.options.offset,
+          offsetBottom = offset.bottom,
+          offsetTop    = offset.top,
+          reset        = 'affix affix-top affix-bottom',
+          affix;
+
+      if (typeof offset !== 'object') {
+        offsetBottom = offsetTop = offset;
+      }
+
+      if (typeof offsetTop === 'function') {
+        offsetTop = offset.top();
+      }
+
+      if (typeof offsetBottom === 'function') {
+        offsetBottom = offset.bottom();
+      }
+
+      affix =     this.unpin   !== null && (scrollTop + this.unpin <= position.top) ?
+        false   : offsetBottom !== null && (position.top + this.$element.height() >= scrollHeight - offsetBottom) ?
+        'bottom': offsetTop    !== null && scrollTop <= offsetTop ?
+        'top'   : false;
+
+      if (this.affixed === affix) {
+        return;
+      }
+
+      this.affixed = affix;
+      this.unpin = affix === 'bottom' ? position.top - scrollTop : null;
+
+      this.$element.removeClass(reset).addClass('affix' + (affix ? '-' + affix : ''));
     }
+
   };
 
-  /* AFFIX PLUGIN DEFINITION
-   * ======================= */
+
+ /* AFFIX PLUGIN DEFINITION
+  * ======================= */
 
   $.fn.affix = function (option) {
     return this.each(function () {
@@ -36,7 +98,32 @@
 
   $.fn.affix.Constructor = Affix;
 
-  $.fn.affix.defaults = {};
+  $.fn.affix.defaults = {
+    offset: {}
+  };
+
+
+ /* AFFIX DATA-API
+  * ============== */
+
+  $(window).on('load', function () {
+    $('[data-spy="affix"]').each(function () {
+      var $spy = $(this),
+          data = $spy.data();
+
+      data.offset = data.offset || {};
+
+      if (data.offsetBottom) {
+        data.offset.bottom = data.offsetBottom;
+      }
+
+      if (data.offsetTop) {
+        data.offset.top = data.offsetTop;
+      }
+
+      $spy.affix(data);
+    });
+  });
 
 }(window.jQuery));
 
@@ -78,6 +165,35 @@
   $.fn.autocomplete.defaults = {};
 
 }(window.jQuery));
+
+/*
+<div class="wh-control-group">
+<label for="right-label" >Author(s)</label>
+<div class="wh-tag-input-group">
+  <span class="wh-tag">Dave Snider<a href="" class="wh-tag-remove"></a></span>
+  <span class="wh-tag">Andy McCurdy<a href="" class="wh-tag-remove"></a></span>
+  <span class="wh-tag">Mike Horn<a href="" class="wh-tag-remove"></a></span>
+  <div class="wh-autocomplete-group">
+    <input type="text" id="right-label" placeholder="Search users">
+    <div class="wh-autocomplete-dropdown">
+      <ul>
+        <li class="on">
+          <img src="https://secure.gravatar.com/avatar/701bba3438bca23aed0079226247c308?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" />
+          Dave snider
+        </li>
+        <li>
+          <img src="http://static.giantbomb.com/uploads/square_tiny/0/29/955845-177637_410709_soundwave_copy.jpg" />
+          Andy McCurdy
+        </li>
+        <li>
+          <img src="http://static.giantbomb.com/uploads/square_tiny/0/5761/1630113-1446558_tronpreorder.png" />
+          Mike Horn
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+*/
 
 (function ($) {
 
@@ -471,28 +587,41 @@
 
   "use strict";
 
-  var Tab = function (element) {
-    this.$element = $(element);
+  var Tab = function (element, options) {
+    this.init(element, options);
   };
 
   Tab.prototype = {
+    init: function (element, options) {
+      this.$element = $(element);
+      this.options = this.getOptions(options);
+    },
+
+    getOptions: function (options) {
+      return $.extend({}, $.fn.tab.defaults, this.$element.closest('[data-toggle-group]').data(), this.$element.data(), options);
+    },
+
     show: function () {
 
-      var selector, $target;
+      var selector, $target, $targetGroup, groupOptions;
 
-      this.$element.closest('[data-toggle-group]').find('[data-toggle]').removeClass('active');
-      this.$element.addClass('active');
+      this.$element.closest('[data-toggle-group]').find('[data-toggle]').parent().removeClass(this.options.activetabclass);
+      this.$element.parent().addClass(this.options.activetabclass);
 
       selector = this.$element.attr('href');
       selector = selector && selector.replace(/.*(?=#[^\s]*$)/, '');
 
       $target = $(selector);
+      $targetGroup = $target.closest('[data-toggle-target-group]');
 
-      $target.closest('[data-toggle-target-group]').children().removeClass('active');
-      $target.addClass('active');
+      groupOptions = $.extend({}, this.options, $targetGroup.data());
+
+      $targetGroup.children().removeClass(groupOptions.activepaneclass);
+      $target.addClass(groupOptions.activepaneclass);
 
     }
   };
+
 
  /* TAB PLUGIN DEFINITION
   * ===================== */
@@ -500,10 +629,11 @@
   $.fn.tab = function (option) {
     return this.each(function () {
       var $this   = $(this),
-          data    = $this.data('tab');
+          data    = $this.data('tab'),
+          options = typeof option === 'object' && option;
 
       if (!data) {
-        $this.data('tab', (data = new Tab(this)));
+        $this.data('tab', (data = new Tab(this, options)));
       }
 
       if (typeof option === 'string') {
@@ -514,10 +644,16 @@
 
   $.fn.tab.Constructor = Tab;
 
- /* TAB DATA-API
-  * ============ */
+  $.fn.tab.defaults = {
+    activetabclass: 'active',
+    activepaneclass: 'active'
+  };
 
-  $(document).on('click.tab.data-api', '[data-toggle]', function (e) {
+
+ /* TAB DATA-API
+  * ============== */
+
+  $(document).on('click.tab.data-api', '[data-toggle=tab]', function (e) {
     e.preventDefault();
     $(this).tab('show');
   });
@@ -582,7 +718,6 @@
       this.type     = type;
       this.$element = $(element);
       this.options  = this.getOptions(options);
-      window.console.log('after', this.options);
       this.enabled  = true;
 
       this.fixTitle();

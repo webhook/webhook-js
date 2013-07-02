@@ -16,12 +16,74 @@
 
   Affix.prototype = {
     init: function (element, options) {
-      return [element, options];
+      this.$element = $(element);
+      this.options  = this.getOptions(options);
+      this.$window  = $(window);
+
+      if (!this.options.offset.top) {
+        this.options.offset.top = this.$element.offset().top - 10;
+      }
+
+      this.$window.on({
+        'scroll.affix': $.proxy(this.checkPosition, this),
+        'click.affix': $.proxy(function () {
+          setTimeout($.proxy(this.checkPosition, this), 1);
+        }, this)
+      });
+
+      this.checkPosition();
+    },
+
+    getOptions: function (options) {
+      return $.extend({}, $.fn.affix.defaults, this.$element.data(), options);
+    },
+
+    checkPosition: function () {
+      if (!this.$element.is(':visible')) {
+        return;
+      }
+
+      var scrollHeight = $(document).height(),
+          scrollTop    = this.$window.scrollTop(),
+          position     = this.$element.offset(),
+          offset       = this.options.offset,
+          offsetBottom = offset.bottom,
+          offsetTop    = offset.top,
+          reset        = 'affix affix-top affix-bottom',
+          affix;
+
+      if (typeof offset !== 'object') {
+        offsetBottom = offsetTop = offset;
+      }
+
+      if (typeof offsetTop === 'function') {
+        offsetTop = offset.top();
+      }
+
+      if (typeof offsetBottom === 'function') {
+        offsetBottom = offset.bottom();
+      }
+
+      affix =     this.unpin   !== null && (scrollTop + this.unpin <= position.top) ?
+        false   : offsetBottom !== null && (position.top + this.$element.height() >= scrollHeight - offsetBottom) ?
+        'bottom': offsetTop    !== null && scrollTop <= offsetTop ?
+        'top'   : false;
+
+      if (this.affixed === affix) {
+        return;
+      }
+
+      this.affixed = affix;
+      this.unpin = affix === 'bottom' ? position.top - scrollTop : null;
+
+      this.$element.removeClass(reset).addClass('affix' + (affix ? '-' + affix : ''));
     }
+
   };
 
-  /* AFFIX PLUGIN DEFINITION
-   * ======================= */
+
+ /* AFFIX PLUGIN DEFINITION
+  * ======================= */
 
   $.fn.affix = function (option) {
     return this.each(function () {
@@ -41,6 +103,31 @@
 
   $.fn.affix.Constructor = Affix;
 
-  $.fn.affix.defaults = {};
+  $.fn.affix.defaults = {
+    offset: {}
+  };
+
+
+ /* AFFIX DATA-API
+  * ============== */
+
+  $(window).on('load', function () {
+    $('[data-spy="affix"]').each(function () {
+      var $spy = $(this),
+          data = $spy.data();
+
+      data.offset = data.offset || {};
+
+      if (data.offsetBottom) {
+        data.offset.bottom = data.offsetBottom;
+      }
+
+      if (data.offsetTop) {
+        data.offset.top = data.offsetTop;
+      }
+
+      $spy.affix(data);
+    });
+  });
 
 }(window.jQuery));
