@@ -30,20 +30,40 @@
           <a class="pure-menu-heading">Widgets</a>
 
           <ul>
+              <li><a href="#autocomplete">Autocomplete</a></li>
+              <li><a href="#modal">Modal</a></li>
               <li><a href="#tab">Tab</a></li>
               <li><a href="#affix">Affix</a></li>
               <li><a href="#tooltip">Tooltip</a></li>
               <li><a href="#calendar">Calendar</a></li>
-              <!-- <li class="pure-menu-heading">More Sites!</li>
-              <li><a href="#">Games</a></li>
-              <li><a href="#">News</a></li>
-              <li><a href="#">OMG!</a></li> -->
           </ul>
       </div>
 
     </div>
 
     <div class="pure-u-3-4 main">
+
+      <section class="widget">
+        <header id="autocomplete">Autocomplete</header>
+
+        <form class="pure-form">
+          <fieldset>
+            <label>Popular Languages (local)</label>
+            <input type="text" data-provide="autocomplete" data-source='["Mandarin", "Spanish", "English", "Arabic", "Hindi", "Bengali", "Portuguese", "Russian", "Japanese", "German", "Javanese"]'>
+          </fieldset>
+          <fieldset>
+            <label>States (remote)</label>
+            <input type="text" data-provide="autocomplete" data-source="states.json">
+          </fieldset>
+          <fieldset>
+            <label>Select CA Plants (remote)</label>
+            <input type="text" data-provide="autocomplete" data-source="plants.json">
+          </fieldset>
+          <fieldset>
+            <label>MTG Cards (remote + formatdata)</label>
+            <input type="text" id="mtgcards">
+        </form>
+      </section>
 
       <section class="widget">
         <header id="modal">Modal</header>
@@ -106,9 +126,19 @@
 
   <!-- Load local lib. -->
   <script src="js/webhook-affix.js"></script>
+  <script src="js/webhook-autocomplete.js"></script>
   <script src="js/webhook-datetime.js"></script>
   <script src="js/webhook-modal.js"></script>
   <script src="js/webhook-tab.js"></script>
   <script src="js/webhook-tooltip.js"></script>
+
+  <script>
+    $('#mtgcards').autocomplete({
+      source: 'cards.json',
+      formatdata: function (data) {
+        return data[0].split("\n");
+      }
+    });
+  </script>
 </body>
 </html>
