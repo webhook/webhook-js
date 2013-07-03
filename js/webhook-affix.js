@@ -31,6 +31,8 @@
         }, this)
       });
 
+      this.initialwidth = this.$element.width() === this.$element.parent().width() ? 'auto' : this.$element.width();
+
       this.checkPosition();
     },
 
@@ -71,6 +73,18 @@
 
       if (this.affixed === affix) {
         return;
+      }
+
+      if (!affix) {
+        this.$element.css({
+          top: 10,
+          width: this.$element.width()
+        });
+      } else {
+        this.$element.css({
+          top: 'auto',
+          width: this.initialWidth
+        });
       }
 
       this.affixed = affix;
