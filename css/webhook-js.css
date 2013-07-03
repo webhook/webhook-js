@@ -69,3 +69,7 @@
   right: 0;
   z-index: 1040;
 }
+
+.wh-autocomplete-results .on {
+  background: rgba(0, 0, 255, 0.2);
+}
