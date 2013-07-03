@@ -39,7 +39,7 @@
   Autocomplete.prototype = {
     init: function (element, options) {
       this.$element = $(element).prop('readonly', true);
-      this.$input   = $('<input type="text" autocomplete="off" autofocus>').insertAfter(this.$element);
+      this.$input   = $('<input type="text" autocomplete="off">').insertAfter(this.$element);
       this.$results = $('<ul class="wh-autocomplete-results">');
       this.options  = this.getOptions(options);
 

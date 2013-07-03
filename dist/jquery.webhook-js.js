@@ -26,6 +26,8 @@
         }, this)
       });
 
+      this.initialwidth = this.$element.width() === this.$element.parent().width() ? 'auto' : this.$element.width();
+
       this.checkPosition();
     },
 
@@ -66,6 +68,18 @@
 
       if (this.affixed === affix) {
         return;
+      }
+
+      if (!affix) {
+        this.$element.css({
+          top: 10,
+          width: this.$element.width()
+        });
+      } else {
+        this.$element.css({
+          top: 'auto',
+          width: this.initialWidth
+        });
       }
 
       this.affixed = affix;
@@ -160,7 +174,7 @@
   Autocomplete.prototype = {
     init: function (element, options) {
       this.$element = $(element).prop('readonly', true);
-      this.$input   = $('<input type="text" autocomplete="off" autofocus>').insertAfter(this.$element);
+      this.$input   = $('<input type="text" autocomplete="off">').insertAfter(this.$element);
       this.$results = $('<ul class="wh-autocomplete-results">');
       this.options  = this.getOptions(options);
 
