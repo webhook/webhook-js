@@ -46,7 +46,7 @@
           offset       = this.options.offset,
           offsetBottom = offset.bottom,
           offsetTop    = offset.top,
-          reset        = 'affix affix-top affix-bottom',
+          reset        = 'wh-affix wh-affix-top wh-affix-bottom',
           affix;
 
       if (typeof offset !== 'object') {
@@ -70,22 +70,12 @@
         return;
       }
 
-      if (!affix) {
-        this.$element.css({
-          top: 10,
-          width: this.$element.width()
-        });
-      } else {
-        this.$element.css({
-          top: 'auto',
-          width: this.initialWidth
-        });
-      }
+      this.$element.width(affix ? this.initialWidth : this.$element.width());
 
       this.affixed = affix;
       this.unpin = affix === 'bottom' ? position.top - scrollTop : null;
 
-      this.$element.removeClass(reset).addClass('affix' + (affix ? '-' + affix : ''));
+      this.$element.removeClass(reset).addClass('wh-affix' + (affix ? '-' + affix : ''));
     }
 
   };
