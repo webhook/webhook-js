@@ -168,17 +168,18 @@
       this.$tagGroup = $('<div class="wh-tag-input-group">').insertAfter(this.$element);
       this.$autocompleteGroup = $('<div class="wh-autocomplete-group">').appendTo(this.$tagGroup);
 
-      this.$input   = $('<input type="text" autocomplete="off">').appendTo(this.$autocompleteGroup);
-      this.$results = $('<div class="wh-autocomplete-dropdown">').append('<ul>');
-      this.options  = this.getOptions(options);
-      this.selected = [];
+      this.$input    = $('<input type="text" autocomplete="off">').appendTo(this.$autocompleteGroup);
+      this.$results  = $('<div class="wh-autocomplete-dropdown">').append('<ul>');
+      this.options   = this.getOptions(options);
+      this.selected  = [];
       this.$selected = $([]);
+      this.keyedData = {};
 
       this.$input.attr('placeholder', this.options.placeholder || this.$element.attr('placeholder'));
 
-      this.getSource(this.options.source);
-
       this.listen();
+
+      this.getSource(this.options.source);
 
     },
 
@@ -199,6 +200,17 @@
     setData: function (data) {
       this.data = data;
       this.formattedData = this.options.formatData(data);
+
+      $.each(this.data, $.proxy(function (index, item) {
+        this.keyedData[this.options.formatSelect(item)] = item;
+      }, this));
+
+      // initial data
+      if (this.$element.val()) {
+        $.each(this.$element.val().split(','), $.proxy(function (index, value) {
+          this.selectItem(this.keyedData[value]);
+        }, this));
+      }
     },
 
     listen: function () {
@@ -216,6 +228,7 @@
 
       this.$element.on({
         'selectItem.autocomplete': $.proxy(function (event, item) {
+
           var $selected = $('<span class="wh-tag">')
                             .text(this.options.formatDisplay(item))
                             .data('item', item)
@@ -375,6 +388,7 @@
       }
 
       this.updateSelection();
+
       this.$element.trigger('selectItem.autocomplete', item);
       this.hide();
       this.$input.val('');
