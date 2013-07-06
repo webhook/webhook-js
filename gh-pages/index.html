@@ -12,6 +12,9 @@
     .widget { margin: 2em 0; border-bottom: 2px dashed #ccc; padding-bottom: 2em; }
     [data-toggle-target-group] > * { display: none; }
     [data-toggle-target-group] > .pure-menu { display: none; }
+    .wh-tag { border: 1px solid #ccc; background: #eee; border-radius: 3px; font-size: 12px; padding: 3px 5px; }
+    .wh-tag + .wh-tag { margin-left: 0.2em; }
+    .wh-tag-remove:after { content: "\00D7"; margin-left: 0.2em; font-weight: bold; cursor: pointer; }
   </style>
 </head>
 <body>
@@ -47,7 +50,7 @@
         <form class="pure-form">
           <fieldset>
             <label>Popular Languages (local)</label>
-            <input type="text" data-provide="autocomplete" data-source='["Mandarin", "Spanish", "English", "Arabic", "Hindi", "Bengali", "Portuguese", "Russian", "Japanese", "German", "Javanese"]' data-limit='0'>
+            <input type="text" data-provide="autocomplete" data-source='["Mandarin", "Spanish", "English", "Arabic", "Hindi", "Bengali", "Portuguese", "Russian", "Japanese", "German", "Javanese"]' data-limit='0' value="Hindi" placeholder="Language">
           </fieldset>
           <fieldset>
             <label>States (remote)</label>
@@ -55,7 +58,7 @@
           </fieldset>
           <fieldset>
             <label>Select CA Plants (remote + formatData + formatDisplay + formatSelect)</label>
-            <input type="text" id="plants">
+            <input type="text" id="plants" value="5,20">
           </fieldset>
           <fieldset>
             <label>MTG Cards (remote + formatSource + large dataset)</label>
@@ -132,6 +135,8 @@
 
   <script>
     $('#plants').autocomplete({
+      placeholder: 'Plant name',
+      limit: 5,
       source: 'plants.json',
       formatData: function (data) {
         return data.map(function (item) { return item.name; });

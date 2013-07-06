@@ -164,41 +164,22 @@
   Autocomplete.prototype = {
     init: function (element, options) {
       this.$element = $(element).prop('readonly', true);
-      this.$input   = $('<input type="text" autocomplete="off">').insertAfter(this.$element);
-      this.$results = $('<ul class="wh-autocomplete-results">');
+
+      this.$tagGroup = $('<div class="wh-tag-input-group">').insertAfter(this.$element);
+      this.$autocompleteGroup = $('<div class="wh-autocomplete-group">').appendTo(this.$tagGroup);
+
+      this.$input   = $('<input type="text" autocomplete="off">').appendTo(this.$autocompleteGroup);
+      this.$results = $('<div class="wh-autocomplete-dropdown">').append('<ul>');
       this.options  = this.getOptions(options);
       this.selected = [];
       this.$selected = $([]);
 
+      this.$input.attr('placeholder', this.options.placeholder || this.$element.attr('placeholder'));
+
       this.getSource(this.options.source);
 
-      this.$input.on({
-        'keydown.autocomplete': $.proxy(this.keydown, this),
-        'keyup.autocomplete': $.proxy(this.keyup, this)
-      });
+      this.listen();
 
-      this.$results.on('mouseenter.autocomplete', 'li', function () {
-        $(this).addClass('on').siblings().removeClass('on');
-      });
-
-      this.$results.on('click.autocomplete', 'li', $.proxy(this.selectCurrent, this));
-
-      this.$element.on({
-        'selectItem.autocomplete': $.proxy(function (event, item) {
-          var $selected = $('<span>')
-                            .text(this.options.formatDisplay(item))
-                            .data('item', item)
-                            .attr('data-val', this.options.formatSelect(item))
-                            .insertBefore(this.$input);
-          this.$selected = this.$selected.add($selected);
-          $selected.on('click', $.proxy(function () {
-            this.removeItem(item);
-          }, this));
-        }, this),
-        'removeItem.autocomplete': $.proxy(function (event, item) {
-          this.$selected.filter('[data-val="' + this.options.formatSelect(item) + '"]').remove();
-        }, this)
-      });
     },
 
     getOptions: function (options) {
@@ -218,6 +199,40 @@
     setData: function (data) {
       this.data = data;
       this.formattedData = this.options.formatData(data);
+    },
+
+    listen: function () {
+
+      this.$input.on({
+        'keydown.autocomplete': $.proxy(this.keydown, this),
+        'keyup.autocomplete': $.proxy(this.keyup, this)
+      });
+
+      this.$results.on('mouseenter.autocomplete', 'li', function () {
+        $(this).addClass('on').siblings().removeClass('on');
+      });
+
+      this.$results.on('click.autocomplete', 'li', $.proxy(this.selectCurrent, this));
+
+      this.$element.on({
+        'selectItem.autocomplete': $.proxy(function (event, item) {
+          var $selected = $('<span class="wh-tag">')
+                            .text(this.options.formatDisplay(item))
+                            .data('item', item)
+                            .attr('data-val', this.options.formatSelect(item))
+                            .insertBefore(this.$autocompleteGroup);
+
+          $('<a class="wh-tag-remove">').appendTo($selected).on('click', $.proxy(function () {
+            this.removeItem(item);
+          }, this));
+
+          this.$selected = this.$selected.add($selected);
+        }, this),
+        'removeItem.autocomplete': $.proxy(function (event, item) {
+          this.$selected.filter('[data-val="' + this.options.formatSelect(item) + '"]').remove();
+        }, this)
+      });
+
     },
 
     keydown: function (event) {
@@ -347,6 +362,10 @@
 
       var val = this.options.formatSelect(item);
 
+      if (~this.selected.indexOf(val)) {
+        return this;
+      }
+
       if (this.options.limit && this.selected.length >= this.options.limit) {
         return this;
       } else if (this.options.limit === 1) {
@@ -376,10 +395,10 @@
 
     render: function (orderedKeys) {
 
-      this.$results.empty();
+      this.$results.find('ul').empty();
 
       $.each(orderedKeys, $.proxy(function (index, key) {
-        $('<li>').text(this.options.formatDisplay(this.data[key])).data('item', this.data[key]).appendTo(this.$results);
+        $('<li>').text(this.options.formatDisplay(this.data[key])).data('item', this.data[key]).appendTo(this.$results.find('ul'));
       }, this));
 
       this.$results.find('li').first().addClass('on');
@@ -390,7 +409,7 @@
     show: function () {
 
       if (!this.$results.is(':empty')) {
-        this.$results.insertAfter(this.$input);
+        this.$results.appendTo(this.$autocompleteGroup);
       }
 
       return this;
