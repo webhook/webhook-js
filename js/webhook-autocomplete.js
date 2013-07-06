@@ -42,12 +42,37 @@
       this.$input   = $('<input type="text" autocomplete="off">').insertAfter(this.$element);
       this.$results = $('<ul class="wh-autocomplete-results">');
       this.options  = this.getOptions(options);
+      this.selected = [];
+      this.$selected = $([]);
 
       this.getSource(this.options.source);
 
       this.$input.on({
         'keydown.autocomplete': $.proxy(this.keydown, this),
         'keyup.autocomplete': $.proxy(this.keyup, this)
+      });
+
+      this.$results.on('mouseenter.autocomplete', 'li', function () {
+        $(this).addClass('on').siblings().removeClass('on');
+      });
+
+      this.$results.on('click.autocomplete', 'li', $.proxy(this.selectCurrent, this));
+
+      this.$element.on({
+        'selectItem.autocomplete': $.proxy(function (event, item) {
+          var $selected = $('<span>')
+                            .text(this.options.formatDisplay(item))
+                            .data('item', item)
+                            .attr('data-val', this.options.formatSelect(item))
+                            .insertBefore(this.$input);
+          this.$selected = this.$selected.add($selected);
+          $selected.on('click', $.proxy(function () {
+            this.removeItem(item);
+          }, this));
+        }, this),
+        'removeItem.autocomplete': $.proxy(function (event, item) {
+          this.$selected.filter('[data-val="' + this.options.formatSelect(item) + '"]').remove();
+        }, this)
       });
     },
 
@@ -103,7 +128,7 @@
           break;
 
         case keyCode.ENTER:
-          this.select();
+          this.selectCurrent();
           break;
 
         case keyCode.ESCAPE:
@@ -189,11 +214,39 @@
       prev.addClass('on');
     },
 
-    select: function () {
-      var item = this.$results.find('.on').data('item');
-      this.$element.val(this.options.formatSelect(item)).trigger('change');
+    selectCurrent: function () {
+      return this.selectItem(this.$results.find('.on').data('item'));
+    },
+
+    selectItem: function (item) {
+
+      var val = this.options.formatSelect(item);
+
+      if (this.options.limit && this.selected.length >= this.options.limit) {
+        return this;
+      } else if (this.options.limit === 1) {
+        this.selected = [val];
+      } else {
+        this.selected.push(val);
+      }
+
+      this.updateSelection();
+      this.$element.trigger('selectItem.autocomplete', item);
       this.hide();
       this.$input.val('');
+
+      return this;
+    },
+
+    updateSelection: function () {
+      this.$element.val(this.selected.join(this.options.separator)).trigger('change');
+    },
+
+    removeItem: function (item) {
+      this.selected.splice(this.selected.indexOf(this.options.formatSelect(item)), 1);
+      this.updateSelection();
+      this.$element.trigger('removeItem.autocomplete', item);
+      return this;
     },
 
     render: function (orderedKeys) {
@@ -249,6 +302,8 @@
   $.fn.autocomplete.Constructor = Autocomplete;
 
   $.fn.autocomplete.defaults = {
+    separator: ',',
+    limit: 1,
     perPage: 10,
     minLength: 2,
     formatSource: function (data) {
