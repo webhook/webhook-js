@@ -1,4 +1,4 @@
-/*! webhook-js - v0.0.1 - 2013-07-05
+/*! webhook-js - v0.0.1 - 2013-07-16
 * https://github.com/webhook/webhook-js
 * Copyright (c) 2013 Mike Horn; Licensed MIT */
 (function ($) {
@@ -36,6 +36,7 @@
     },
 
     checkPosition: function () {
+
       if (!this.$element.is(':visible')) {
         return;
       }
@@ -61,10 +62,19 @@
         offsetBottom = offset.bottom();
       }
 
-      affix =     this.unpin   !== null && (scrollTop + this.unpin <= position.top) ?
-        false   : offsetBottom !== null && (position.top + this.$element.height() >= scrollHeight - offsetBottom) ?
-        'bottom': offsetTop    !== null && scrollTop <= offsetTop ?
-        'top'   : false;
+      if (this.$element.height() >= this.$window.height()) {
+        affix = 'top';
+      } else if (this.options.minWidth >= this.$window.width()) {
+        affix = 'top';
+      } else if (this.unpin !== null && (scrollTop + this.unpin <= position.top)) {
+        affix = false;
+      } else if (offsetBottom !== null && (position.top + this.$element.height() >= scrollHeight - offsetBottom)) {
+        affix = 'bottom';
+      } else if (offsetTop !== null && scrollTop <= offsetTop) {
+        affix = 'top';
+      } else {
+        affix = false;
+      }
 
       if (this.affixed === affix) {
         return;
@@ -103,7 +113,11 @@
   $.fn.affix.Constructor = Affix;
 
   $.fn.affix.defaults = {
-    offset: {}
+    offset: {},
+    minWidth: 480,
+    minHeight: function () {
+
+    }
   };
 
 
