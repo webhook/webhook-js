@@ -19,6 +19,8 @@
       this.$element = $(element);
       this.options  = this.getOptions(options);
       this.$body    = $('body');
+      this.$content = $(this.options.contentTemplate);
+      this.$close   = $(this.options.closeButton && this.options.closeTemplate);
 
       // dismiss the modal when ESC is pressed.
       // TODO: only dismiss the top modal
@@ -34,15 +36,15 @@
       return $.extend({}, $.fn.modal.defaults, this.$element.data(), options);
     },
 
-    getTarget: function () {
+    getTarget: function (target) {
 
       var selector;
 
-      selector = this.$element.attr('href');
+      selector = target || this.$element.attr('href');
       if (selector.indexOf('#') === 0) {
         selector = selector && selector.replace(/.*(?=#[^\s]*$)/, '');
       } else {
-        this.getModal().load(selector);
+        this.getContent().load(selector);
         selector = '<div>loading</div>';
       }
 
@@ -51,20 +53,37 @@
     },
 
     getModal: function () {
-      this.$modal = this.$modal || $(this.options.template);
-      this.$modal.one('click.modal', function (event) { event.stopPropagation(); });
-      this.$modal.one('click.modal.dismiss', '[data-dismiss="modal"]', $.proxy(this.hide, this));
+
+      if (this.$modal) {
+        return this.$modal;
+      }
+
+      this.$modal = $(this.options.template).append(this.$close).append(this.$content);
+      this.$modal.on('click.modal', function (event) { event.stopPropagation(); });
+      this.$modal.on('click.modal.dismiss', '[data-dismiss="modal"]', $.proxy(this.hide, this));
+      if (this.options.captureLinks) {
+        this.$modal.on('click.modal', 'a[href]', $.proxy(function (event) {
+          event.preventDefault();
+          this.show($(event.target).attr('href'));
+        }, this));
+      }
+
       return this.$modal;
     },
 
+    getContent: function () {
+      return this.$content;
+    },
+
     getScreen: function () {
-      this.$screen = this.$screen || $(this.options.screentemplate);
+      this.$screen = this.$screen || $(this.options.screenTemplate);
       this.$screen.one('click.modal', $.proxy(this.hide, this));
       return this.$screen;
     },
 
-    show: function () {
-      this.$body.append(this.getScreen(), this.getModal().append(this.getTarget()));
+    show: function (target) {
+      this.getContent().append(this.getTarget(target));
+      this.$body.append(this.getScreen(), this.getModal());
     },
 
     hide: function () {
@@ -98,7 +117,11 @@
   $.fn.modal.defaults = {
     cache: true,
     template: "<div class='wh-modal'></div>",
-    screentemplate: "<div class='wh-modal-screen'></div>"
+    contentTemplate: "<div class='wh-modal-content'></div>",
+    closeTemplate: "<a class='wh-modal-close' data-dismiss='modal'>&times;</a>",
+    screenTemplate: "<div class='wh-modal-screen'></div>",
+    closeButton: true,
+    captureLinks: true
   };
 
 
