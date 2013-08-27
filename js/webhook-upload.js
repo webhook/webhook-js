@@ -22,13 +22,13 @@
 
       this.$element = $(element).hide();
 
-      this.$fileinput = $('<input type="file" multiple>').insertAfter(element);
+      this.$fileinput = $('<input type="file" multiple>').hide().insertAfter(element);
 
       this.$dropzone = this.getDropzone(element);
 
       $('<button class="pure-button">Click</button>').on('click', $.proxy(function () {
         this.$fileinput.trigger('click');
-      }, this)).insertBefore(element);
+      }, this)).appendTo(this.$dropzone);
 
       var uploader = this;
       this.$fileinput.on('change', function () {
@@ -83,9 +83,9 @@
 
           dropzone.css('background', 'transparent');
 
-          this.createThumbnails(event.originalEvent.dataTransfer.files, function (thumb) {
+          this.createThumbnails(event.originalEvent.dataTransfer.files, $.proxy(function (thumb) {
             thumb.insertAfter(element);
-          });
+          }, this));
         }, this)
       });
 
@@ -96,7 +96,10 @@
       $.each(files, function () {
         var thumb = $('<img>').attr({
           src: (window.URL || window.webkitURL).createObjectURL(this)
-        }).css('max-width', 200);
+        }).css({
+          'max-width': 100,
+          'max-height': 100
+        });
 
         var reader = new FileReader();
 
