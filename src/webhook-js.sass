@@ -1,3 +1,5 @@
+@import "../bower_components/bourbon/app/assets/stylesheets/bourbon"
+
 .wh-tooltip
   position: absolute
   display: none
@@ -38,3 +40,12 @@
 
 .wh-autocomplete-dropdown .on
   background: rgba(blue, 0.2)
+
+.rot-90
+  @include transform(rotate(90deg))
+.rot-180
+  @include transform(rotate(180deg))
+.rot-270
+  @include transform(rotate(270deg))
+.mirror
+  @include transform(scaleX(-1))

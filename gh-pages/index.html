@@ -31,6 +31,7 @@
           <a class="pure-menu-heading">Widgets</a>
 
           <ul>
+              <li><a href="#upload">Upload</a></li>
               <li><a href="#autocomplete">Autocomplete</a></li>
               <li><a href="#tab">Tab</a></li>
               <li><a href="#affix">Affix</a></li>
@@ -42,6 +43,11 @@
     </div>
 
     <div class="pure-u-3-4 main">
+
+      <section class="widget">
+        <header id="upload">Upload</header>
+        <input type="text" data-upload>
+      </section>
 
       <section class="widget">
         <header id="autocomplete">Autocomplete</header>
@@ -109,17 +115,18 @@
 
   </div>
 
-  <!-- Load local jQuery. -->
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.0.0/moment.min.js"></script>
+  <!-- Load local libs. -->
+  <script src="lib/jquery.js"></script>
+  <script src="lib/moment.js"></script>
+  <script src="lib/ExifReader.js"></script>
 
-  <!-- Load local lib. -->
+  <!-- Load local widgets. -->
   <script src="js/webhook-affix.js"></script>
   <script src="js/webhook-autocomplete.js"></script>
   <script src="js/webhook-datetime.js"></script>
-  <script src="js/webhook-modal.js"></script>
   <script src="js/webhook-tab.js"></script>
   <script src="js/webhook-tooltip.js"></script>
+  <script src="js/webhook-upload.js"></script>
 
   <script>
     $('#plants').autocomplete({
