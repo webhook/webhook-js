@@ -83,3 +83,24 @@
   -o-transform: scaleX(-1);
   transform: scaleX(-1);
 }
+.mirror.rot-90 {
+  -webkit-transform: scaleX(-1) rotate(90deg);
+  -moz-transform: scaleX(-1) rotate(90deg);
+  -ms-transform: scaleX(-1) rotate(90deg);
+  -o-transform: scaleX(-1) rotate(90deg);
+  transform: scaleX(-1) rotate(90deg);
+}
+.mirror.rot-180 {
+  -webkit-transform: scaleX(-1) rotate(180deg);
+  -moz-transform: scaleX(-1) rotate(180deg);
+  -ms-transform: scaleX(-1) rotate(180deg);
+  -o-transform: scaleX(-1) rotate(180deg);
+  transform: scaleX(-1) rotate(180deg);
+}
+.mirror.rot-270 {
+  -webkit-transform: scaleX(-1) rotate(270deg);
+  -moz-transform: scaleX(-1) rotate(270deg);
+  -ms-transform: scaleX(-1) rotate(270deg);
+  -o-transform: scaleX(-1) rotate(270deg);
+  transform: scaleX(-1) rotate(270deg);
+}
