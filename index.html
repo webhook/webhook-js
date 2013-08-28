@@ -132,8 +132,22 @@
   <script src="js/webhook-upload.js"></script>
 
   <script>
-    $('[data-upload][type=text]').on('thumb', function (event, thumb) {
-      $(this).data('upload').$dropzone.empty().append(thumb);
+    $('[data-upload][type=text]').on({
+      'dragover.wh.upload': function () {
+        $(this).data('upload').$dropzone.css('background', 'green');
+      },
+      'dragenter.wh.upload': function () {
+        $(this).data('upload').$dropzone.css('background', 'green');
+      },
+      'dragleave.wh.upload': function () {
+        $(this).data('upload').$dropzone.css('background', 'transparent');
+      },
+      'drop.wh.upload': function () {
+        $(this).data('upload').$dropzone.css('background', 'transparent');
+      },
+      'thumb.wh.upload': function (event, thumb) {
+        $(this).data('upload').$dropzone.empty().append(thumb);
+      }
     });
 
     $('#plants').autocomplete({
