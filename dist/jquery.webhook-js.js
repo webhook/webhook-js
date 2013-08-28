@@ -1177,9 +1177,7 @@
       this.$fileinput = $('<input type="file" multiple>').hide().insertAfter(element).on({
         change: function () {
           uploader.createThumbnails(this.files, function (thumb) {
-            // we should probably have an option where to put the thumbnail(s)
-            // thumb.appendTo("[data-upload-thumb='" + uploader.options.uploadGroup + "']");
-            uploader.$element.trigger('thumb', thumb);
+            uploader.$element.trigger('thumb.wh.upload', thumb);
           });
         },
         click: function (event) {
@@ -1200,7 +1198,7 @@
 
     initTriggers: function () {
       $("[data-upload-trigger='" + this.options.uploadGroup + "']").on('click', $.proxy(function () {
-        this.$fileinput.trigger('click');
+        this.$fileinput.trigger('click.wh.upload');
       }, this));
     },
 
@@ -1214,12 +1212,22 @@
 
       // prevent miss-drops
       $(window).on({
-        dragover: function (event) {
+        dragover: $.proxy(function (event) {
           event.preventDefault();
-        },
-        drop: function (event) {
+          this.$element.trigger('dragover.wh.upload');
+        }, this),
+        dragenter: $.proxy(function (event) {
           event.preventDefault();
-        }
+          this.$element.trigger('dragenter.wh.upload');
+        }, this),
+        dragleave: $.proxy(function (event) {
+          event.preventDefault();
+          this.$element.trigger('dragleave.wh.upload');
+        }, this),
+        drop: $.proxy(function (event) {
+          event.preventDefault();
+          this.$element.trigger('drop.wh.upload');
+        }, this)
       });
 
       // Handle drag and drop from OS.
@@ -1230,24 +1238,16 @@
 
           event.originalEvent.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
         },
-        dragenter: function () {
-          dropzone.addClass('wh-over');
-        },
-        dragleave: function () {
-          dropzone.removeClass('wh-over');
-        },
         drop: $.proxy(function (event) {
           event.stopPropagation();
           event.preventDefault();
 
-          dropzone.removeClass('wh-over');
-
           this.createThumbnails(event.originalEvent.dataTransfer.files, $.proxy(function (thumb) {
-            this.$element.trigger('thumb', thumb);
-            // thumb.appendTo("[data-upload-thumb='" + this.options.uploadGroup + "']");
+            this.$element.trigger('thumb.wh.upload', thumb);
           }, this));
         }, this)
       });
+
     },
 
     createThumbnails: function (files, callback) {
