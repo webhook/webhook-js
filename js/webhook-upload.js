@@ -22,29 +22,47 @@
 
       this.$element = $(element).hide();
 
-      this.$fileinput = $('<input type="file" multiple>').hide().insertAfter(element);
-
-      this.$dropzone = this.getDropzone(element);
-
-      $('<button class="pure-button">Click</button>').on('click', $.proxy(function () {
-        this.$fileinput.trigger('click');
-      }, this)).appendTo(this.$dropzone);
+      this.options = this.getOptions(options);
 
       var uploader = this;
-      this.$fileinput.on('change', function () {
-        uploader.createThumbnails(this.files, function (thumb) {
-          thumb.insertAfter(element);
-        });
+
+      // we need this for OS file selection
+      this.$fileinput = $('<input type="file" multiple>').hide().insertAfter(element).on({
+        change: function () {
+          uploader.createThumbnails(this.files, function (thumb) {
+            // we should probably have an option where to put the thumbnail(s)
+            // thumb.appendTo("[data-upload-thumb='" + uploader.options.uploadGroup + "']");
+            uploader.$element.trigger('thumb', thumb);
+          });
+        },
+        click: function (event) {
+          event.stopPropagation();
+        }
       });
+
+      this.initTriggers();
+      this.initDropzones();
 
       return [element, options];
 
     },
 
-    getDropzone: function (element) {
+    getOptions: function (options) {
+      return $.extend({}, $.fn.upload.defaults, this.$element.data(), options);
+    },
 
-      if (this.$dropzone) {
-        return this.$dropzone;
+    initTriggers: function () {
+      $("[data-upload-trigger='" + this.options.uploadGroup + "']").on('click', $.proxy(function () {
+        this.$fileinput.trigger('click');
+      }, this));
+    },
+
+    initDropzones: function () {
+
+      var dropzone = this.$dropzone = $("[data-upload-dropzone='" + this.options.uploadGroup + "']");
+
+      if (!dropzone.length) {
+        return;
       }
 
       // prevent miss-drops
@@ -58,12 +76,6 @@
       });
 
       // Handle drag and drop from OS.
-      var dropzone = $('<div>').css({
-        height: 200,
-        width: 200,
-        border: '1px solid black'
-      }).insertBefore(element);
-
       dropzone.on({
         dragover: function (event) {
           event.stopPropagation();
@@ -72,33 +84,32 @@
           event.originalEvent.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
         },
         dragenter: function () {
-          dropzone.css('background', 'blue');
+          dropzone.addClass('wh-over');
         },
         dragleave: function () {
-          dropzone.css('background', 'transparent');
+          dropzone.removeClass('wh-over');
         },
         drop: $.proxy(function (event) {
           event.stopPropagation();
           event.preventDefault();
 
-          dropzone.css('background', 'transparent');
+          dropzone.removeClass('wh-over');
 
           this.createThumbnails(event.originalEvent.dataTransfer.files, $.proxy(function (thumb) {
-            thumb.insertAfter(element);
+            this.$element.trigger('thumb', thumb);
+            // thumb.appendTo("[data-upload-thumb='" + this.options.uploadGroup + "']");
           }, this));
         }, this)
       });
-
-      return dropzone;
     },
 
     createThumbnails: function (files, callback) {
-      $.each(files, function () {
+      $.each(files, $.proxy(function (index, file) {
         var thumb = $('<img>').attr({
-          src: (window.URL || window.webkitURL).createObjectURL(this)
+          src: (window.URL || window.webkitURL).createObjectURL(file)
         }).css({
-          'max-width': 100,
-          'max-height': 100
+          'max-width': this.options.thumbmax,
+          'max-height': this.options.thumbmax
         });
 
         var reader = new FileReader();
@@ -142,8 +153,8 @@
         };
 
         // Read in the image file as a data URL.
-        reader.readAsArrayBuffer(this);
-      });
+        reader.readAsArrayBuffer(file);
+      }, this));
     }
   };
 
@@ -168,13 +179,15 @@
 
   $.fn.upload.Constructor = Upload;
 
-  $.fn.upload.defaults = {};
+  $.fn.upload.defaults = {
+    thumbmax: 100
+  };
 
  /* UPLOAD DATA-API
   * =============== */
 
   $(window).on('load', function () {
-    $('[data-upload][type=text]').each(function () {
+    $('[data-upload]:input').each(function () {
 
       var $element = $(this),
           data     = $element.data();
