@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "qunit": "~1.11.0",
-    "bourbon": "~3.1.8"
+    "bourbon": "~3.1.8",
+    "pure": "~0.2.1"
   }
 }

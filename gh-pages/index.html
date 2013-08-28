@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Webhook JS Demo</title>
-  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.2.1/pure-min.css">
+  <link rel="stylesheet" href="lib/pure.css">
   <link rel="stylesheet" href="css/webhook-js.css" media="screen">
   <style>
     body > header { background: #eee; height: 200px; }
@@ -15,6 +15,8 @@
     .wh-tag { border: 1px solid #ccc; background: #eee; border-radius: 3px; font-size: 12px; padding: 3px 5px; }
     .wh-tag + .wh-tag { margin-left: 0.2em; }
     .wh-tag-remove:after { content: "\00D7"; margin-left: 0.2em; font-weight: bold; cursor: pointer; }
+    [data-upload-dropzone] { width: 200px; height: 200px; border: 1px solid black; }
+    [data-upload-dropzone].wh-over { background: blue; }
   </style>
 </head>
 <body>
@@ -46,7 +48,8 @@
 
       <section class="widget">
         <header id="upload">Upload</header>
-        <input type="text" data-upload>
+        <div data-upload-dropzone="example" data-upload-trigger="example"></div>
+        <input type="text" data-upload data-upload-group="example">
       </section>
 
       <section class="widget">
@@ -129,6 +132,10 @@
   <script src="js/webhook-upload.js"></script>
 
   <script>
+    $('[data-upload][type=text]').on('thumb', function (event, thumb) {
+      $(this).data('upload').$dropzone.empty().append(thumb);
+    });
+
     $('#plants').autocomplete({
       placeholder: 'Plant name',
       limit: 5,

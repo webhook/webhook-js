@@ -25,6 +25,10 @@ module.exports = function (grunt) {
       dist: {
         src: ['src/*.js'],
         dest: 'dist/jquery.<%= pkg.name %>.js'
+      },
+      pure: {
+        src: ['bower_components/pure/**/*.css'],
+        dest: 'gh-pages/lib/pure.css'
       }
     },
     uglify: {
