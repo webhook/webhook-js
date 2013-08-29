@@ -1,0 +1,27 @@
+@import wh_variables
+@import site_variables
+@import wh_core
+@import pygments
+@import pygments_light
+@import rst
+
+
+.wh-body-two-col.wh-body-max .wh-grid-two-col section
+  max-width: 100%
+
+.doc-tree-btn
+  background: $menu-top-background-color
+  z-index: $z-index-popover
+  padding: 5px
+  cursor: pointer
+  margin: auto
+  width: 40px
+  height: 40px
+  &.fixed
+    position: fixed
+    top: $gutter
+    left: $gutter
+    border-radius: 100%
+
+[data-toggle="wh-cms-nav-desktop"]
+  left: -$nav-desktop-width
