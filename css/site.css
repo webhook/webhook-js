@@ -2295,7 +2295,7 @@ nav.wh-nav-mobile i {
   height: 100%;
   background: rgba(0, 0, 0, 0.2);
   display: none;
-  z-index: 5;
+  z-index: 499;
 }
 .wh-body-mask.on {
   display: block;
@@ -2631,11 +2631,11 @@ nav.wh-nav-mobile i {
   left: 15px;
 }
 
-.wh-form-stacked select, .wh-form-stacked label {
+.wh-form-stacked select {
   display: block;
 }
 
-.wh-form-aligned input, .wh-form-aligned textarea, .wh-form-aligned select, .wh-form-aligned .wh-help-inline {
+.wh-form-aligned input, .wh-form-aligned textarea, .wh-form-aligned select, .wh-form-aligned .wh-help-inline, .wh-form-aligned label {
   display: inline-block;
   *display: inline;
   *zoom: 1;
@@ -2677,6 +2677,7 @@ legend {
 }
 
 label {
+  display: block;
   margin: 0 0 0.3125em 0;
   color: #999999;
   font-size: 90%;
@@ -3097,6 +3098,59 @@ select[disabled], textarea[disabled], input[readonly], select[readonly], textare
   margin-bottom: 0;
 }
 
+.rotate-90 {
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+.rotate-180 {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.rotate-270 {
+  -webkit-transform: rotate(270deg);
+  -moz-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  -o-transform: rotate(270deg);
+  transform: rotate(270deg);
+}
+
+.mirror {
+  -webkit-transform: scaleX(-1);
+  -moz-transform: scaleX(-1);
+  -ms-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
+.mirror.rotate-90 {
+  -webkit-transform: scaleX(-1) rotate(90deg);
+  -moz-transform: scaleX(-1) rotate(90deg);
+  -ms-transform: scaleX(-1) rotate(90deg);
+  -o-transform: scaleX(-1) rotate(90deg);
+  transform: scaleX(-1) rotate(90deg);
+}
+.mirror.rotate-180 {
+  -webkit-transform: scaleX(-1) rotate(180deg);
+  -moz-transform: scaleX(-1) rotate(180deg);
+  -ms-transform: scaleX(-1) rotate(180deg);
+  -o-transform: scaleX(-1) rotate(180deg);
+  transform: scaleX(-1) rotate(180deg);
+}
+.mirror.rotate-270 {
+  -webkit-transform: scaleX(-1) rotate(270deg);
+  -moz-transform: scaleX(-1) rotate(270deg);
+  -ms-transform: scaleX(-1) rotate(270deg);
+  -o-transform: scaleX(-1) rotate(270deg);
+  transform: scaleX(-1) rotate(270deg);
+}
+
 .wh-form-gallery-manage {
   margin-left: -15px;
   margin-right: -15px;
@@ -3457,7 +3511,7 @@ li.wh-form-gallery-edit .arrow {
   z-index: 501;
 }
 .wh-modal section {
-  padding: 0 1.618em;
+  padding: 0 1.618em 1.618em 1.618em;
 }
 .wh-modal header {
   font-weight: 500;
@@ -3471,6 +3525,10 @@ li.wh-form-gallery-edit .arrow {
 .wh-modal footer {
   background: #eef1ec;
   padding: 1.618em;
+  text-align: right;
+}
+.wh-modal footer .btn {
+  margin-left: 5px;
 }
 
 .wh-autocomplete-group {
@@ -4320,57 +4378,4 @@ pre.literal-block:after {
 
 [data-toggle="wh-cms-nav-desktop"] {
   left: -300px;
-}
-
-.rot-90 {
-  -webkit-transform: rotate(90deg);
-  -moz-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
-  -o-transform: rotate(90deg);
-  transform: rotate(90deg);
-}
-
-.rot-180 {
-  -webkit-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -ms-transform: rotate(180deg);
-  -o-transform: rotate(180deg);
-  transform: rotate(180deg);
-}
-
-.rot-270 {
-  -webkit-transform: rotate(270deg);
-  -moz-transform: rotate(270deg);
-  -ms-transform: rotate(270deg);
-  -o-transform: rotate(270deg);
-  transform: rotate(270deg);
-}
-
-.mirror {
-  -webkit-transform: scaleX(-1);
-  -moz-transform: scaleX(-1);
-  -ms-transform: scaleX(-1);
-  -o-transform: scaleX(-1);
-  transform: scaleX(-1);
-}
-.mirror.rot-90 {
-  -webkit-transform: scaleX(-1) rotate(90deg);
-  -moz-transform: scaleX(-1) rotate(90deg);
-  -ms-transform: scaleX(-1) rotate(90deg);
-  -o-transform: scaleX(-1) rotate(90deg);
-  transform: scaleX(-1) rotate(90deg);
-}
-.mirror.rot-180 {
-  -webkit-transform: scaleX(-1) rotate(180deg);
-  -moz-transform: scaleX(-1) rotate(180deg);
-  -ms-transform: scaleX(-1) rotate(180deg);
-  -o-transform: scaleX(-1) rotate(180deg);
-  transform: scaleX(-1) rotate(180deg);
-}
-.mirror.rot-270 {
-  -webkit-transform: scaleX(-1) rotate(270deg);
-  -moz-transform: scaleX(-1) rotate(270deg);
-  -ms-transform: scaleX(-1) rotate(270deg);
-  -o-transform: scaleX(-1) rotate(270deg);
-  transform: scaleX(-1) rotate(270deg);
 }
