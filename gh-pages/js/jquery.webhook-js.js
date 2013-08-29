@@ -1286,33 +1286,30 @@
         // Closure to capture the file information.
         reader.onload = function(evt) {
           try {
-            var exif = new ExifReader();
+            var exif = new ExifReader(),
+                orientation = 1;
 
             // Parse the Exif tags.
             exif.load(evt.target.result);
+            orientation = exif.getTagValue('Orientation');
 
-            switch (exif.getTagValue('Orientation')) {
-              case 2:
-                thumb.addClass('mirror');
-                break;
+            switch (orientation) {
               case 3:
-                thumb.addClass('rot-180');
-                break;
               case 4:
-                thumb.addClass('rot-180 mirror');
+                thumb.addClass('rotate-180');
                 break;
               case 5:
-                thumb.addClass('rot-90 mirror');
-                break;
               case 6:
-                thumb.addClass('rot-90');
+                thumb.addClass('rotate-90');
                 break;
               case 7:
-                thumb.addClass('rot-270 mirror');
-                break;
               case 8:
-                thumb.addClass('rot-270');
+                thumb.addClass('rotate-270');
                 break;
+            }
+
+            if ($.inArray(orientation, [2, 4, 5, 7]) >= 0) {
+              thumb.addClass('flip-h');
             }
           }
           catch (error) {
