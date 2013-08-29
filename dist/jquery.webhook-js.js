@@ -1,4 +1,4 @@
-/*! webhook-js - v0.0.1 - 2013-08-28
+/*! webhook-js - v0.0.1 - 2013-08-29
 * https://github.com/webhook/webhook-js
 * Copyright (c) 2013 Mike Horn; Licensed MIT */
 (function ($) {
@@ -1233,13 +1233,19 @@
       // Handle drag and drop from OS.
       dropzone.on({
         dragover: function (event) {
-          event.stopPropagation();
           event.preventDefault();
 
           event.originalEvent.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
         },
+        dragenter: $.proxy(function (event) {
+          event.preventDefault();
+          this.$element.trigger('dragenterdropzone.wh.upload');
+        }, this),
+        dragleave: $.proxy(function (event) {
+          event.preventDefault();
+          this.$element.trigger('dragleavedropzone.wh.upload');
+        }, this),
         drop: $.proxy(function (event) {
-          event.stopPropagation();
           event.preventDefault();
 
           this.createThumbnails(event.originalEvent.dataTransfer.files, $.proxy(function (thumb) {

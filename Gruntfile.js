@@ -106,7 +106,6 @@ module.exports = function (grunt) {
       main: {
         files: [
           {expand: true, cwd: 'src/', src: ['*.js'], dest: 'gh-pages/js/'},
-          {expand: true, cwd: 'dist/', src: ['*.css'], dest: 'gh-pages/css/'},
           {expand: true, cwd: 'bower_components/exifreader/js/', src: ['ExifReader.js'], dest: 'gh-pages/lib/'},
           {expand: true, cwd: 'bower_components/jquery/', src: ['jquery.js'], dest: 'gh-pages/lib/'},
           {expand: true, cwd: 'bower_components/moment/', src: ['moment.js'], dest: 'gh-pages/lib/'}
