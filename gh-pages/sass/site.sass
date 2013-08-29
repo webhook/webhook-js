@@ -25,3 +25,18 @@
 
 [data-toggle="wh-cms-nav-desktop"]
   left: -$nav-desktop-width
+
+.rot-90
+  @include transform(rotate(90deg))
+.rot-180
+  @include transform(rotate(180deg))
+.rot-270
+  @include transform(rotate(270deg))
+.mirror
+  @include transform(scaleX(-1))
+  &.rot-90
+    @include transform(scaleX(-1) rotate(90deg))
+  &.rot-180
+    @include transform(scaleX(-1) rotate(180deg))
+  &.rot-270
+    @include transform(scaleX(-1) rotate(270deg))

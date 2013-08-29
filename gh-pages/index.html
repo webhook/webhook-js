@@ -13,8 +13,8 @@
     <nav class="wh-nav-desktop">
 
       <div class="wh-logo">
-        <a href="/" class="wh-logo-img"><img src="/img/menu-btn.png"></a>
-        <a href="/">Webhook-js docs</a>
+        <span class="wh-logo-img"><img src="../img/menu-btn.png"></span>
+        <span>Webhook-js docs</span>
       </div>
       <div class="wh-menu wh-menu-vertical">
 
@@ -147,12 +147,7 @@
   <script src="lib/ExifReader.js"></script>
 
   <!-- Load local widgets. -->
-  <script src="js/webhook-affix.js"></script>
-  <script src="js/webhook-autocomplete.js"></script>
-  <script src="js/webhook-datetime.js"></script>
-  <script src="js/webhook-tab.js"></script>
-  <script src="js/webhook-tooltip.js"></script>
-  <script src="js/webhook-upload.js"></script>
+  <script src="js/jquery.webhook-js.js"></script>
 
   <style>
   [data-upload-dropzone].over-window { background: green; }
@@ -160,7 +155,7 @@
   </style>
   <script>
     $('[data-upload]:input').on({
-      'dragover.wh.upload': function () {
+      'dragenter.wh.upload': function () {
         $(this).data('upload').$dropzone.addClass('wh-form-upload-drop');
       },
       'dragleave.wh.upload': function () {
@@ -170,7 +165,7 @@
         $(this).data('upload').$dropzone.removeClass('wh-form-upload-drop');
       },
       'thumb.wh.upload': function (event, thumb) {
-        var widget = $(this).data('upload').$dropzone.addClass('wh-form-upload-loading');
+        var widget = $(this).data('upload').$dropzone.addClass('wh-form-upload-loading').removeClass('wh-form-upload-drop');
         widget.find('.wh-form-upload-image').remove();
         $('<div class="wh-form-upload-image">').append(thumb).prependTo(widget);
       }

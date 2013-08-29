@@ -63,6 +63,8 @@
         return;
       }
 
+      var windowlayer = 0;
+
       // prevent miss-drops
       $(window).on({
         dragover: $.proxy(function (event) {
@@ -71,36 +73,50 @@
         }, this),
         dragenter: $.proxy(function (event) {
           event.preventDefault();
-          this.$element.trigger('dragenter.wh.upload');
+          windowlayer++;
+          if (windowlayer) {
+            this.$element.trigger('dragenter.wh.upload');
+          }
         }, this),
         dragleave: $.proxy(function (event) {
           event.preventDefault();
-          this.$element.trigger('dragleave.wh.upload');
+          windowlayer--;
+          if (!windowlayer) {
+            this.$element.trigger('dragleave.wh.upload');
+          }
         }, this),
         drop: $.proxy(function (event) {
           event.preventDefault();
-          this.$element.trigger('drop.wh.upload');
+          windowlayer--;
+          this.$element.trigger('dragdrop.wh.upload');
         }, this)
       });
+
+      var dropzonelayer = 0;
 
       // Handle drag and drop from OS.
       dropzone.on({
         dragover: function (event) {
           event.preventDefault();
-
           event.originalEvent.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
         },
         dragenter: $.proxy(function (event) {
           event.preventDefault();
-          this.$element.trigger('dragenterdropzone.wh.upload');
+          dropzonelayer++;
+          if (dropzonelayer) {
+            this.$element.trigger('dragenterdropzone.wh.upload');
+          }
         }, this),
         dragleave: $.proxy(function (event) {
           event.preventDefault();
-          this.$element.trigger('dragleavedropzone.wh.upload');
+          dropzonelayer--;
+          if (!dropzonelayer) {
+            this.$element.trigger('dragleavedropzone.wh.upload');
+          }
         }, this),
         drop: $.proxy(function (event) {
           event.preventDefault();
-
+          dropzonelayer--;
           this.createThumbnails(event.originalEvent.dataTransfer.files, $.proxy(function (thumb) {
             this.$element.trigger('thumb.wh.upload', thumb);
           }, this));

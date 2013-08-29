@@ -73,7 +73,7 @@ module.exports = function (grunt) {
       },
       js: {
         files: '<%= jshint.src.src %>',
-        tasks: ['jshint:src', 'copy']
+        tasks: ['jshint:src', 'concat', 'copy']
       },
       sass: {
         files: '<%= sass.dev.src %>',
@@ -84,7 +84,7 @@ module.exports = function (grunt) {
         tasks: ['jshint:test', 'qunit']
       },
       livereload: {
-        files: ['gh-pages/*.html']
+        files: ['gh-pages/*.html', 'gh-pages/js/*.js', 'gh-pages/css/*.css']
       }
     },
     connect: {
@@ -105,7 +105,7 @@ module.exports = function (grunt) {
     copy: {
       main: {
         files: [
-          {expand: true, cwd: 'src/', src: ['*.js'], dest: 'gh-pages/js/'},
+          {expand: true, cwd: 'dist/', src: ['*.js'], dest: 'gh-pages/js/'},
           {expand: true, cwd: 'bower_components/exifreader/js/', src: ['ExifReader.js'], dest: 'gh-pages/lib/'},
           {expand: true, cwd: 'bower_components/jquery/', src: ['jquery.js'], dest: 'gh-pages/lib/'},
           {expand: true, cwd: 'bower_components/moment/', src: ['moment.js'], dest: 'gh-pages/lib/'}
