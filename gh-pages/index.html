@@ -7,137 +7,131 @@
   <script>try{Typekit.load();}catch(e){}</script>
   <link rel="stylesheet" href="css/site.css">
 </head>
-<body>
+<body class="wh-body-for-nav">
 
-  <div class="wh-grid-two-col">
-    <nav class="wh-nav-desktop">
+  <div class="wh-grid-for-nav">
 
+    <nav data-toggle="wh-nav-shift" class="wh-nav-side">
       <div class="wh-logo">
-        <span class="wh-logo-img"><img src="./img/menu-btn.png"></span>
-        <span>Webhook-js docs</span>
+        <img src="./img/menu-btn.png">
+        <a>Webhook-js docs</a>
       </div>
-      <div class="wh-menu wh-menu-vertical">
-
+      <div class="wh-menu wh-menu-vertical wh-affix-top" data-spy="affix">
         <header>Components</header>
-
         <ul>
-            <li><a href="#upload">&raquo; Upload</a></li>
-            <li><a href="#autocomplete">&raquo; Autocomplete</a></li>
-            <li><a href="#tab">&raquo; Tab</a></li>
-            <li><a href="#affix">&raquo; Affix</a></li>
-            <li><a href="#tooltip">&raquo; Tooltip</a></li>
-            <li><a href="#calendar">&raquo; Calendar</a></li>
+            <li><a href="#upload">Upload</a></li>
+            <li><a href="#autocomplete">Autocomplete</a></li>
+            <li><a href="#tab">Tab</a></li>
+            <li><a href="#affix">Affix</a></li>
+            <li><a href="#tooltip">Tooltip</a></li>
+            <li><a href="#calendar">Calendar</a></li>
         </ul>
       </div>
-
     </nav>
-    <section>
 
-      <div class="rst-content">
+    <section data-toggle="wh-nav-shift" class="wh-nav-content-wrap">
 
-        <div class="section">
-          <h1>Components</h1>
+      <div class="wh-nav-content">
 
-          <div class="section" id="upload">
-            <h2>Upload</h2>
-            <div class="codeblock-example">
+        <h1>Components</h1>
 
-              <a class="wh-form-upload" data-upload-dropzone="example" data-upload-trigger="example">
-                <div class="wh-form-upload-content">
-                <div class="image-drag">
-                  <i class="icon icon-picture wh-form-upload-icon"></i>
-                  <p>Drag or select image</p>
-                </div>
-                <div class="image-desktop">
-                  <i class="icon icon-desktop wh-form-upload-icon"></i>
-                  <p>Select from desktop</p>
-                </div>
-                <div class="image-drop">
-                  <i class="icon icon-arrow-down wh-form-upload-icon"></i>
-                  <p>Drop files here</p>
-                </div>
-                <div class="image-loading">
-                  <div class="wh-spinner wh-spinner-margin"></div>
-                  <p>Uploading <span>92%</span></p>
-                </div>
-                <div class="wh-input-prefix"><span class="wh-input-context"><i class="icon icon-globe"></i></span><input type="text" placeholder=" Or paste URL"></div>
-                </div>
-                <input type="hidden" data-upload data-upload-group="example">
-              </a>
+        <div class="section" id="upload">
+          <h2>Upload</h2>
+          <div class="codeblock-example">
 
-            </div>
-          </div>
-
-          <div class="section" id="autocomplete">
-            <h2>Autocomplete</h2>
-            <div class="codeblock-example">
-              <form class="pure-form">
-                <fieldset>
-                  <label>Popular Languages (local)</label>
-                  <input type="text" data-provide="autocomplete" data-source='["Mandarin", "Spanish", "English", "Arabic", "Hindi", "Bengali", "Portuguese", "Russian", "Japanese", "German", "Javanese"]' data-limit='0' value="Hindi" placeholder="Language">
-                </fieldset>
-                <fieldset>
-                  <label>States (remote)</label>
-                  <input type="text" data-provide="autocomplete" data-source="states.json" data-min-length="3">
-                </fieldset>
-                <fieldset>
-                  <label>Select CA Plants (remote + formatData + formatDisplay + formatSelect)</label>
-                  <input type="text" id="plants" value="5,20">
-                </fieldset>
-                <fieldset>
-                <label>MTG Cards (remote + formatSource + large dataset)</label>
-                <input type="text" id="mtgcards">
-              </form>
-            </div>
-          </div>
-
-          <div class="section" id="tab">
-            <h2>Tab</h2>
-
-            <div class="codeblock-example">
-
-              <div class="pure-menu pure-menu-open pure-menu-horizontal">
-                <ul data-toggle-group data-activetabclass="pure-menu-selected">
-                  <li class="pure-menu-selected"><a href="#one" data-toggle="tab">One</a></li>
-                  <li><a href="#two" data-toggle="tab">Two</a></li>
-                  <li><a href="#three" data-toggle="tab">Three</a></li>
-                </ul>
+            <a class="wh-form-upload" data-upload-dropzone="example" data-upload-trigger="example">
+              <div class="wh-form-upload-content">
+              <div class="image-drag">
+                <i class="icon icon-picture wh-form-upload-icon"></i>
+                <p>Drag or select image</p>
               </div>
-
-              <div data-toggle-target-group>
-                <div id="one" class="active">One, singular sensation</div>
-                <div id="two">Every little step you take</div>
-                <div id="three">One, thrilling combination</div>
+              <div class="image-desktop">
+                <i class="icon icon-desktop wh-form-upload-icon"></i>
+                <p>Select from desktop</p>
               </div>
+              <div class="image-drop">
+                <i class="icon icon-arrow-down wh-form-upload-icon"></i>
+                <p>Drop files here</p>
+              </div>
+              <div class="image-loading">
+                <div class="wh-spinner wh-spinner-margin"></div>
+                <p>Uploading <span>92%</span></p>
+              </div>
+              <div class="wh-input-prefix"><span class="wh-input-context"><i class="icon icon-globe"></i></span><input type="text" placeholder=" Or paste URL"></div>
+              </div>
+              <input type="hidden" data-upload data-upload-group="example">
+            </a>
 
+          </div>
+        </div>
+
+        <div class="section" id="autocomplete">
+          <h2>Autocomplete</h2>
+          <div class="codeblock-example">
+            <form class="pure-form">
+              <fieldset>
+                <label>Popular Languages (local)</label>
+                <input type="text" data-provide="autocomplete" data-source='["Mandarin", "Spanish", "English", "Arabic", "Hindi", "Bengali", "Portuguese", "Russian", "Japanese", "German", "Javanese"]' data-limit='0' value="Hindi" placeholder="Language">
+              </fieldset>
+              <fieldset>
+                <label>States (remote)</label>
+                <input type="text" data-provide="autocomplete" data-source="states.json" data-min-length="3">
+              </fieldset>
+              <fieldset>
+                <label>Select CA Plants (remote + formatData + formatDisplay + formatSelect)</label>
+                <input type="text" id="plants" value="5,20">
+              </fieldset>
+              <fieldset>
+              <label>MTG Cards (remote + formatSource + large dataset)</label>
+              <input type="text" id="mtgcards">
+            </form>
+          </div>
+        </div>
+
+        <div class="section" id="tab">
+          <h2>Tab</h2>
+
+          <div class="codeblock-example">
+
+            <div class="pure-menu pure-menu-open pure-menu-horizontal">
+              <ul data-toggle-group data-activetabclass="pure-menu-selected">
+                <li class="pure-menu-selected"><a href="#one" data-toggle="tab">One</a></li>
+                <li><a href="#two" data-toggle="tab">Two</a></li>
+                <li><a href="#three" data-toggle="tab">Three</a></li>
+              </ul>
             </div>
-          </div>
 
-          <div class="section" id="affix">
-            <h2>Affix</h2>
-            <code>data-spy="affix"</code>
-          </div>
+            <div data-toggle-target-group>
+              <div id="one" class="active">One, singular sensation</div>
+              <div id="two">Every little step you take</div>
+              <div id="three">One, thrilling combination</div>
+            </div>
 
-          <div class="section" id="tooltip">
-            <h2>Tooltip</h2>
-            <ul>
-              <li><span data-toggle="tooltip" title="Hey Dave">Tooltip on top</span></li>
-              <li><span data-toggle="tooltip" data-placement="right" title="Hey Dave">Tooltip on right</span></li>
-              <li><span data-toggle="tooltip" data-placement="bottom" title="Hey Dave">Tooltip on bottom</span></li>
-              <li><span data-toggle="tooltip" data-placement="left" title="Hey Dave">Tooltip on left</span></li>
-            <ul>
           </div>
+        </div>
 
-          <div class="section" id="calendar">
-            <h2>Datetime Polyfill</h2>
-            <input type="datetime-local">
-            <input type="datetime-local" value="2012-07-01T15:04">
-          </div>
+        <div class="section" id="affix">
+          <h2>Affix</h2>
+          <code>data-spy="affix"</code>
+        </div>
 
+        <div class="section" id="tooltip">
+          <h2>Tooltip</h2>
+          <ul>
+            <li><span data-toggle="tooltip" title="Hey Dave">Tooltip on top</span></li>
+            <li><span data-toggle="tooltip" data-placement="right" title="Hey Dave">Tooltip on right</span></li>
+            <li><span data-toggle="tooltip" data-placement="bottom" title="Hey Dave">Tooltip on bottom</span></li>
+            <li><span data-toggle="tooltip" data-placement="left" title="Hey Dave">Tooltip on left</span></li>
+          <ul>
+        </div>
+
+        <div class="section" id="calendar">
+          <h2>Datetime Polyfill</h2>
+          <input type="datetime-local">
+          <input type="datetime-local" value="2012-07-01T15:04">
         </div>
 
       </div>
-
     </section>
   </div>
 
@@ -149,10 +143,6 @@
   <!-- Load local widgets. -->
   <script src="js/jquery.webhook-js.js"></script>
 
-  <style>
-  [data-upload-dropzone].over-window { background: green; }
-  [data-upload-dropzone].over-dropzone { background: blue; }
-  </style>
   <script>
     $('[data-upload]:input').on({
       'dragenter.wh.upload': function () {
