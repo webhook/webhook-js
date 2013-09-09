@@ -20,11 +20,11 @@
     "package.json"
   ],
   "dependencies": {
-    "jquery": "~2.0.3",
-    "moment": "~2.0.0",
+    "jquery": "2.*",
+    "moment": "2.*",
     "exifreader": "*"
   },
   "devDependencies": {
-    "qunit": "~1.11.0"
+    "qunit": "1.*"
   }
 }

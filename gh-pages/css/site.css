@@ -342,7 +342,7 @@ td {
     page-break-after: avoid;
   }
 }
-.font-smooth, .icon:before, .wh-inline-validate.wh-inline-validate-success .wh-input-context:before, .wh-inline-validate.wh-inline-validate-danger .wh-input-context:before, .wh-inline-validate.wh-inline-validate-warning .wh-input-context:before, .wh-inline-validate.wh-inline-validate-info .wh-input-context:before, .wh-tag-input-group .wh-tag .wh-tag-remove:before, .wh-modal-close:before, .rst-content .admonition-title:before, input[type="text"], input[type="password"], input[type="email"], input[type="url"], input[type="date"], input[type="month"], input[type="time"], input[type="datetime"], input[type="datetime-local"], input[type="week"], input[type="number"], input[type="search"], input[type="tel"], input[type="color"], select, textarea, .wh-tag-input-group, .btn, .wh-alert, .rst-content .note, .rst-content .attention, .rst-content .caution, .rst-content .danger, .rst-content .error, .rst-content .hint, .rst-content .important, .rst-content .tip, .rst-content .warning {
+.font-smooth, .icon:before, .wh-inline-validate.wh-inline-validate-success .wh-input-context:before, .wh-inline-validate.wh-inline-validate-danger .wh-input-context:before, .wh-inline-validate.wh-inline-validate-warning .wh-input-context:before, .wh-inline-validate.wh-inline-validate-info .wh-input-context:before, .wh-tag-input-group .wh-tag .wh-tag-remove:before, .wh-modal-close:before, .wh-figure-controls span.wh-figure-controls-arrow-left:before, .wh-figure-controls span.wh-figure-controls-arrow-right:before, .wh-figure-controls span.wh-figure-controls-arrow-up:before, .wh-figure-controls span.wh-figure-controls-arrow-down:before, .wh-figure-controls span.wh-figure-controls-resize-full:before, .wh-figure-controls span.wh-figure-controls-resize-small:before, .wh-figure-controls span.wh-figure-controls-delete:before, .wh-figure-controls span.wh-figure-controls-table:before, .rst-content .admonition-title:before, input[type="text"], input[type="password"], input[type="email"], input[type="url"], input[type="date"], input[type="month"], input[type="time"], input[type="datetime"], input[type="datetime-local"], input[type="week"], input[type="number"], input[type="search"], input[type="tel"], input[type="color"], select, textarea, .wh-tag-input-group, .btn, .wh-alert, .rst-content .note, .rst-content .attention, .rst-content .caution, .rst-content .danger, .rst-content .error, .rst-content .hint, .rst-content .important, .rst-content .tip, .rst-content .warning {
   -webkit-font-smoothing: antialiased;
 }
 
@@ -365,7 +365,7 @@ td {
   src: url("../font/fontawesome_webfont.eot?#iefix") format("embedded-opentype"), url("../font/fontawesome_webfont.woff") format("woff"), url("../font/fontawesome_webfont.ttf") format("truetype"), url("../font/fontawesome_webfont.svg#fontawesome-webfont") format("svg");
 }
 
-.icon:before, .wh-inline-validate.wh-inline-validate-success .wh-input-context:before, .wh-inline-validate.wh-inline-validate-danger .wh-input-context:before, .wh-inline-validate.wh-inline-validate-warning .wh-input-context:before, .wh-inline-validate.wh-inline-validate-info .wh-input-context:before, .wh-tag-input-group .wh-tag .wh-tag-remove:before, .wh-modal-close:before, .rst-content .admonition-title:before {
+.icon:before, .wh-inline-validate.wh-inline-validate-success .wh-input-context:before, .wh-inline-validate.wh-inline-validate-danger .wh-input-context:before, .wh-inline-validate.wh-inline-validate-warning .wh-input-context:before, .wh-inline-validate.wh-inline-validate-info .wh-input-context:before, .wh-tag-input-group .wh-tag .wh-tag-remove:before, .wh-modal-close:before, .wh-figure-controls span.wh-figure-controls-arrow-left:before, .wh-figure-controls span.wh-figure-controls-arrow-right:before, .wh-figure-controls span.wh-figure-controls-arrow-up:before, .wh-figure-controls span.wh-figure-controls-arrow-down:before, .wh-figure-controls span.wh-figure-controls-resize-full:before, .wh-figure-controls span.wh-figure-controls-resize-small:before, .wh-figure-controls span.wh-figure-controls-delete:before, .wh-figure-controls span.wh-figure-controls-table:before, .rst-content .admonition-title:before {
   display: inline-block;
   font-family: fontawesome-webfont;
   font-style: normal;
@@ -374,7 +374,7 @@ td {
   text-decoration: inherit;
 }
 
-a .icon, a .wh-inline-validate.wh-inline-validate-success .wh-input-context, .wh-inline-validate.wh-inline-validate-success a .wh-input-context, a .wh-inline-validate.wh-inline-validate-danger .wh-input-context, .wh-inline-validate.wh-inline-validate-danger a .wh-input-context, a .wh-inline-validate.wh-inline-validate-warning .wh-input-context, .wh-inline-validate.wh-inline-validate-warning a .wh-input-context, a .wh-inline-validate.wh-inline-validate-info .wh-input-context, .wh-inline-validate.wh-inline-validate-info a .wh-input-context, a .wh-tag-input-group .wh-tag .wh-tag-remove, .wh-tag-input-group .wh-tag a .wh-tag-remove, a .wh-modal-close, a .rst-content .admonition-title, .rst-content a .admonition-title {
+a .icon, a .wh-inline-validate.wh-inline-validate-success .wh-input-context, .wh-inline-validate.wh-inline-validate-success a .wh-input-context, a .wh-inline-validate.wh-inline-validate-danger .wh-input-context, .wh-inline-validate.wh-inline-validate-danger a .wh-input-context, a .wh-inline-validate.wh-inline-validate-warning .wh-input-context, .wh-inline-validate.wh-inline-validate-warning a .wh-input-context, a .wh-inline-validate.wh-inline-validate-info .wh-input-context, .wh-inline-validate.wh-inline-validate-info a .wh-input-context, a .wh-tag-input-group .wh-tag .wh-tag-remove, .wh-tag-input-group .wh-tag a .wh-tag-remove, a .wh-modal-close, a .wh-figure-controls span.wh-figure-controls-arrow-left, .wh-figure-controls a span.wh-figure-controls-arrow-left, a .wh-figure-controls span.wh-figure-controls-arrow-right, .wh-figure-controls a span.wh-figure-controls-arrow-right, a .wh-figure-controls span.wh-figure-controls-arrow-up, .wh-figure-controls a span.wh-figure-controls-arrow-up, a .wh-figure-controls span.wh-figure-controls-arrow-down, .wh-figure-controls a span.wh-figure-controls-arrow-down, a .wh-figure-controls span.wh-figure-controls-resize-full, .wh-figure-controls a span.wh-figure-controls-resize-full, a .wh-figure-controls span.wh-figure-controls-resize-small, .wh-figure-controls a span.wh-figure-controls-resize-small, a .wh-figure-controls span.wh-figure-controls-delete, .wh-figure-controls a span.wh-figure-controls-delete, a .wh-figure-controls span.wh-figure-controls-table, .wh-figure-controls a span.wh-figure-controls-table, a .rst-content .admonition-title, .rst-content a .admonition-title {
   display: inline-block;
   text-decoration: inherit;
 }
@@ -385,33 +385,33 @@ a .icon, a .wh-inline-validate.wh-inline-validate-success .wh-input-context, .wh
   font-size: 1.33333em;
 }
 
-.btn .icon, .btn .wh-inline-validate.wh-inline-validate-success .wh-input-context, .wh-inline-validate.wh-inline-validate-success .btn .wh-input-context, .btn .wh-inline-validate.wh-inline-validate-danger .wh-input-context, .wh-inline-validate.wh-inline-validate-danger .btn .wh-input-context, .btn .wh-inline-validate.wh-inline-validate-warning .wh-input-context, .wh-inline-validate.wh-inline-validate-warning .btn .wh-input-context, .btn .wh-inline-validate.wh-inline-validate-info .wh-input-context, .wh-inline-validate.wh-inline-validate-info .btn .wh-input-context, .btn .wh-tag-input-group .wh-tag .wh-tag-remove, .wh-tag-input-group .wh-tag .btn .wh-tag-remove, .btn .wh-modal-close, .btn .rst-content .admonition-title, .rst-content .btn .admonition-title, .nav .icon, .nav .wh-inline-validate.wh-inline-validate-success .wh-input-context, .wh-inline-validate.wh-inline-validate-success .nav .wh-input-context, .nav .wh-inline-validate.wh-inline-validate-danger .wh-input-context, .wh-inline-validate.wh-inline-validate-danger .nav .wh-input-context, .nav .wh-inline-validate.wh-inline-validate-warning .wh-input-context, .wh-inline-validate.wh-inline-validate-warning .nav .wh-input-context, .nav .wh-inline-validate.wh-inline-validate-info .wh-input-context, .wh-inline-validate.wh-inline-validate-info .nav .wh-input-context, .nav .wh-tag-input-group .wh-tag .wh-tag-remove, .wh-tag-input-group .wh-tag .nav .wh-tag-remove, .nav .wh-modal-close, .nav .rst-content .admonition-title, .rst-content .nav .admonition-title {
+.btn .icon, .btn .wh-inline-validate.wh-inline-validate-success .wh-input-context, .wh-inline-validate.wh-inline-validate-success .btn .wh-input-context, .btn .wh-inline-validate.wh-inline-validate-danger .wh-input-context, .wh-inline-validate.wh-inline-validate-danger .btn .wh-input-context, .btn .wh-inline-validate.wh-inline-validate-warning .wh-input-context, .wh-inline-validate.wh-inline-validate-warning .btn .wh-input-context, .btn .wh-inline-validate.wh-inline-validate-info .wh-input-context, .wh-inline-validate.wh-inline-validate-info .btn .wh-input-context, .btn .wh-tag-input-group .wh-tag .wh-tag-remove, .wh-tag-input-group .wh-tag .btn .wh-tag-remove, .btn .wh-modal-close, .btn .wh-figure-controls span.wh-figure-controls-arrow-left, .wh-figure-controls .btn span.wh-figure-controls-arrow-left, .btn .wh-figure-controls span.wh-figure-controls-arrow-right, .wh-figure-controls .btn span.wh-figure-controls-arrow-right, .btn .wh-figure-controls span.wh-figure-controls-arrow-up, .wh-figure-controls .btn span.wh-figure-controls-arrow-up, .btn .wh-figure-controls span.wh-figure-controls-arrow-down, .wh-figure-controls .btn span.wh-figure-controls-arrow-down, .btn .wh-figure-controls span.wh-figure-controls-resize-full, .wh-figure-controls .btn span.wh-figure-controls-resize-full, .btn .wh-figure-controls span.wh-figure-controls-resize-small, .wh-figure-controls .btn span.wh-figure-controls-resize-small, .btn .wh-figure-controls span.wh-figure-controls-delete, .wh-figure-controls .btn span.wh-figure-controls-delete, .btn .wh-figure-controls span.wh-figure-controls-table, .wh-figure-controls .btn span.wh-figure-controls-table, .btn .rst-content .admonition-title, .rst-content .btn .admonition-title, .nav .icon, .nav .wh-inline-validate.wh-inline-validate-success .wh-input-context, .wh-inline-validate.wh-inline-validate-success .nav .wh-input-context, .nav .wh-inline-validate.wh-inline-validate-danger .wh-input-context, .wh-inline-validate.wh-inline-validate-danger .nav .wh-input-context, .nav .wh-inline-validate.wh-inline-validate-warning .wh-input-context, .wh-inline-validate.wh-inline-validate-warning .nav .wh-input-context, .nav .wh-inline-validate.wh-inline-validate-info .wh-input-context, .wh-inline-validate.wh-inline-validate-info .nav .wh-input-context, .nav .wh-tag-input-group .wh-tag .wh-tag-remove, .wh-tag-input-group .wh-tag .nav .wh-tag-remove, .nav .wh-modal-close, .nav .wh-figure-controls span.wh-figure-controls-arrow-left, .wh-figure-controls .nav span.wh-figure-controls-arrow-left, .nav .wh-figure-controls span.wh-figure-controls-arrow-right, .wh-figure-controls .nav span.wh-figure-controls-arrow-right, .nav .wh-figure-controls span.wh-figure-controls-arrow-up, .wh-figure-controls .nav span.wh-figure-controls-arrow-up, .nav .wh-figure-controls span.wh-figure-controls-arrow-down, .wh-figure-controls .nav span.wh-figure-controls-arrow-down, .nav .wh-figure-controls span.wh-figure-controls-resize-full, .wh-figure-controls .nav span.wh-figure-controls-resize-full, .nav .wh-figure-controls span.wh-figure-controls-resize-small, .wh-figure-controls .nav span.wh-figure-controls-resize-small, .nav .wh-figure-controls span.wh-figure-controls-delete, .wh-figure-controls .nav span.wh-figure-controls-delete, .nav .wh-figure-controls span.wh-figure-controls-table, .wh-figure-controls .nav span.wh-figure-controls-table, .nav .rst-content .admonition-title, .rst-content .nav .admonition-title {
   display: inline;
 }
-.btn .icon.icon-large, .btn .wh-inline-validate.wh-inline-validate-success .icon-large.wh-input-context, .wh-inline-validate.wh-inline-validate-success .btn .icon-large.wh-input-context, .btn .wh-inline-validate.wh-inline-validate-danger .icon-large.wh-input-context, .wh-inline-validate.wh-inline-validate-danger .btn .icon-large.wh-input-context, .btn .wh-inline-validate.wh-inline-validate-warning .icon-large.wh-input-context, .wh-inline-validate.wh-inline-validate-warning .btn .icon-large.wh-input-context, .btn .wh-inline-validate.wh-inline-validate-info .icon-large.wh-input-context, .wh-inline-validate.wh-inline-validate-info .btn .icon-large.wh-input-context, .btn .wh-tag-input-group .wh-tag .icon-large.wh-tag-remove, .wh-tag-input-group .wh-tag .btn .icon-large.wh-tag-remove, .btn .icon-large.wh-modal-close, .btn .rst-content .icon-large.admonition-title, .rst-content .btn .icon-large.admonition-title, .nav .icon.icon-large, .nav .wh-inline-validate.wh-inline-validate-success .icon-large.wh-input-context, .wh-inline-validate.wh-inline-validate-success .nav .icon-large.wh-input-context, .nav .wh-inline-validate.wh-inline-validate-danger .icon-large.wh-input-context, .wh-inline-validate.wh-inline-validate-danger .nav .icon-large.wh-input-context, .nav .wh-inline-validate.wh-inline-validate-warning .icon-large.wh-input-context, .wh-inline-validate.wh-inline-validate-warning .nav .icon-large.wh-input-context, .nav .wh-inline-validate.wh-inline-validate-info .icon-large.wh-input-context, .wh-inline-validate.wh-inline-validate-info .nav .icon-large.wh-input-context, .nav .wh-tag-input-group .wh-tag .icon-large.wh-tag-remove, .wh-tag-input-group .wh-tag .nav .icon-large.wh-tag-remove, .nav .icon-large.wh-modal-close, .nav .rst-content .icon-large.admonition-title, .rst-content .nav .icon-large.admonition-title {
+.btn .icon.icon-large, .btn .wh-inline-validate.wh-inline-validate-success .icon-large.wh-input-context, .wh-inline-validate.wh-inline-validate-success .btn .icon-large.wh-input-context, .btn .wh-inline-validate.wh-inline-validate-danger .icon-large.wh-input-context, .wh-inline-validate.wh-inline-validate-danger .btn .icon-large.wh-input-context, .btn .wh-inline-validate.wh-inline-validate-warning .icon-large.wh-input-context, .wh-inline-validate.wh-inline-validate-warning .btn .icon-large.wh-input-context, .btn .wh-inline-validate.wh-inline-validate-info .icon-large.wh-input-context, .wh-inline-validate.wh-inline-validate-info .btn .icon-large.wh-input-context, .btn .wh-tag-input-group .wh-tag .icon-large.wh-tag-remove, .wh-tag-input-group .wh-tag .btn .icon-large.wh-tag-remove, .btn .icon-large.wh-modal-close, .btn .wh-figure-controls span.icon-large.wh-figure-controls-arrow-left, .wh-figure-controls .btn span.icon-large.wh-figure-controls-arrow-left, .btn .wh-figure-controls span.icon-large.wh-figure-controls-arrow-right, .wh-figure-controls .btn span.icon-large.wh-figure-controls-arrow-right, .btn .wh-figure-controls span.icon-large.wh-figure-controls-arrow-up, .wh-figure-controls .btn span.icon-large.wh-figure-controls-arrow-up, .btn .wh-figure-controls span.icon-large.wh-figure-controls-arrow-down, .wh-figure-controls .btn span.icon-large.wh-figure-controls-arrow-down, .btn .wh-figure-controls span.icon-large.wh-figure-controls-resize-full, .wh-figure-controls .btn span.icon-large.wh-figure-controls-resize-full, .btn .wh-figure-controls span.icon-large.wh-figure-controls-resize-small, .wh-figure-controls .btn span.icon-large.wh-figure-controls-resize-small, .btn .wh-figure-controls span.icon-large.wh-figure-controls-delete, .wh-figure-controls .btn span.icon-large.wh-figure-controls-delete, .btn .wh-figure-controls span.icon-large.wh-figure-controls-table, .wh-figure-controls .btn span.icon-large.wh-figure-controls-table, .btn .rst-content .icon-large.admonition-title, .rst-content .btn .icon-large.admonition-title, .nav .icon.icon-large, .nav .wh-inline-validate.wh-inline-validate-success .icon-large.wh-input-context, .wh-inline-validate.wh-inline-validate-success .nav .icon-large.wh-input-context, .nav .wh-inline-validate.wh-inline-validate-danger .icon-large.wh-input-context, .wh-inline-validate.wh-inline-validate-danger .nav .icon-large.wh-input-context, .nav .wh-inline-validate.wh-inline-validate-warning .icon-large.wh-input-context, .wh-inline-validate.wh-inline-validate-warning .nav .icon-large.wh-input-context, .nav .wh-inline-validate.wh-inline-validate-info .icon-large.wh-input-context, .wh-inline-validate.wh-inline-validate-info .nav .icon-large.wh-input-context, .nav .wh-tag-input-group .wh-tag .icon-large.wh-tag-remove, .wh-tag-input-group .wh-tag .nav .icon-large.wh-tag-remove, .nav .icon-large.wh-modal-close, .nav .wh-figure-controls span.icon-large.wh-figure-controls-arrow-left, .wh-figure-controls .nav span.icon-large.wh-figure-controls-arrow-left, .nav .wh-figure-controls span.icon-large.wh-figure-controls-arrow-right, .wh-figure-controls .nav span.icon-large.wh-figure-controls-arrow-right, .nav .wh-figure-controls span.icon-large.wh-figure-controls-arrow-up, .wh-figure-controls .nav span.icon-large.wh-figure-controls-arrow-up, .nav .wh-figure-controls span.icon-large.wh-figure-controls-arrow-down, .wh-figure-controls .nav span.icon-large.wh-figure-controls-arrow-down, .nav .wh-figure-controls span.icon-large.wh-figure-controls-resize-full, .wh-figure-controls .nav span.icon-large.wh-figure-controls-resize-full, .nav .wh-figure-controls span.icon-large.wh-figure-controls-resize-small, .wh-figure-controls .nav span.icon-large.wh-figure-controls-resize-small, .nav .wh-figure-controls span.icon-large.wh-figure-controls-delete, .wh-figure-controls .nav span.icon-large.wh-figure-controls-delete, .nav .wh-figure-controls span.icon-large.wh-figure-controls-table, .wh-figure-controls .nav span.icon-large.wh-figure-controls-table, .nav .rst-content .icon-large.admonition-title, .rst-content .nav .icon-large.admonition-title {
   line-height: 0.9em;
 }
-.btn .icon.icon-spin, .btn .wh-inline-validate.wh-inline-validate-success .icon-spin.wh-input-context, .wh-inline-validate.wh-inline-validate-success .btn .icon-spin.wh-input-context, .btn .wh-inline-validate.wh-inline-validate-danger .icon-spin.wh-input-context, .wh-inline-validate.wh-inline-validate-danger .btn .icon-spin.wh-input-context, .btn .wh-inline-validate.wh-inline-validate-warning .icon-spin.wh-input-context, .wh-inline-validate.wh-inline-validate-warning .btn .icon-spin.wh-input-context, .btn .wh-inline-validate.wh-inline-validate-info .icon-spin.wh-input-context, .wh-inline-validate.wh-inline-validate-info .btn .icon-spin.wh-input-context, .btn .wh-tag-input-group .wh-tag .icon-spin.wh-tag-remove, .wh-tag-input-group .wh-tag .btn .icon-spin.wh-tag-remove, .btn .icon-spin.wh-modal-close, .btn .rst-content .icon-spin.admonition-title, .rst-content .btn .icon-spin.admonition-title, .nav .icon.icon-spin, .nav .wh-inline-validate.wh-inline-validate-success .icon-spin.wh-input-context, .wh-inline-validate.wh-inline-validate-success .nav .icon-spin.wh-input-context, .nav .wh-inline-validate.wh-inline-validate-danger .icon-spin.wh-input-context, .wh-inline-validate.wh-inline-validate-danger .nav .icon-spin.wh-input-context, .nav .wh-inline-validate.wh-inline-validate-warning .icon-spin.wh-input-context, .wh-inline-validate.wh-inline-validate-warning .nav .icon-spin.wh-input-context, .nav .wh-inline-validate.wh-inline-validate-info .icon-spin.wh-input-context, .wh-inline-validate.wh-inline-validate-info .nav .icon-spin.wh-input-context, .nav .wh-tag-input-group .wh-tag .icon-spin.wh-tag-remove, .wh-tag-input-group .wh-tag .nav .icon-spin.wh-tag-remove, .nav .icon-spin.wh-modal-close, .nav .rst-content .icon-spin.admonition-title, .rst-content .nav .icon-spin.admonition-title {
+.btn .icon.icon-spin, .btn .wh-inline-validate.wh-inline-validate-success .icon-spin.wh-input-context, .wh-inline-validate.wh-inline-validate-success .btn .icon-spin.wh-input-context, .btn .wh-inline-validate.wh-inline-validate-danger .icon-spin.wh-input-context, .wh-inline-validate.wh-inline-validate-danger .btn .icon-spin.wh-input-context, .btn .wh-inline-validate.wh-inline-validate-warning .icon-spin.wh-input-context, .wh-inline-validate.wh-inline-validate-warning .btn .icon-spin.wh-input-context, .btn .wh-inline-validate.wh-inline-validate-info .icon-spin.wh-input-context, .wh-inline-validate.wh-inline-validate-info .btn .icon-spin.wh-input-context, .btn .wh-tag-input-group .wh-tag .icon-spin.wh-tag-remove, .wh-tag-input-group .wh-tag .btn .icon-spin.wh-tag-remove, .btn .icon-spin.wh-modal-close, .btn .wh-figure-controls span.icon-spin.wh-figure-controls-arrow-left, .wh-figure-controls .btn span.icon-spin.wh-figure-controls-arrow-left, .btn .wh-figure-controls span.icon-spin.wh-figure-controls-arrow-right, .wh-figure-controls .btn span.icon-spin.wh-figure-controls-arrow-right, .btn .wh-figure-controls span.icon-spin.wh-figure-controls-arrow-up, .wh-figure-controls .btn span.icon-spin.wh-figure-controls-arrow-up, .btn .wh-figure-controls span.icon-spin.wh-figure-controls-arrow-down, .wh-figure-controls .btn span.icon-spin.wh-figure-controls-arrow-down, .btn .wh-figure-controls span.icon-spin.wh-figure-controls-resize-full, .wh-figure-controls .btn span.icon-spin.wh-figure-controls-resize-full, .btn .wh-figure-controls span.icon-spin.wh-figure-controls-resize-small, .wh-figure-controls .btn span.icon-spin.wh-figure-controls-resize-small, .btn .wh-figure-controls span.icon-spin.wh-figure-controls-delete, .wh-figure-controls .btn span.icon-spin.wh-figure-controls-delete, .btn .wh-figure-controls span.icon-spin.wh-figure-controls-table, .wh-figure-controls .btn span.icon-spin.wh-figure-controls-table, .btn .rst-content .icon-spin.admonition-title, .rst-content .btn .icon-spin.admonition-title, .nav .icon.icon-spin, .nav .wh-inline-validate.wh-inline-validate-success .icon-spin.wh-input-context, .wh-inline-validate.wh-inline-validate-success .nav .icon-spin.wh-input-context, .nav .wh-inline-validate.wh-inline-validate-danger .icon-spin.wh-input-context, .wh-inline-validate.wh-inline-validate-danger .nav .icon-spin.wh-input-context, .nav .wh-inline-validate.wh-inline-validate-warning .icon-spin.wh-input-context, .wh-inline-validate.wh-inline-validate-warning .nav .icon-spin.wh-input-context, .nav .wh-inline-validate.wh-inline-validate-info .icon-spin.wh-input-context, .wh-inline-validate.wh-inline-validate-info .nav .icon-spin.wh-input-context, .nav .wh-tag-input-group .wh-tag .icon-spin.wh-tag-remove, .wh-tag-input-group .wh-tag .nav .icon-spin.wh-tag-remove, .nav .icon-spin.wh-modal-close, .nav .wh-figure-controls span.icon-spin.wh-figure-controls-arrow-left, .wh-figure-controls .nav span.icon-spin.wh-figure-controls-arrow-left, .nav .wh-figure-controls span.icon-spin.wh-figure-controls-arrow-right, .wh-figure-controls .nav span.icon-spin.wh-figure-controls-arrow-right, .nav .wh-figure-controls span.icon-spin.wh-figure-controls-arrow-up, .wh-figure-controls .nav span.icon-spin.wh-figure-controls-arrow-up, .nav .wh-figure-controls span.icon-spin.wh-figure-controls-arrow-down, .wh-figure-controls .nav span.icon-spin.wh-figure-controls-arrow-down, .nav .wh-figure-controls span.icon-spin.wh-figure-controls-resize-full, .wh-figure-controls .nav span.icon-spin.wh-figure-controls-resize-full, .nav .wh-figure-controls span.icon-spin.wh-figure-controls-resize-small, .wh-figure-controls .nav span.icon-spin.wh-figure-controls-resize-small, .nav .wh-figure-controls span.icon-spin.wh-figure-controls-delete, .wh-figure-controls .nav span.icon-spin.wh-figure-controls-delete, .nav .wh-figure-controls span.icon-spin.wh-figure-controls-table, .wh-figure-controls .nav span.icon-spin.wh-figure-controls-table, .nav .rst-content .icon-spin.admonition-title, .rst-content .nav .icon-spin.admonition-title {
   display: inline-block;
 }
 
-.btn.icon:before, .wh-inline-validate.wh-inline-validate-success .btn.wh-input-context:before, .wh-inline-validate.wh-inline-validate-danger .btn.wh-input-context:before, .wh-inline-validate.wh-inline-validate-warning .btn.wh-input-context:before, .wh-inline-validate.wh-inline-validate-info .btn.wh-input-context:before, .wh-tag-input-group .wh-tag .btn.wh-tag-remove:before, .btn.wh-modal-close:before, .rst-content .btn.admonition-title:before {
+.btn.icon:before, .wh-inline-validate.wh-inline-validate-success .btn.wh-input-context:before, .wh-inline-validate.wh-inline-validate-danger .btn.wh-input-context:before, .wh-inline-validate.wh-inline-validate-warning .btn.wh-input-context:before, .wh-inline-validate.wh-inline-validate-info .btn.wh-input-context:before, .wh-tag-input-group .wh-tag .btn.wh-tag-remove:before, .btn.wh-modal-close:before, .wh-figure-controls span.btn.wh-figure-controls-arrow-left:before, .wh-figure-controls span.btn.wh-figure-controls-arrow-right:before, .wh-figure-controls span.btn.wh-figure-controls-arrow-up:before, .wh-figure-controls span.btn.wh-figure-controls-arrow-down:before, .wh-figure-controls span.btn.wh-figure-controls-resize-full:before, .wh-figure-controls span.btn.wh-figure-controls-resize-small:before, .wh-figure-controls span.btn.wh-figure-controls-delete:before, .wh-figure-controls span.btn.wh-figure-controls-table:before, .rst-content .btn.admonition-title:before {
   opacity: 0.5;
   -webkit-transition: opacity 0.05s ease-in;
   -moz-transition: opacity 0.05s ease-in;
   transition: opacity 0.05s ease-in;
 }
 
-.btn.icon:hover:before, .wh-inline-validate.wh-inline-validate-success .btn.wh-input-context:hover:before, .wh-inline-validate.wh-inline-validate-danger .btn.wh-input-context:hover:before, .wh-inline-validate.wh-inline-validate-warning .btn.wh-input-context:hover:before, .wh-inline-validate.wh-inline-validate-info .btn.wh-input-context:hover:before, .wh-tag-input-group .wh-tag .btn.wh-tag-remove:hover:before, .btn.wh-modal-close:hover:before, .rst-content .btn.admonition-title:hover:before {
+.btn.icon:hover:before, .wh-inline-validate.wh-inline-validate-success .btn.wh-input-context:hover:before, .wh-inline-validate.wh-inline-validate-danger .btn.wh-input-context:hover:before, .wh-inline-validate.wh-inline-validate-warning .btn.wh-input-context:hover:before, .wh-inline-validate.wh-inline-validate-info .btn.wh-input-context:hover:before, .wh-tag-input-group .wh-tag .btn.wh-tag-remove:hover:before, .btn.wh-modal-close:hover:before, .wh-figure-controls span.btn.wh-figure-controls-arrow-left:hover:before, .wh-figure-controls span.btn.wh-figure-controls-arrow-right:hover:before, .wh-figure-controls span.btn.wh-figure-controls-arrow-up:hover:before, .wh-figure-controls span.btn.wh-figure-controls-arrow-down:hover:before, .wh-figure-controls span.btn.wh-figure-controls-resize-full:hover:before, .wh-figure-controls span.btn.wh-figure-controls-resize-small:hover:before, .wh-figure-controls span.btn.wh-figure-controls-delete:hover:before, .wh-figure-controls span.btn.wh-figure-controls-table:hover:before, .rst-content .btn.admonition-title:hover:before {
   opacity: 1;
 }
 
-.btn-mini .icon:before, .btn-mini .wh-inline-validate.wh-inline-validate-success .wh-input-context:before, .wh-inline-validate.wh-inline-validate-success .btn-mini .wh-input-context:before, .btn-mini .wh-inline-validate.wh-inline-validate-danger .wh-input-context:before, .wh-inline-validate.wh-inline-validate-danger .btn-mini .wh-input-context:before, .btn-mini .wh-inline-validate.wh-inline-validate-warning .wh-input-context:before, .wh-inline-validate.wh-inline-validate-warning .btn-mini .wh-input-context:before, .btn-mini .wh-inline-validate.wh-inline-validate-info .wh-input-context:before, .wh-inline-validate.wh-inline-validate-info .btn-mini .wh-input-context:before, .btn-mini .wh-tag-input-group .wh-tag .wh-tag-remove:before, .wh-tag-input-group .wh-tag .btn-mini .wh-tag-remove:before, .btn-mini .wh-modal-close:before, .btn-mini .rst-content .admonition-title:before, .rst-content .btn-mini .admonition-title:before {
+.btn-mini .icon:before, .btn-mini .wh-inline-validate.wh-inline-validate-success .wh-input-context:before, .wh-inline-validate.wh-inline-validate-success .btn-mini .wh-input-context:before, .btn-mini .wh-inline-validate.wh-inline-validate-danger .wh-input-context:before, .wh-inline-validate.wh-inline-validate-danger .btn-mini .wh-input-context:before, .btn-mini .wh-inline-validate.wh-inline-validate-warning .wh-input-context:before, .wh-inline-validate.wh-inline-validate-warning .btn-mini .wh-input-context:before, .btn-mini .wh-inline-validate.wh-inline-validate-info .wh-input-context:before, .wh-inline-validate.wh-inline-validate-info .btn-mini .wh-input-context:before, .btn-mini .wh-tag-input-group .wh-tag .wh-tag-remove:before, .wh-tag-input-group .wh-tag .btn-mini .wh-tag-remove:before, .btn-mini .wh-modal-close:before, .btn-mini .wh-figure-controls span.wh-figure-controls-arrow-left:before, .wh-figure-controls .btn-mini span.wh-figure-controls-arrow-left:before, .btn-mini .wh-figure-controls span.wh-figure-controls-arrow-right:before, .wh-figure-controls .btn-mini span.wh-figure-controls-arrow-right:before, .btn-mini .wh-figure-controls span.wh-figure-controls-arrow-up:before, .wh-figure-controls .btn-mini span.wh-figure-controls-arrow-up:before, .btn-mini .wh-figure-controls span.wh-figure-controls-arrow-down:before, .wh-figure-controls .btn-mini span.wh-figure-controls-arrow-down:before, .btn-mini .wh-figure-controls span.wh-figure-controls-resize-full:before, .wh-figure-controls .btn-mini span.wh-figure-controls-resize-full:before, .btn-mini .wh-figure-controls span.wh-figure-controls-resize-small:before, .wh-figure-controls .btn-mini span.wh-figure-controls-resize-small:before, .btn-mini .wh-figure-controls span.wh-figure-controls-delete:before, .wh-figure-controls .btn-mini span.wh-figure-controls-delete:before, .btn-mini .wh-figure-controls span.wh-figure-controls-table:before, .wh-figure-controls .btn-mini span.wh-figure-controls-table:before, .btn-mini .rst-content .admonition-title:before, .rst-content .btn-mini .admonition-title:before {
   font-size: 14px;
   vertical-align: -15%;
 }
 
-li .icon, li .wh-inline-validate.wh-inline-validate-success .wh-input-context, .wh-inline-validate.wh-inline-validate-success li .wh-input-context, li .wh-inline-validate.wh-inline-validate-danger .wh-input-context, .wh-inline-validate.wh-inline-validate-danger li .wh-input-context, li .wh-inline-validate.wh-inline-validate-warning .wh-input-context, .wh-inline-validate.wh-inline-validate-warning li .wh-input-context, li .wh-inline-validate.wh-inline-validate-info .wh-input-context, .wh-inline-validate.wh-inline-validate-info li .wh-input-context, li .wh-tag-input-group .wh-tag .wh-tag-remove, .wh-tag-input-group .wh-tag li .wh-tag-remove, li .wh-modal-close, li .rst-content .admonition-title, .rst-content li .admonition-title {
+li .icon, li .wh-inline-validate.wh-inline-validate-success .wh-input-context, .wh-inline-validate.wh-inline-validate-success li .wh-input-context, li .wh-inline-validate.wh-inline-validate-danger .wh-input-context, .wh-inline-validate.wh-inline-validate-danger li .wh-input-context, li .wh-inline-validate.wh-inline-validate-warning .wh-input-context, .wh-inline-validate.wh-inline-validate-warning li .wh-input-context, li .wh-inline-validate.wh-inline-validate-info .wh-input-context, .wh-inline-validate.wh-inline-validate-info li .wh-input-context, li .wh-tag-input-group .wh-tag .wh-tag-remove, .wh-tag-input-group .wh-tag li .wh-tag-remove, li .wh-modal-close, li .wh-figure-controls span.wh-figure-controls-arrow-left, .wh-figure-controls li span.wh-figure-controls-arrow-left, li .wh-figure-controls span.wh-figure-controls-arrow-right, .wh-figure-controls li span.wh-figure-controls-arrow-right, li .wh-figure-controls span.wh-figure-controls-arrow-up, .wh-figure-controls li span.wh-figure-controls-arrow-up, li .wh-figure-controls span.wh-figure-controls-arrow-down, .wh-figure-controls li span.wh-figure-controls-arrow-down, li .wh-figure-controls span.wh-figure-controls-resize-full, .wh-figure-controls li span.wh-figure-controls-resize-full, li .wh-figure-controls span.wh-figure-controls-resize-small, .wh-figure-controls li span.wh-figure-controls-resize-small, li .wh-figure-controls span.wh-figure-controls-delete, .wh-figure-controls li span.wh-figure-controls-delete, li .wh-figure-controls span.wh-figure-controls-table, .wh-figure-controls li span.wh-figure-controls-table, li .rst-content .admonition-title, .rst-content li .admonition-title {
   display: inline-block;
 }
 li .icon-large:before,
@@ -425,7 +425,7 @@ ul.icons {
   margin-left: 2em;
   text-indent: -0.8em;
 }
-ul.icons li .icon, ul.icons li .wh-inline-validate.wh-inline-validate-success .wh-input-context, .wh-inline-validate.wh-inline-validate-success ul.icons li .wh-input-context, ul.icons li .wh-inline-validate.wh-inline-validate-danger .wh-input-context, .wh-inline-validate.wh-inline-validate-danger ul.icons li .wh-input-context, ul.icons li .wh-inline-validate.wh-inline-validate-warning .wh-input-context, .wh-inline-validate.wh-inline-validate-warning ul.icons li .wh-input-context, ul.icons li .wh-inline-validate.wh-inline-validate-info .wh-input-context, .wh-inline-validate.wh-inline-validate-info ul.icons li .wh-input-context, ul.icons li .wh-tag-input-group .wh-tag .wh-tag-remove, .wh-tag-input-group .wh-tag ul.icons li .wh-tag-remove, ul.icons li .wh-modal-close, ul.icons li .rst-content .admonition-title, .rst-content ul.icons li .admonition-title {
+ul.icons li .icon, ul.icons li .wh-inline-validate.wh-inline-validate-success .wh-input-context, .wh-inline-validate.wh-inline-validate-success ul.icons li .wh-input-context, ul.icons li .wh-inline-validate.wh-inline-validate-danger .wh-input-context, .wh-inline-validate.wh-inline-validate-danger ul.icons li .wh-input-context, ul.icons li .wh-inline-validate.wh-inline-validate-warning .wh-input-context, .wh-inline-validate.wh-inline-validate-warning ul.icons li .wh-input-context, ul.icons li .wh-inline-validate.wh-inline-validate-info .wh-input-context, .wh-inline-validate.wh-inline-validate-info ul.icons li .wh-input-context, ul.icons li .wh-tag-input-group .wh-tag .wh-tag-remove, .wh-tag-input-group .wh-tag ul.icons li .wh-tag-remove, ul.icons li .wh-modal-close, ul.icons li .wh-figure-controls span.wh-figure-controls-arrow-left, .wh-figure-controls ul.icons li span.wh-figure-controls-arrow-left, ul.icons li .wh-figure-controls span.wh-figure-controls-arrow-right, .wh-figure-controls ul.icons li span.wh-figure-controls-arrow-right, ul.icons li .wh-figure-controls span.wh-figure-controls-arrow-up, .wh-figure-controls ul.icons li span.wh-figure-controls-arrow-up, ul.icons li .wh-figure-controls span.wh-figure-controls-arrow-down, .wh-figure-controls ul.icons li span.wh-figure-controls-arrow-down, ul.icons li .wh-figure-controls span.wh-figure-controls-resize-full, .wh-figure-controls ul.icons li span.wh-figure-controls-resize-full, ul.icons li .wh-figure-controls span.wh-figure-controls-resize-small, .wh-figure-controls ul.icons li span.wh-figure-controls-resize-small, ul.icons li .wh-figure-controls span.wh-figure-controls-delete, .wh-figure-controls ul.icons li span.wh-figure-controls-delete, ul.icons li .wh-figure-controls span.wh-figure-controls-table, .wh-figure-controls ul.icons li span.wh-figure-controls-table, ul.icons li .rst-content .admonition-title, .rst-content ul.icons li .admonition-title {
   width: 0.8em;
 }
 ul.icons li .icon-large:before,
@@ -512,7 +512,7 @@ ul.icons li .icon-large:before {
   content: "\f013";
 }
 
-.icon-trash:before {
+.icon-trash:before, .wh-figure-controls span.wh-figure-controls-delete:before {
   content: "\f014";
 }
 
@@ -797,19 +797,19 @@ ul.icons li .icon-large:before {
   content: "\f05e";
 }
 
-.icon-arrow-left:before {
+.icon-arrow-left:before, .wh-figure-controls span.wh-figure-controls-arrow-left:before {
   content: "\f060";
 }
 
-.icon-arrow-right:before {
+.icon-arrow-right:before, .wh-figure-controls span.wh-figure-controls-arrow-right:before {
   content: "\f061";
 }
 
-.icon-arrow-up:before {
+.icon-arrow-up:before, .wh-figure-controls span.wh-figure-controls-arrow-up:before {
   content: "\f062";
 }
 
-.icon-arrow-down:before {
+.icon-arrow-down:before, .wh-figure-controls span.wh-figure-controls-arrow-down:before {
   content: "\f063";
 }
 
@@ -818,11 +818,11 @@ ul.icons li .icon-large:before {
   content: "\f064";
 }
 
-.icon-resize-full:before {
+.icon-resize-full:before, .wh-figure-controls span.wh-figure-controls-resize-full:before {
   content: "\f065";
 }
 
-.icon-resize-small:before {
+.icon-resize-small:before, .wh-figure-controls span.wh-figure-controls-resize-small:before {
   content: "\f066";
 }
 
@@ -1169,7 +1169,7 @@ ul.icons li .icon-large:before {
   content: "\f0cd";
 }
 
-.icon-table:before {
+.icon-table:before, .wh-figure-controls span.wh-figure-controls-table:before {
   content: "\f0ce";
 }
 
@@ -1920,7 +1920,6 @@ ul.icons li .icon-large:before {
 }
 
 html {
-  background: #eef1ec;
   height: 100%;
   overflow-x: hidden;
 }
@@ -1928,9 +1927,10 @@ html {
 body {
   font-family: "museo-sans-1", "museo-sans-2", "Helvetica Neue", "HelveticaNeue", Arial, sans-serif;
   font-weight: 300;
-  color: #595959;
+  color: #404040;
   min-height: 100%;
   overflow-x: hidden;
+  background: #eef1ec;
 }
 
 a {
@@ -1961,15 +1961,21 @@ a:hover {
 }
 
 h1, .rst-content .topic-title, h2, h3, h4, h5, h6, legend {
+  clear: both;
   margin-top: 0;
   font-weight: bold;
   font-family: "ff-tisa-web-pro-1", "ff-tisa-web-pro-2", "Helvetica Neue", "HelveticaNeue", Arial, sans-serif;
 }
 
+h1, .rst-content .topic-title {
+  clear: none;
+}
+
 p {
-  line-height: 30px;
+  line-height: 24px;
   margin: 0;
-  margin-bottom: 30px;
+  font-size: 16px;
+  margin-bottom: 24px;
 }
 
 h1, .rst-content .topic-title {
@@ -2002,12 +2008,12 @@ small {
 
 code, tt {
   white-space: nowrap;
-  background: #f4f6f3;
+  background: white;
   border: solid 1px #e2e5e1;
   font-size: 80%;
   padding: 0 5px;
   font-family: "source-code-pro-1", "source-code-pro-2", Incosolata, Consolata, Monaco, monospace;
-  color: #999999;
+  color: #2980b9;
 }
 code.code-large, tt.code-large {
   font-size: 90%;
@@ -2019,24 +2025,24 @@ code.code-large, tt.code-large {
 
 .wh-plain-list-disc, .rst-content ul.simple {
   list-style: disc;
-  line-height: 30px;
-  margin-bottom: 30px;
+  line-height: 24px;
+  margin-bottom: 24px;
 }
 
 .wh-plain-list-disc li, .rst-content ul.simple li {
   list-style: disc;
-  margin-left: 30px;
+  margin-left: 24px;
 }
 
 .wh-plain-list-decimal {
   list-style: decimal;
-  line-height: 30px;
-  margin-bottom: 30px;
+  line-height: 24px;
+  margin-bottom: 24px;
 }
 
 .wh-plain-list-decimal li {
   list-style: decimal;
-  margin-left: 30px;
+  margin-left: 24px;
 }
 
 .wh-type-large {
@@ -2088,11 +2094,11 @@ a.wh-text-danger:hover {
 }
 
 .wh-text-neutral {
-  color: #595959 !important;
+  color: #404040 !important;
 }
 
 a.wh-text-neutral:hover {
-  color: #737373 !important;
+  color: #595959 !important;
 }
 
 .wh-menu a:hover {
@@ -2128,9 +2134,6 @@ a.wh-text-neutral:hover {
   padding: 0 16px;
 }
 
-.wh-menu-vertical {
-  position: relative;
-}
 .wh-menu-vertical header {
   height: 32px;
   display: inline-block;
@@ -2140,7 +2143,7 @@ a.wh-text-neutral:hover {
   font-weight: 500;
   text-transform: uppercase;
   font-size: 80%;
-  color: #bec2bc;
+  color: #2980b9;
   white-space: nowrap;
 }
 .wh-menu-vertical ul {
@@ -2168,18 +2171,18 @@ a.wh-text-neutral:hover {
   display: block;
   position: relative;
   font-size: 80%;
-  color: #595959;
+  color: #b3b3b3;
   white-space: nowrap;
   -webkit-transition: background-color 0.05s ease-in;
   -moz-transition: background-color 0.05s ease-in;
   transition: background-color 0.05s ease-in;
 }
 .wh-menu-vertical a:hover {
-  background-color: #e2e5e1;
+  background-color: #4e4a4a;
   cursor: pointer;
 }
 .wh-menu-vertical a:active {
-  background-color: #27ae60;
+  background-color: #2980b9;
   cursor: pointer;
   color: white;
 }
@@ -2187,7 +2190,7 @@ a.wh-text-neutral:hover {
 .wh-logo {
   z-index: 200;
   margin-bottom: 1.618em;
-  background-color: #343131;
+  background-color: #272525;
   text-align: center;
   padding: 0.809em 0;
   display: block;
@@ -2208,10 +2211,10 @@ a.wh-text-neutral:hover {
   border-radius: 100%;
 }
 .wh-logo a {
-  color: #cccccc;
+  color: #b3b3b3;
   font-size: 80%;
   display: inline-block;
-  padding: 5px 7.5px;
+  padding: 4px 6px;
 }
 .wh-logo a:hover {
   background: rgba(255, 255, 255, 0.1);
@@ -2221,7 +2224,7 @@ a.wh-text-neutral:hover {
   color: #27ae60;
 }
 .wh-nav .wh-menu-vertical a {
-  color: #cccccc;
+  color: #b3b3b3;
 }
 .wh-nav .wh-menu-vertical a:hover {
   background-color: #27ae60;
@@ -2253,40 +2256,68 @@ a.wh-text-neutral:hover {
   opacity: 0;
 }
 
-nav.wh-nav-desktop {
-  position: fixed;
-  top: 0;
-  width: 300px;
-  height: 100%;
-  overflow: hidden;
-  background: #eef1ec;
-  z-index: 200;
-  -webkit-transition: all 0.2s ease-in;
-  -moz-transition: all 0.2s ease-in;
-  transition: all 0.2s ease-in;
-  left: 0;
-}
-nav.wh-nav-desktop.shift {
-  left: 0px;
+.wh-body-for-nav {
+  background: url("/static/img/body_bg_1x1.png") left repeat-y #fcfcfc;
+  background-size: 300px 1px;
 }
 
-nav.wh-nav-mobile {
-  display: none;
-  margin-bottom: 1.618em;
+.wh-grid-for-nav {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.wh-nav-side {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300px;
+  overflow: hidden;
+  min-height: 100%;
   background: #343131;
-  height: 60px;
-  line-height: 60px;
-  color: #cccccc;
-  padding: 0 1.618em;
+  z-index: 200;
+}
+
+.wh-nav-top {
+  display: none;
+  background: #343131;
+  color: #b3b3b3;
+  padding: 0.4045em 0.809em;
+  position: relative;
+  line-height: 50px;
+  text-align: center;
+  *zoom: 1;
+}
+.wh-nav-top:before, .wh-nav-top:after {
+  display: table;
+  content: "";
+}
+.wh-nav-top:after {
+  clear: both;
+}
+.wh-nav-top img {
+  margin-right: 12px;
+  height: 45px;
+  width: 45px;
+  background-color: #2980b9;
+  padding: 5px;
+  border-radius: 100%;
+}
+.wh-nav-top i {
+  font-size: 30px;
+  float: left;
   cursor: pointer;
 }
-nav.wh-nav-mobile img {
-  margin-top: 10px;
-  float: right;
+
+.wh-nav-content-wrap {
+  margin-left: 300px;
+  background: #fcfcfc;
+  min-height: 100%;
 }
-nav.wh-nav-mobile i {
-  font-size: 30px;
-  margin-right: 10px;
+
+.wh-nav-content {
+  padding: 1.618em 3.236em;
+  height: 100%;
 }
 
 .wh-body-mask {
@@ -2302,12 +2333,39 @@ nav.wh-nav-mobile i {
 }
 
 @media screen and (max-width: 768px) {
-  nav.wh-nav-mobile {
+  .wh-body-for-nav {
+    background: #fcfcfc;
+  }
+
+  .wh-nav-top {
     display: block;
   }
 
-  nav.wh-nav-desktop {
+  .wh-nav-side {
+    padding-top: 1.618em;
     left: -300px;
+  }
+  .wh-nav-side .wh-logo {
+    display: none;
+  }
+  .wh-nav-side.shift {
+    width: 85%;
+    left: 0;
+  }
+
+  .wh-nav-content-wrap {
+    margin-left: 0;
+  }
+  .wh-nav-content-wrap .wh-nav-content {
+    padding: 1.618em;
+  }
+  .wh-nav-content-wrap.shift {
+    position: fixed;
+    min-width: 100%;
+    left: 85%;
+    top: 0;
+    height: 100%;
+    overflow: hidden;
   }
 }
 .wh-dropdown {
@@ -2326,6 +2384,7 @@ nav.wh-nav-mobile i {
 .wh-dropdown-menu {
   position: absolute;
   top: 100%;
+  left: 0;
   display: none;
   float: left;
   min-width: 100%;
@@ -2333,15 +2392,15 @@ nav.wh-nav-mobile i {
   z-index: 100;
   border: solid 1px #d4dbcf;
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.1);
-  padding: 15px;
+  padding: 12px;
 }
 .wh-dropdown-menu > dd > a {
   display: block;
   clear: both;
-  color: #595959;
+  color: #404040;
   white-space: nowrap;
   font-size: 90%;
-  padding: 0 15px;
+  padding: 0 12px;
 }
 .wh-dropdown-menu > dd > a:hover {
   background: #27ae60;
@@ -2349,9 +2408,10 @@ nav.wh-nav-mobile i {
 }
 .wh-dropdown-menu > dd.divider {
   border-top: solid 1px #d4dbcf;
+  margin: 6px 0;
 }
 .wh-dropdown-menu > dd.search {
-  padding-bottom: 15px;
+  padding-bottom: 12px;
 }
 .wh-dropdown-menu > dd.search input[type="search"] {
   width: 100%;
@@ -2374,7 +2434,7 @@ nav.wh-nav-mobile i {
   margin-top: 2px;
 }
 .wh-dropdown.wh-dropdown-bubble .wh-dropdown-menu a {
-  padding: 7.5px 15px;
+  padding: 6px 12px;
 }
 .wh-dropdown.wh-dropdown-bubble .wh-dropdown-menu a:hover {
   background: #27ae60;
@@ -2406,7 +2466,7 @@ nav.wh-nav-mobile i {
   border-collapse: collapse;
   border-spacing: 0;
   empty-cells: show;
-  margin-bottom: 30px;
+  margin-bottom: 24px;
 }
 .wh-table caption {
   color: black;
@@ -2419,16 +2479,6 @@ nav.wh-nav-mobile i {
   margin: 0;
   overflow: visible;
   padding: 8px 16px;
-}
-@media screen and (max-width: 480px) {
-  .wh-table td, .wh-table th {
-    display: none !important;
-  }
-}
-@media screen and (max-width: 480px) {
-  .wh-table td.wh-table-mobile-ok, .wh-table th.wh-table-mobile-ok {
-    display: block !important;
-  }
 }
 .wh-table td:first-child, .wh-table th:first-child {
   border-left-width: 0;
@@ -2449,7 +2499,7 @@ nav.wh-nav-mobile i {
 }
 
 .wh-table td p {
-  line-height: 22.5px;
+  line-height: 18px;
   margin-bottom: 0;
 }
 
@@ -2462,12 +2512,12 @@ nav.wh-nav-mobile i {
 }
 
 .wh-table-secondary {
-  color: #999999;
+  color: gray;
   font-size: 90%;
 }
 
 .wh-table-tertiary {
-  color: #999999;
+  color: gray;
   font-size: 80%;
 }
 
@@ -2519,7 +2569,7 @@ nav.wh-nav-mobile i {
 
 /* HORIZONTAL BORDERED TABLES */
 .wh-list-like-table-header {
-  margin-bottom: 30px;
+  margin-bottom: 24px;
   *zoom: 1;
 }
 .wh-list-like-table-header:before, .wh-list-like-table-header:after {
@@ -2536,7 +2586,7 @@ nav.wh-nav-mobile i {
 }
 .wh-list-like-table li > a {
   display: block;
-  padding: 15px;
+  padding: 12px;
   padding-left: 0;
 }
 .wh-list-like-table li:first-child {
@@ -2560,7 +2610,7 @@ nav.wh-nav-mobile i {
   border-radius: 100px;
   position: absolute;
   right: 0;
-  top: 15px;
+  top: 12px;
 }
 .wh-list-like-table .wh-list-like-table-views .view-fill {
   position: absolute;
@@ -2585,9 +2635,9 @@ nav.wh-nav-mobile i {
 }
 .wh-list-like-table .wh-list-like-table-title {
   position: absolute;
-  top: 15px;
-  left: 65px;
-  color: #595959;
+  top: 12px;
+  left: 62px;
+  color: #404040;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -2596,39 +2646,39 @@ nav.wh-nav-mobile i {
 }
 .wh-list-like-table .wh-list-like-table-subtitle {
   position: absolute;
-  bottom: 15px;
-  left: 65px;
-  color: #cccccc;
+  bottom: 12px;
+  left: 62px;
+  color: #b3b3b3;
   font-size: 70%;
 }
 .wh-list-like-table .wh-list-like-table-side-primary {
   display: block;
   position: absolute;
   right: 0;
-  top: 15px;
+  top: 12px;
   font-size: 90%;
 }
 .wh-list-like-table .wh-list-like-table-type {
   position: absolute;
-  right: 80px;
+  right: 74px;
   line-height: 50px;
   font-size: 70%;
   font-weight: 500;
-  color: #595959;
+  color: #404040;
   text-transform: uppercase;
 }
 
 .wh-list-like-table.multiple-links li {
-  padding: 15px;
+  padding: 12px;
   padding-left: 0;
 }
 
 .wh-list-like-table.wh-list-like-table-no-img li > a {
-  height: 80px;
-  padding-left: 15px;
+  height: 74px;
+  padding-left: 12px;
 }
 .wh-list-like-table.wh-list-like-table-no-img .wh-list-like-table-title, .wh-list-like-table.wh-list-like-table-no-img .wh-list-like-table-subtitle {
-  left: 15px;
+  left: 12px;
 }
 
 .wh-form-stacked select {
@@ -2671,7 +2721,7 @@ legend {
   border: 0;
   padding: 0;
   white-space: normal;
-  margin-bottom: 30px;
+  margin-bottom: 24px;
   font-size: 150%;
   *margin-left: -7px;
 }
@@ -2824,7 +2874,7 @@ select[disabled], textarea[disabled], input[readonly], select[readonly], textare
 
 .wh-checkbox, .wh-radio {
   margin: 0.5em 0;
-  color: #595959 !important;
+  color: #404040 !important;
   display: block;
 }
 
@@ -2881,7 +2931,7 @@ select[disabled], textarea[disabled], input[readonly], select[readonly], textare
 }
 
 .wh-control-group {
-  margin-bottom: 30px;
+  margin-bottom: 24px;
   *zoom: 1;
 }
 .wh-control-group:before, .wh-control-group:after {
@@ -2964,11 +3014,11 @@ select[disabled], textarea[disabled], input[readonly], select[readonly], textare
   border: solid 1px #cccccc;
   border-bottom: solid 3px #cccccc;
   background-color: white;
-  padding: 30px;
+  padding: 24px;
   display: inline-block;
   text-align: center;
   cursor: pointer;
-  color: #595959;
+  color: #404040;
   -webkit-transition: border-color 0.1s ease-in;
   -moz-transition: border-color 0.1s ease-in;
   transition: border-color 0.1s ease-in;
@@ -2998,7 +3048,7 @@ select[disabled], textarea[disabled], input[readonly], select[readonly], textare
 .wh-form-upload .wh-form-upload-icon {
   display: block;
   font-size: 32px;
-  color: #cccccc;
+  color: #b3b3b3;
 }
 .wh-form-upload .image-drop .wh-form-upload-icon {
   color: #27ae60;
@@ -3008,12 +3058,12 @@ select[disabled], textarea[disabled], input[readonly], select[readonly], textare
 }
 .wh-form-upload .wh-form-upload-image {
   float: left;
-  margin-right: 30px;
+  margin-right: 24px;
 }
 @media screen and (max-width: 480px) {
   .wh-form-upload .wh-form-upload-image {
     width: 100%;
-    margin-bottom: 30px;
+    margin-bottom: 24px;
   }
 }
 .wh-form-upload img {
@@ -3035,7 +3085,7 @@ select[disabled], textarea[disabled], input[readonly], select[readonly], textare
 
 .wh-form-upload:hover {
   border-color: #b3b3b3;
-  color: #595959;
+  color: #404040;
 }
 .wh-form-upload:hover .image-desktop {
   display: block;
@@ -3055,7 +3105,7 @@ select[disabled], textarea[disabled], input[readonly], select[readonly], textare
 .wh-form-upload.wh-form-upload-big {
   width: 100%;
   text-align: center;
-  padding: 90px;
+  padding: 72px;
 }
 .wh-form-upload.wh-form-upload-big .wh-form-upload-content {
   float: none;
@@ -3152,12 +3202,12 @@ select[disabled], textarea[disabled], input[readonly], select[readonly], textare
 }
 
 .wh-form-gallery-manage {
-  margin-left: -15px;
-  margin-right: -15px;
+  margin-left: -12px;
+  margin-right: -12px;
 }
 .wh-form-gallery-manage li {
   float: left;
-  padding: 15px;
+  padding: 12px;
   width: 20%;
   cursor: pointer;
 }
@@ -3175,7 +3225,7 @@ select[disabled], textarea[disabled], input[readonly], select[readonly], textare
   cursor: move;
 }
 .wh-form-gallery-manage li > a {
-  padding: 15px;
+  padding: 12px;
   background-color: white;
   border: solid 1px #e2e5e1;
   border-bottom: solid 3px #e2e5e1;
@@ -3198,7 +3248,7 @@ select[disabled], textarea[disabled], input[readonly], select[readonly], textare
 li.wh-form-gallery-edit {
   position: relative;
   color: white;
-  padding: 30px;
+  padding: 24px;
   width: 100%;
   display: block;
   background-color: #343131;
@@ -3271,7 +3321,7 @@ li.wh-form-gallery-edit .arrow {
   -ms-user-select: none;
   user-select: none;
   font-size: 100%;
-  padding: 7.5px 15px;
+  padding: 6px 12px;
   color: white;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-bottom: solid 3px rgba(0, 0, 0, 0.1);
@@ -3345,11 +3395,11 @@ li.wh-form-gallery-edit .arrow {
 
 .btn-neutral {
   background-color: #f4f6f3 !important;
-  color: #595959 !important;
+  color: #404040 !important;
 }
 .btn-neutral:hover {
   background-color: #e7ebe5 !important;
-  color: #595959;
+  color: #404040;
 }
 
 .btn-danger {
@@ -3388,7 +3438,7 @@ li.wh-form-gallery-edit .arrow {
 }
 
 .wh-btn-group {
-  margin-bottom: 30px;
+  margin-bottom: 24px;
   *zoom: 1;
 }
 .wh-btn-group:before, .wh-btn-group:after {
@@ -3486,11 +3536,11 @@ li.wh-form-gallery-edit .arrow {
 }
 
 .wh-modal-close {
-  color: #595959;
+  color: #404040;
   cursor: pointer;
   position: absolute;
-  right: 15px;
-  top: 15px;
+  right: 12px;
+  top: 12px;
   font-size: 0;
 }
 .wh-modal-close:before {
@@ -3567,9 +3617,9 @@ li.wh-form-gallery-edit .arrow {
 }
 
 .wh-alert, .rst-content .note, .rst-content .attention, .rst-content .caution, .rst-content .danger, .rst-content .error, .rst-content .hint, .rst-content .important, .rst-content .tip, .rst-content .warning {
-  padding: 30px;
-  line-height: 30px;
-  margin-bottom: 30px;
+  padding: 24px;
+  line-height: 24px;
+  margin-bottom: 24px;
   border-left: solid 3px transparent;
 }
 .wh-alert strong, .rst-content .note strong, .rst-content .attention strong, .rst-content .caution strong, .rst-content .danger strong, .rst-content .error strong, .rst-content .hint strong, .rst-content .important strong, .rst-content .tip strong, .rst-content .warning strong, .wh-alert a, .rst-content .note a, .rst-content .attention a, .rst-content .caution a, .rst-content .danger a, .rst-content .error a, .rst-content .hint a, .rst-content .important a, .rst-content .tip a, .rst-content .warning a {
@@ -3605,7 +3655,7 @@ li.wh-form-gallery-edit .arrow {
   border-color: #e2e5e1;
 }
 .wh-alert.wh-alert-neutral strong, .rst-content .note strong, .rst-content .wh-alert-neutral.attention strong, .rst-content .wh-alert-neutral.caution strong, .rst-content .wh-alert-neutral.danger strong, .rst-content .wh-alert-neutral.error strong, .rst-content .wh-alert-neutral.hint strong, .rst-content .wh-alert-neutral.important strong, .rst-content .wh-alert-neutral.tip strong, .rst-content .wh-alert-neutral.warning strong {
-  color: #595959;
+  color: #404040;
 }
 .wh-alert.wh-alert-neutral a, .rst-content .note a, .rst-content .wh-alert-neutral.attention a, .rst-content .wh-alert-neutral.caution a, .rst-content .wh-alert-neutral.danger a, .rst-content .wh-alert-neutral.error a, .rst-content .wh-alert-neutral.hint a, .rst-content .wh-alert-neutral.important a, .rst-content .wh-alert-neutral.tip a, .rst-content .wh-alert-neutral.warning a {
   color: #27ae60;
@@ -3627,9 +3677,9 @@ li.wh-form-gallery-edit .arrow {
   display: none;
   width: 100%;
   background: #343131;
-  padding: 15px 30px;
+  padding: 12px 24px;
   color: white;
-  margin-bottom: 7.5px;
+  margin-bottom: 6px;
   text-align: center;
   box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.1), 0px -1px 2px -1px rgba(255, 255, 255, 0.5) inset;
 }
@@ -3660,7 +3710,7 @@ li.wh-form-gallery-edit .arrow {
 }
 
 .wh-spinner.wh-spinner-margin {
-  margin: 30px auto;
+  margin: 24px auto;
 }
 
 .btn .wh-spinner {
@@ -3736,31 +3786,216 @@ li.wh-form-gallery-edit .arrow {
   }
 }
 
-.wh-body-two-col {
-  background: #fcfcfc;
+figure {
   position: relative;
+}
+
+figcaption {
+  text-align: center;
+  line-height: 24px;
+  font-size: 16px;
+}
+figcaption:empty:before {
+  opacity: 0.4;
+  content: "Type to add caption (optional)";
+}
+
+figure[data-type=table] {
+  clear: both;
+}
+
+figure[data-type=video] {
+  position: relative;
+  margin-bottom: 24px;
+  text-align: center;
+  clear: both;
+}
+figure[data-type=video] p {
+  margin: 0;
+}
+figure[data-type=video].wh-figure-full p {
+  position: relative;
+  padding-bottom: 51%;
+  width: 100%;
+  height: 0;
+}
+figure[data-type=video].wh-figure-full iframe {
+  width: 100%;
+  height: 100%;
+  position: absolute;
   left: 0;
-  -webkit-transition: all 0.2s ease-in;
-  -moz-transition: all 0.2s ease-in;
-  transition: all 0.2s ease-in;
-}
-.wh-body-two-col.shift {
-  height: 100%;
-  overflow: hidden;
-  left: 300px;
+  top: 0;
 }
 
-.wh-grid-two-col section {
-  padding: 1.618em 1.618em 1.618em 1.618em;
-  background: #fcfcfc;
-  height: 100%;
-  padding-left: 20.368em;
+figure[data-type=image] {
+  position: relative;
+  margin-bottom: 24px;
+}
+figure[data-type=image] .wh-figure-controls {
+  top: 0px;
+}
+figure[data-type=image] img {
+  background: #343131;
+  width: 100%;
+}
+figure[data-type=image]:hover img {
+  opacity: 0.8;
+}
+figure[data-type=image].wh-figure-large {
+  width: 100%;
+  clear: both;
+}
+figure[data-type=image].wh-figure-medium {
+  width: 50%;
+}
+figure[data-type=image].wh-figure-small {
+  width: 33%;
 }
 
-.wh-body-two-col.wh-body-max .wh-grid-two-col section {
-  max-width: 61.618em;
+figure[data-type=quote] {
+  font-family: "ff-tisa-web-pro-1", "ff-tisa-web-pro-2", "Helvetica Neue", "HelveticaNeue", Arial, sans-serif;
+  margin-bottom: 24px;
+  margin-left: 24px;
+  font-style: italic;
+  position: relative;
+  border-left: solid 5px #404040;
+  padding-left: 24px;
+}
+figure[data-type=quote] figcaption {
+  font-weight: bold;
+  text-align: left;
+}
+figure[data-type=quote] .wh-figure-controls {
+  margin-left: -5px;
+}
+figure[data-type=quote].wh-figure-medium {
+  font-size: 1.25em;
+  line-height: 1.2em;
+}
+figure[data-type=quote].wh-figure-large {
+  font-size: 1.5em;
+  line-height: 2em;
+}
+figure[data-type=quote].wh-figure-right {
+  width: 33%;
+}
+figure[data-type=quote].wh-figure-left {
+  width: 33%;
+  border-left: none;
+  border-right: solid 5px #404040;
+  padding-left: 0;
+  padding-right: 24px;
+  margin-left: 0;
+  margin-right: 24px;
+}
+figure[data-type=quote].wh-figure-left .wh-figure-controls {
+  margin-left: 0;
+  margin-right: -5px;
+}
+figure[data-type=quote] cite {
+  display: block;
+  text-align: left;
+  font-weight: bold;
+}
+figure[data-type=quote] cite:before {
+  content: "\2014 ";
 }
 
+figure:hover .wh-figure-controls {
+  display: block;
+}
+
+.wh-figure-controls {
+  background: #27ae60;
+  padding: 6px;
+  position: absolute;
+  display: none;
+  min-width: 100%;
+  white-space: nowrap;
+  left: 0;
+  top: -37px;
+  margin: auto;
+  font-family: "museo-sans-1", "museo-sans-2", "Helvetica Neue", "HelveticaNeue", Arial, sans-serif;
+  border-bottom: solid 3px #1e8449;
+  line-height: 24px;
+  font-style: normal;
+  z-index: 5;
+  text-align: center;
+}
+
+.wh-figure-controls span {
+  display: inline-block;
+  border: none;
+  background: none;
+  color: white;
+  vertical-align: bottom;
+  font-size: 14px;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+  cursor: pointer;
+}
+.wh-figure-controls span:hover {
+  background: rgba(255, 255, 255, 0.3);
+  color: white;
+}
+.wh-figure-controls span.on {
+  background: white;
+  color: #27ae60;
+}
+
+.wh-figure-controls span.wh-figure-controls-divider {
+  width: 1px;
+  background: #36d278;
+  padding: 0;
+  margin: 0 2px;
+  cursor: normal;
+}
+.wh-figure-controls span.wh-figure-controls-small {
+  font-size: 50%;
+}
+.wh-figure-controls span.wh-figure-controls-medium {
+  font-size: 75%;
+}
+.wh-figure-controls span.wh-figure-controls-delete {
+  margin-left: 24px;
+}
+.wh-figure-controls span.wh-figure-controls-delete:hover {
+  background: #e74c3c;
+}
+.wh-figure-controls span.wh-figure-controls-table {
+  width: auto;
+  padding-left: 6px;
+  text-align: left;
+}
+
+.wh-figure-right {
+  float: right;
+  margin-left: 24px;
+}
+.wh-figure-right .wh-figure-controls {
+  right: 0;
+}
+
+.wh-figure-left {
+  float: left;
+  margin-right: 24px;
+}
+
+@media screen and (max-width: 480px) {
+  figure[data-type=image] {
+    width: 100% !important;
+    float: none !important;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  figure[data-type=video] iframe {
+    width: 100% !important;
+    height: auto !important;
+  }
+}
 .wh-grid-one-col {
   *zoom: 1;
   max-width: 100%;
@@ -3842,7 +4077,7 @@ li.wh-form-gallery-edit .arrow {
   max-width: 100%;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 30px;
+  margin-bottom: 24px;
 }
 .wh-grid-search-filter:before, .wh-grid-search-filter:after {
   display: table;
@@ -3870,11 +4105,6 @@ li.wh-form-gallery-edit .arrow {
   margin-right: 0;
 }
 
-@media screen and (max-width: 768px) {
-  .wh-grid-two-col section {
-    padding: 0 1.618em 1.618em 1.618em;
-  }
-}
 .wh-object-list li {
   padding: 10px;
   border-bottom: solid 1px #e9ede6;
@@ -3922,12 +4152,12 @@ li.wh-form-gallery-edit .arrow {
   opacity: 0.2;
 }
 .wh-object-list .wh-object-list-title {
-  margin: 0 0 15px 60px;
+  margin: 0 0 12px 60px;
 }
 .wh-object-list .title {
   margin-left: 60px;
   display: block;
-  color: #595959;
+  color: #404040;
   font-size: 14px;
   font-weight: 500;
   opacity: 0.8;
@@ -3967,7 +4197,7 @@ li.wh-form-gallery-edit .arrow {
   max-width: 100%;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 30px;
+  margin-bottom: 24px;
   border-bottom: solid 1px #e2e5e1;
 }
 .wh-package-select:before, .wh-package-select:after {
@@ -3998,8 +4228,8 @@ li.wh-form-gallery-edit .arrow {
 
 .codeblock-example {
   border: 1px solid #e2e5e1;
-  padding: 30px;
-  padding-top: 60px;
+  padding: 24px;
+  padding-top: 48px;
   font-weight: 500;
   background: white;
   position: relative;
@@ -4011,11 +4241,11 @@ li.wh-form-gallery-edit .arrow {
   left: 0px;
   background: #9b59b6;
   color: white;
-  padding: 7.5px 15px;
+  padding: 6px 12px;
 }
 .codeblock-example.prettyprint-example-only {
   border: 1px solid #e2e5e1;
-  margin-bottom: 30px;
+  margin-bottom: 24px;
 }
 
 .codeblock {
@@ -4024,7 +4254,7 @@ li.wh-form-gallery-edit .arrow {
   width: 100%;
   overflow-x: auto;
   background: white;
-  margin: 1px 0 30px 0;
+  margin: 1px 0 24px 0;
 }
 
 .codeblock-example + .codeblock {
@@ -4034,17 +4264,17 @@ li.wh-form-gallery-edit .arrow {
 .linenodiv pre {
   border-right: solid 1px #e7eae6;
   margin: 0;
-  padding: 15px 15px;
+  padding: 12px 12px;
   font-family: Menlo, "Bitstream Vera Sans Mono", "DejaVu Sans Mono", Monaco, Consolas, "source-code-pro-1", "source-code-pro-2", monospace;
   font-size: 12px;
   line-height: 1.5;
-  color: #cccccc;
+  color: #b3b3b3;
 }
 
 .highlight pre {
   white-space: pre;
   margin: 0;
-  padding: 15px 15px;
+  padding: 12px 12px;
   font-family: Menlo, "Bitstream Vera Sans Mono", "DejaVu Sans Mono", Monaco, Consolas, "source-code-pro-1", "source-code-pro-2", monospace;
   font-size: 12px;
   line-height: 1.5;
@@ -4054,7 +4284,7 @@ pre.literal-block {
   @extends .codeblock;
   background: #343131;
   color: white;
-  padding: 52.5px 15px 15px 15px;
+  padding: 42px 12px 12px 12px;
   font-family: Menlo, "Bitstream Vera Sans Mono", "DejaVu Sans Mono", Monaco, Consolas, "source-code-pro-1", "source-code-pro-2", monospace;
   font-size: 12px;
   line-height: 1.5;
@@ -4064,11 +4294,11 @@ pre.literal-block:after {
   position: absolute;
   content: "  Type in your terminal (without the $ part)";
   background: #f4f6f3;
-  color: #595959;
+  color: #404040;
   top: 0;
   left: 0;
   width: 100%;
-  padding: 7.5px 0;
+  padding: 6px 0;
 }
 
 .hll {
@@ -4353,7 +4583,7 @@ pre.literal-block:after {
   margin-right: 4px;
 }
 .rst-content .toc-backref {
-  color: #595959;
+  color: #404040;
 }
 
 .wh-body-two-col.wh-body-max .wh-grid-two-col section {

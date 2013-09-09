@@ -1,7 +1,5 @@
 'use strict';
 
-var path = require('path');
-
 module.exports = function (grunt) {
 
   // Project configuration.
@@ -90,15 +88,8 @@ module.exports = function (grunt) {
     connect: {
       server: {
         options: {
-          middleware: function(connect, options) {
-            return [
-              // livereload
-              require('connect-livereload')(),
-              // Serve static files.
-              connect.static(path.resolve('gh-pages')),
-              connect.static(path.resolve(options.base))
-            ];
-          }
+          hostname: '*',
+          port: 9000
         }
       }
     },
@@ -143,8 +134,8 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'qunit', 'clean', 'sass', 'concat', 'uglify']);
-  grunt.registerTask('test', ['jshint', 'qunit']);
+  grunt.registerTask('default', ['test', 'clean', 'sass', 'concat', 'uglify']);
+  grunt.registerTask('test', ['jshint', 'connect', 'qunit']);
   grunt.registerTask('server', ['connect', 'watch']);
 
 };
