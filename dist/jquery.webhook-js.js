@@ -1,4 +1,4 @@
-/*! webhook-js - v0.0.1 - 2013-09-09
+/*! webhook-js - v0.0.1 - 2013-09-10
 * https://github.com/webhook/webhook-js
 * Copyright (c) 2013 Mike Horn; Licensed MIT */
 (function ($) {
@@ -86,6 +86,8 @@
       this.unpin = affix === 'bottom' ? position.top - scrollTop : null;
 
       this.$element.removeClass(reset).addClass('wh-affix' + (affix ? '-' + affix : ''));
+
+      this.$element.trigger('affix', affix);
     }
 
   };

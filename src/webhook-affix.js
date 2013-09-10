@@ -91,6 +91,8 @@
       this.unpin = affix === 'bottom' ? position.top - scrollTop : null;
 
       this.$element.removeClass(reset).addClass('wh-affix' + (affix ? '-' + affix : ''));
+
+      this.$element.trigger('affix', affix);
     }
 
   };

@@ -67,11 +67,11 @@ module.exports = function (grunt) {
       },
       js: {
         files: '<%= jshint.src.src %>',
-        tasks: ['jshint:src', 'concat', 'copy']
+        tasks: ['jshint:src', 'concat']
       },
       sass: {
         files: '<%= sass.dev.src %>',
-        tasks: ['sass', 'copy']
+        tasks: ['sass']
       },
       test: {
         files: '<%= jshint.test.src %>',
@@ -87,16 +87,6 @@ module.exports = function (grunt) {
           hostname: '*',
           port: 9000
         }
-      }
-    },
-    copy: {
-      main: {
-        files: [
-          {expand: true, cwd: 'dist/', src: ['*.js'], dest: 'gh-pages/js/'},
-          {expand: true, cwd: 'bower_components/exifreader/js/', src: ['ExifReader.js'], dest: 'gh-pages/lib/'},
-          {expand: true, cwd: 'bower_components/jquery/', src: ['jquery.js'], dest: 'gh-pages/lib/'},
-          {expand: true, cwd: 'bower_components/moment/', src: ['moment.js'], dest: 'gh-pages/lib/'}
-        ]
       }
     },
     sass: {
