@@ -5,11 +5,11 @@
 #path = File.dirname(__FILE__)
 
 http_path = "/"
-css_dir = "../css"
+css_dir = "../static/css"
 sass_dir = ""
-images_dir = "../img"
-font_dir = "../font"
-javascripts_dir = "../js"
+images_dir = "../static/img"
+font_dir = "../static/font"
+javascripts_dir = "../static/js"
 line_comments = false
 preferred_syntax = :sass
 
