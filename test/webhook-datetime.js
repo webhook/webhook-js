@@ -29,11 +29,8 @@
     }
   });
 
-  test('is defined on jQuery object', function () {
-    ok(this.input.datetime, 'datetime plugin is defined');
-  });
-
-  test('is chainable', function () {
+  test('basic jQuery funcionality', function () {
+    ok(this.input.datetime, 'plugin is defined');
     strictEqual(this.input.datetime(), this.input, 'should be chainable');
   });
 

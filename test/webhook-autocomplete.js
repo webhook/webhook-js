@@ -22,13 +22,11 @@
 
   module('Autocomplete');
 
-  test('is defined on jQuery object', function () {
-    ok($('<div></div>').autocomplete, 'tooltip plugin is defined');
-  });
-
-  test('is chainable', function () {
-    var elems = $('<div></div>');
-    strictEqual(elems.autocomplete(), elems, 'should be chainable');
+  test('basic jQuery functionality', function () {
+    expect(2);
+    var el = $('<div>');
+    ok(el.autocomplete, 'plugin is defined');
+    strictEqual(el.autocomplete(), el, 'should be chainable');
   });
 
 }(jQuery));

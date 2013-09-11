@@ -1,4 +1,4 @@
-/*! webhook-js - v0.0.1 - 2013-09-10
+/*! webhook-js - v0.0.1 - 2013-09-11
 * https://github.com/webhook/webhook-js
 * Copyright (c) 2013 Mike Horn; Licensed MIT */
 (function ($) {
@@ -774,84 +774,6 @@
 
   "use strict";
 
-  var Defer = function (element, options) {
-    this.init(element, options);
-  };
-
-  Defer.prototype = {
-    init: function (element, options) {
-      return [element, options];
-    }
-  };
-
-  /* DEFER PLUGIN DEFINITION
-   * ======================= */
-
-  $.fn.defer = function (option) {
-    return this.each(function () {
-      var $this   = $(this),
-          data    = $this.data('defer'),
-          options = typeof option === 'object' && option;
-
-      if (!data) {
-        $this.data('defer', (data = new Defer(this, options)));
-      }
-
-      if (typeof option === 'string') {
-        data[option]();
-      }
-    });
-  };
-
-  $.fn.defer.Constructor = Defer;
-
-  $.fn.defer.defaults = {};
-
-}(window.jQuery));
-
-(function ($) {
-
-  "use strict";
-
-  var Menu = function (element, options) {
-    this.init(element, options);
-  };
-
-  Menu.prototype = {
-    init: function (element, options) {
-      return [element, options];
-    }
-  };
-
-  /* MENU PLUGIN DEFINITION
-   * ====================== */
-
-  $.fn.menu = function (option) {
-    return this.each(function () {
-      var $this   = $(this),
-          data    = $this.data('menu'),
-          options = typeof option === 'object' && option;
-
-      if (!data) {
-        $this.data('menu', (data = new Menu(this, options)));
-      }
-
-      if (typeof option === 'string') {
-        data[option]();
-      }
-    });
-  };
-
-  $.fn.menu.Constructor = Menu;
-
-  $.fn.menu.defaults = {};
-
-}(window.jQuery));
-
-(function ($) {
-
-  "use strict";
-
   var Tab = function (element, options) {
     this.init(element, options);
   };
@@ -922,45 +844,6 @@
     e.preventDefault();
     $(this).tab('show');
   });
-
-}(window.jQuery));
-
-(function ($) {
-
-  "use strict";
-
-  var Toc = function (element, options) {
-    this.init(element, options);
-  };
-
-  Toc.prototype = {
-    init: function (element, options) {
-      return [element, options];
-    }
-  };
-
-  /* TOC PLUGIN DEFINITION
-   * ===================== */
-
-  $.fn.toc = function (option) {
-    return this.each(function () {
-      var $this   = $(this),
-          data    = $this.data('toc'),
-          options = typeof option === 'object' && option;
-
-      if (!data) {
-        $this.data('toc', (data = new Toc(this, options)));
-      }
-
-      if (typeof option === 'string') {
-        data[option]();
-      }
-    });
-  };
-
-  $.fn.toc.Constructor = Toc;
-
-  $.fn.toc.defaults = {};
 
 }(window.jQuery));
 
@@ -1325,44 +1208,5 @@
 
     });
   });
-
-}(window.jQuery));
-
-(function ($) {
-
-  "use strict";
-
-  var Validate = function (element, options) {
-    this.init(element, options);
-  };
-
-  Validate.prototype = {
-    init: function (element, options) {
-      return [element, options];
-    }
-  };
-
-  /* VALIDATE PLUGIN DEFINITION
-   * ========================== */
-
-  $.fn.validate = function (option) {
-    return this.each(function () {
-      var $this   = $(this),
-          data    = $this.data('validate'),
-          options = typeof option === 'object' && option;
-
-      if (!data) {
-        $this.data('validate', (data = new Validate(this, options)));
-      }
-
-      if (typeof option === 'string') {
-        data[option]();
-      }
-    });
-  };
-
-  $.fn.validate.Constructor = Validate;
-
-  $.fn.validate.defaults = {};
 
 }(window.jQuery));

@@ -22,13 +22,11 @@
 
   module('Affix');
 
-  test('is defined on jQuery object', function () {
-    ok($('<div></div>').affix, 'tooltip plugin is defined');
-  });
-
-  test('is chainable', function () {
-    var elems = $('<div></div>');
-    strictEqual(elems.affix(), elems, 'should be chainable');
+  test('basic jQuery functionality', function () {
+    expect(2);
+    var el = $('<div>');
+    ok(el.affix, 'plugin is defined');
+    strictEqual(el.affix(), el, 'should be chainable');
   });
 
 }(jQuery));
