@@ -2,6 +2,13 @@
 
 module.exports = function (grunt) {
 
+  var rest = require('connect-rest');
+
+  rest.post('/upload', function (request, content, callback) {
+    console.log( 'Upload called:' + JSON.stringify( request ) );
+    return callback(null, '{"error": null, "id": 555}', { minify: true });
+  });
+
   // Project configuration.
   grunt.initConfig({
     // Metadata.
@@ -85,7 +92,24 @@ module.exports = function (grunt) {
       server: {
         options: {
           hostname: '*',
-          port: 9000
+          port: 9000,
+          middleware: function(connect, options) {
+            var middlewares = [];
+
+            middlewares.push(rest.rester());
+
+            var directory = options.directory || options.base[options.base.length - 1];
+            if (!Array.isArray(options.base)) {
+              options.base = [options.base];
+            }
+            options.base.forEach(function(base) {
+              // Serve static files.
+              middlewares.push(connect.static(base));
+            });
+            // Make directory browse-able.
+            middlewares.push(connect.directory(directory));
+            return middlewares;
+          }
         }
       }
     },

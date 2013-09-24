@@ -31,6 +31,7 @@
     "grunt-contrib-sass": "~0.3.0",
     "grunt": "~0.4.1",
     "connect-livereload": "~0.2.0",
-    "grunt-contrib-copy": "~0.4.1"
+    "grunt-contrib-copy": "~0.4.1",
+    "connect-rest": "~0.7.1"
   }
 }

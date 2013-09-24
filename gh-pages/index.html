@@ -55,11 +55,11 @@
               </div>
               <div class="image-loading">
                 <div class="wh-spinner wh-spinner-margin"></div>
-                <p>Uploading <span>92%</span></p>
+                <p>Uploading <span>0%</span></p>
               </div>
               <div class="wh-input-prefix"><span class="wh-input-context"><i class="icon icon-globe"></i></span><input type="text" placeholder=" Or paste URL"></div>
               </div>
-              <input type="hidden" data-upload data-upload-group="example">
+              <input type="hidden" data-upload data-upload-group="example" data-upload-url="/upload" data-upload-type="image">
             </a>
 
           </div>
@@ -138,7 +138,7 @@
   <!-- Load local libs. -->
   <script src="../bower_components/jquery/jquery.js"></script>
   <script src="../bower_components/moment/moment.js"></script>
-  <script src="../bower_components/js/ExifReader.js"></script>
+  <script src="../bower_components/exifreader/js/ExifReader.js"></script>
 
   <!-- Load local widgets. -->
   <script src="../src/webhook-affix.js"></script>
@@ -156,13 +156,21 @@
       'dragleave.wh.upload': function () {
         $(this).data('upload').$dropzone.removeClass('wh-form-upload-drop');
       },
-      'drop.wh.upload': function () {
+      'dragdrop.wh.upload': function () {
         $(this).data('upload').$dropzone.removeClass('wh-form-upload-drop');
       },
       'thumb.wh.upload': function (event, thumb) {
         var widget = $(this).data('upload').$dropzone.addClass('wh-form-upload-loading').removeClass('wh-form-upload-drop');
         widget.find('.wh-form-upload-image').remove();
         $('<div class="wh-form-upload-image">').append(thumb).prependTo(widget);
+      },
+      'progress.wh.upload': function (event, percentage) {
+        $(this).data('upload').$dropzone.find('.image-loading span').text(percentage + '%');
+      },
+      'load.wh.upload': function (event, response) {
+        $(this).data('upload').$dropzone.removeClass('wh-form-upload-loading');
+        $(this).data('upload').$element.val(response.id);
+        // window.console.log($(this).data('upload').$fileinput);
       }
     });
 

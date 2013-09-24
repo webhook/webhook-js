@@ -1,4 +1,4 @@
-/*! webhook-js - v0.0.1 - 2013-09-11
+/*! webhook-js - v0.0.1 - 2013-09-24
 * https://github.com/webhook/webhook-js
 * Copyright (c) 2013 Mike Horn; Licensed MIT */
 (function ($) {
@@ -1013,7 +1013,7 @@
   Upload.prototype = {
     init: function (element, options) {
 
-      this.$element = $(element).hide();
+      this.$element = $(element);
 
       this.options = this.getOptions(options);
 
@@ -1022,9 +1022,7 @@
       // we need this for OS file selection
       this.$fileinput = $('<input type="file" multiple>').hide().insertAfter(element).on({
         change: function () {
-          uploader.createThumbnails(this.files, function (thumb) {
-            uploader.$element.trigger('thumb.wh.upload', thumb);
-          });
+          uploader.upload(this.files);
         },
         click: function (event) {
           event.stopPropagation();
@@ -1110,12 +1108,44 @@
         drop: $.proxy(function (event) {
           event.preventDefault();
           dropzonelayer--;
-          this.createThumbnails(event.originalEvent.dataTransfer.files, $.proxy(function (thumb) {
-            this.$element.trigger('thumb.wh.upload', thumb);
-          }, this));
+          this.$element.trigger('dragdropdropzone.wh.upload');
+          this.upload(event.originalEvent.dataTransfer.files);
         }, this)
       });
 
+    },
+
+    upload: function (files) {
+
+      // var reader = new FileReader();
+      var xhr  = new XMLHttpRequest(),
+          data = new FormData();
+
+      this.xhr = xhr;
+
+      // var self = this;
+      this.xhr.upload.addEventListener("progress", $.proxy(function (event) {
+        if (event.lengthComputable) {
+          this.$element.trigger('progress.wh.upload', Math.ceil((event.loaded * 100) / event.total));
+        }
+      }, this), false);
+
+      this.xhr.upload.addEventListener("load", $.proxy(function () {
+        this.$element.trigger('progress.wh.upload', 100);
+        setTimeout($.proxy(function () {
+          this.$element.trigger('load.wh.upload', JSON.parse(this.xhr.responseText));
+        }, this));
+      }, this), false);
+
+      data.append('asset_type', this.options.uploadType);
+      data.append('file', files[0]);
+
+      xhr.open("POST", this.options.uploadUrl);
+      xhr.send(data);
+
+      this.createThumbnails(files, $.proxy(function (thumb) {
+        this.$element.trigger('thumb.wh.upload', thumb);
+      }, this));
     },
 
     createThumbnails: function (files, callback) {
