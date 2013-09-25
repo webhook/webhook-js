@@ -1023,8 +1023,6 @@
     return cookieValue;
   }
 
-  var csrftoken = getCookie('csrftoken');
-
   var Upload = function (element, options) {
     this.init(element, options);
   };
@@ -1157,12 +1155,13 @@
       }, this), false);
 
       data.append('asset_type', this.options.uploadType);
-      data.append('file', files[0]);
-
-      // todo: extract CSRF stuff
-      xhr.setRequestHeader("X-CSRFToken", csrftoken);
+      data.append('asset', files[0]);
 
       xhr.open("POST", this.options.uploadUrl);
+
+      // todo: extract CSRF stuff
+      xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+
       xhr.send(data);
 
       this.createThumbnails(files, $.proxy(function (thumb) {
