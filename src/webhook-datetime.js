@@ -17,7 +17,7 @@
   Datetime.prototype = {
     init: function (element, options) {
 
-      this.isPolyfill = element !== 'datetime-local';
+      this.isPolyfill = element.type !== 'datetime-local';
 
       this.$element = $(element);
 
@@ -226,7 +226,7 @@
   $.fn.datetime.Constructor = Datetime;
 
   $.fn.datetime.defaults = {
-    // polyfill: true,
+    polyfill: true,
     // format
     format: 'MM/DD/YYYY hh:mm A'
   };
