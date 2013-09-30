@@ -1,4 +1,4 @@
-/*! webhook-js - v0.0.1 - 2013-09-24
+/*! webhook-js - v0.0.1 - 2013-09-30
 * https://github.com/webhook/webhook-js
 * Copyright (c) 2013 Mike Horn; Licensed MIT */
 (function ($) {
@@ -549,9 +549,18 @@
   Datetime.prototype = {
     init: function (element, options) {
 
+      this.isPolyfill = element !== 'datetime-local';
+
       this.$element = $(element);
 
       this.options  = this.getOptions(options);
+
+      $('<button type="button" class="btn">Now</button>').insertAfter(this.$element).on('click', $.proxy(this.setNow, this));
+
+      // automatic polyfill
+      if ($.fn.datetime.defaults.polyfill && !this.isPolyfill) {
+        return;
+      }
 
       this.$element.attr('placeholder', this.options.format);
 
@@ -581,6 +590,10 @@
       }
     },
 
+    setNow: function () {
+      this.setDatetime(moment());
+    },
+
     setDatetime: function (datetime) {
       this.datetime = moment(datetime);
       this.updateInput();
@@ -591,7 +604,9 @@
     },
 
     getFormattedDatetime: function () {
-      return this.datetime && this.datetime.format(this.options.format);
+      // use datetime-local format if not polyfill
+      var format = this.isPolyfill ? this.options.format : 'YYYY-MM-DDTHH:mm';
+      return this.datetime && this.datetime.format(format);
     },
 
     updateInput: function () {
@@ -743,7 +758,8 @@
   $.fn.datetime.Constructor = Datetime;
 
   $.fn.datetime.defaults = {
-    polyfill: true,
+    // polyfill: true,
+    // format
     format: 'MM/DD/YYYY hh:mm A'
   };
 
@@ -753,11 +769,6 @@
 
   $(window).on('load', function () {
     $('[type=datetime-local]').each(function () {
-
-      // automatic polyfill
-      if ($.fn.datetime.defaults.polyfill && this.type === 'datetime-local') {
-        return;
-      }
 
       var $element = $(this),
           data     = $element.data();
