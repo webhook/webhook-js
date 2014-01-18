@@ -1,6 +1,6 @@
-/*! webhook-js - v0.0.1 - 2013-09-30
+/*! webhook-js - v0.0.1 - 2014-01-17
 * https://github.com/webhook/webhook-js
-* Copyright (c) 2013 Mike Horn; Licensed MIT */
+* Copyright (c) 2014 Mike Horn; Licensed MIT */
 (function ($) {
 
   "use strict";
@@ -47,7 +47,7 @@
           offset       = this.options.offset,
           offsetBottom = offset.bottom,
           offsetTop    = offset.top,
-          reset        = 'wh-affix wh-affix-top wh-affix-bottom',
+          reset        = 'wy-affix wy-affix-top wy-affix-bottom',
           affix;
 
       if (typeof offset !== 'object') {
@@ -85,7 +85,7 @@
       this.affixed = affix;
       this.unpin = affix === 'bottom' ? position.top - scrollTop : null;
 
-      this.$element.removeClass(reset).addClass('wh-affix' + (affix ? '-' + affix : ''));
+      this.$element.removeClass(reset).addClass('wy-affix' + (affix ? '-' + affix : ''));
 
       this.$element.trigger('affix', affix);
     }
@@ -181,11 +181,11 @@
     init: function (element, options) {
       this.$element = $(element).prop('readonly', true);
 
-      this.$tagGroup = $('<div class="wh-tag-input-group">').insertAfter(this.$element);
-      this.$autocompleteGroup = $('<div class="wh-autocomplete-group">').appendTo(this.$tagGroup);
+      this.$tagGroup = $('<div class="wy-tag-input-group">').insertAfter(this.$element);
+      this.$autocompleteGroup = $('<div class="wy-autocomplete-group">').appendTo(this.$tagGroup);
 
       this.$input    = $('<input type="text" autocomplete="off">').appendTo(this.$autocompleteGroup);
-      this.$results  = $('<div class="wh-autocomplete-dropdown">').append('<ul>');
+      this.$results  = $('<div class="wy-autocomplete-dropdown">').append('<ul>');
       this.options   = this.getOptions(options);
       this.selected  = [];
       this.$selected = $([]);
@@ -245,13 +245,13 @@
       this.$element.on({
         'selectItem.autocomplete': $.proxy(function (event, item) {
 
-          var $selected = $('<span class="wh-tag">')
+          var $selected = $('<span class="wy-tag">')
                             .text(this.options.formatDisplay(item))
                             .data('item', item)
                             .attr('data-val', this.options.formatSelect(item))
                             .insertBefore(this.$autocompleteGroup);
 
-          $('<a class="wh-tag-remove">').appendTo($selected).on('click', $.proxy(function () {
+          $('<a class="wy-tag-remove">').appendTo($selected).on('click', $.proxy(function () {
             this.removeItem(item);
           }, this));
 
@@ -510,15 +510,15 @@
 }(window.jQuery));
 
 /*
-<div class="wh-control-group">
+<div class="wy-control-group">
 <label for="right-label" >Author(s)</label>
-<div class="wh-tag-input-group">
-  <span class="wh-tag">Dave Snider<a href="" class="wh-tag-remove"></a></span>
-  <span class="wh-tag">Andy McCurdy<a href="" class="wh-tag-remove"></a></span>
-  <span class="wh-tag">Mike Horn<a href="" class="wh-tag-remove"></a></span>
-  <div class="wh-autocomplete-group">
+<div class="wy-tag-input-group">
+  <span class="wy-tag">Dave Snider<a href="" class="wy-tag-remove"></a></span>
+  <span class="wy-tag">Andy McCurdy<a href="" class="wy-tag-remove"></a></span>
+  <span class="wy-tag">Mike Horn<a href="" class="wy-tag-remove"></a></span>
+  <div class="wy-autocomplete-group">
     <input type="text" id="right-label" placeholder="Search users">
-    <div class="wh-autocomplete-dropdown">
+    <div class="wy-autocomplete-dropdown">
       <ul>
         <li class="on">
           <img src="https://secure.gravatar.com/avatar/701bba3438bca23aed0079226247c308?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" />
@@ -678,7 +678,7 @@
       }
       template += '</tbody></table>';
 
-      this.$calendar = $("<div class='wh-datetime'>" + template + "</div>");
+      this.$calendar = $("<div class='wy-datetime'>" + template + "</div>");
 
       this.$calendar.on('click.datetime.day', 'td:not(:empty)', $.proxy(function (event) {
         var datetime = moment(this.datetimeDate).date(parseInt($(event.target).text(), 10));
@@ -938,7 +938,7 @@
     },
 
     setContent: function (content) {
-      this.tip().find('.wh-tooltip-inner')[this.options.html ? 'html' : 'text'](content || this.getTitle());
+      this.tip().find('.wy-tooltip-inner')[this.options.html ? 'html' : 'text'](content || this.getTitle());
     },
 
     show: function () {
@@ -993,7 +993,7 @@
 
   $.fn.tooltip.defaults = {
     placement: 'top',
-    template : '<div class="wh-tooltip"><div class="wh-tooltip-arrow"></div><div class="wh-tooltip-inner"></div></div>',
+    template : '<div class="wy-tooltip"><div class="wy-tooltip-arrow"></div><div class="wy-tooltip-inner"></div></div>',
     title    : '',
     html     : false
   };
