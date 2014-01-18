@@ -52,7 +52,7 @@
           offset       = this.options.offset,
           offsetBottom = offset.bottom,
           offsetTop    = offset.top,
-          reset        = 'wh-affix wh-affix-top wh-affix-bottom',
+          reset        = 'wy-affix wy-affix-top wy-affix-bottom',
           affix;
 
       if (typeof offset !== 'object') {
@@ -90,7 +90,7 @@
       this.affixed = affix;
       this.unpin = affix === 'bottom' ? position.top - scrollTop : null;
 
-      this.$element.removeClass(reset).addClass('wh-affix' + (affix ? '-' + affix : ''));
+      this.$element.removeClass(reset).addClass('wy-affix' + (affix ? '-' + affix : ''));
 
       this.$element.trigger('affix', affix);
     }

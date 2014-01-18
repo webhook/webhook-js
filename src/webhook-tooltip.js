@@ -86,7 +86,7 @@
     },
 
     setContent: function (content) {
-      this.tip().find('.wh-tooltip-inner')[this.options.html ? 'html' : 'text'](content || this.getTitle());
+      this.tip().find('.wy-tooltip-inner')[this.options.html ? 'html' : 'text'](content || this.getTitle());
     },
 
     show: function () {
@@ -141,7 +141,7 @@
 
   $.fn.tooltip.defaults = {
     placement: 'top',
-    template : '<div class="wh-tooltip"><div class="wh-tooltip-arrow"></div><div class="wh-tooltip-inner"></div></div>',
+    template : '<div class="wy-tooltip"><div class="wy-tooltip-arrow"></div><div class="wy-tooltip-inner"></div></div>',
     title    : '',
     html     : false
   };

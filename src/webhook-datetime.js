@@ -146,7 +146,7 @@
       }
       template += '</tbody></table>';
 
-      this.$calendar = $("<div class='wh-datetime'>" + template + "</div>");
+      this.$calendar = $("<div class='wy-datetime'>" + template + "</div>");
 
       this.$calendar.on('click.datetime.day', 'td:not(:empty)', $.proxy(function (event) {
         var datetime = moment(this.datetimeDate).date(parseInt($(event.target).text(), 10));
