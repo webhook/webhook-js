@@ -1,4 +1,4 @@
-/*! webhook-js - v0.0.1 - 2014-01-17
+/*! webhook-js - v0.0.1 - 2014-01-20
 * https://github.com/webhook/webhook-js
 * Copyright (c) 2014 Mike Horn; Licensed MIT */
 (function ($) {
@@ -555,7 +555,7 @@
 
       this.options  = this.getOptions(options);
 
-      $('<button type="button" class="btn">Now</button>').insertAfter(this.$element).on('click', $.proxy(this.setNow, this));
+      $('<button type="button" class="btn btn-link">Now</button>').insertAfter(this.$element).on('click', $.proxy(this.setNow, this));
 
       // automatic polyfill
       if ($.fn.datetime.defaults.polyfill && !this.isPolyfill) {

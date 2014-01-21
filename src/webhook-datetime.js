@@ -23,7 +23,7 @@
 
       this.options  = this.getOptions(options);
 
-      $('<button type="button" class="btn">Now</button>').insertAfter(this.$element).on('click', $.proxy(this.setNow, this));
+      $('<button type="button" class="btn btn-link">Now</button>').insertAfter(this.$element).on('click', $.proxy(this.setNow, this));
 
       // automatic polyfill
       if ($.fn.datetime.defaults.polyfill && !this.isPolyfill) {
