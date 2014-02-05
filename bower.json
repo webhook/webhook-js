@@ -20,7 +20,7 @@
     "package.json"
   ],
   "dependencies": {
-    "jquery": "2.*",
+    "jquery": "1.*",
     "moment": "2.*",
     "exifreader": "*"
   },
