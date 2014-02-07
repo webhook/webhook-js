@@ -1,0 +1,28 @@
+{
+  "name": "webhook",
+  "title": "Webhook",
+  "description": "A collection of jQuery plugins for Webhook.",
+  "version": "",
+  "homepage": "",
+  "author": {
+    "name": "",
+    "url": "https://github.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "bugs": "",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    }
+  ],
+  "dependencies": {
+    "jquery": "latest"
+  },
+  "keywords": [
+    "jquery-plugin"
+  ]
+}

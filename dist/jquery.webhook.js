@@ -1,6 +1,6 @@
-/*! webhook-js - v0.0.1 - 2013-08-29
-* https://github.com/webhook/webhook-js
-* Copyright (c) 2013 Mike Horn; Licensed MIT */
+/*! webhook - v - 2014-02-07
+* https://github.com//webhook
+* Copyright (c) 2014 ; Licensed MIT */
 (function ($) {
 
   "use strict";
@@ -47,7 +47,7 @@
           offset       = this.options.offset,
           offsetBottom = offset.bottom,
           offsetTop    = offset.top,
-          reset        = 'wh-affix wh-affix-top wh-affix-bottom',
+          reset        = 'wy-affix wy-affix-top wy-affix-bottom',
           affix;
 
       if (typeof offset !== 'object') {
@@ -85,7 +85,9 @@
       this.affixed = affix;
       this.unpin = affix === 'bottom' ? position.top - scrollTop : null;
 
-      this.$element.removeClass(reset).addClass('wh-affix' + (affix ? '-' + affix : ''));
+      this.$element.removeClass(reset).addClass('wy-affix' + (affix ? '-' + affix : ''));
+
+      this.$element.trigger('affix', affix);
     }
 
   };
@@ -179,11 +181,11 @@
     init: function (element, options) {
       this.$element = $(element).prop('readonly', true);
 
-      this.$tagGroup = $('<div class="wh-tag-input-group">').insertAfter(this.$element);
-      this.$autocompleteGroup = $('<div class="wh-autocomplete-group">').appendTo(this.$tagGroup);
+      this.$tagGroup = $('<div class="wy-tag-input-group">').insertAfter(this.$element);
+      this.$autocompleteGroup = $('<div class="wy-autocomplete-group">').appendTo(this.$tagGroup);
 
       this.$input    = $('<input type="text" autocomplete="off">').appendTo(this.$autocompleteGroup);
-      this.$results  = $('<div class="wh-autocomplete-dropdown">').append('<ul>');
+      this.$results  = $('<div class="wy-autocomplete-dropdown">').append('<ul>');
       this.options   = this.getOptions(options);
       this.selected  = [];
       this.$selected = $([]);
@@ -243,13 +245,13 @@
       this.$element.on({
         'selectItem.autocomplete': $.proxy(function (event, item) {
 
-          var $selected = $('<span class="wh-tag">')
+          var $selected = $('<span class="wy-tag">')
                             .text(this.options.formatDisplay(item))
                             .data('item', item)
                             .attr('data-val', this.options.formatSelect(item))
                             .insertBefore(this.$autocompleteGroup);
 
-          $('<a class="wh-tag-remove">').appendTo($selected).on('click', $.proxy(function () {
+          $('<a class="wy-tag-remove">').appendTo($selected).on('click', $.proxy(function () {
             this.removeItem(item);
           }, this));
 
@@ -508,15 +510,15 @@
 }(window.jQuery));
 
 /*
-<div class="wh-control-group">
+<div class="wy-control-group">
 <label for="right-label" >Author(s)</label>
-<div class="wh-tag-input-group">
-  <span class="wh-tag">Dave Snider<a href="" class="wh-tag-remove"></a></span>
-  <span class="wh-tag">Andy McCurdy<a href="" class="wh-tag-remove"></a></span>
-  <span class="wh-tag">Mike Horn<a href="" class="wh-tag-remove"></a></span>
-  <div class="wh-autocomplete-group">
+<div class="wy-tag-input-group">
+  <span class="wy-tag">Dave Snider<a href="" class="wy-tag-remove"></a></span>
+  <span class="wy-tag">Andy McCurdy<a href="" class="wy-tag-remove"></a></span>
+  <span class="wy-tag">Mike Horn<a href="" class="wy-tag-remove"></a></span>
+  <div class="wy-autocomplete-group">
     <input type="text" id="right-label" placeholder="Search users">
-    <div class="wh-autocomplete-dropdown">
+    <div class="wy-autocomplete-dropdown">
       <ul>
         <li class="on">
           <img src="https://secure.gravatar.com/avatar/701bba3438bca23aed0079226247c308?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" />
@@ -540,45 +542,6 @@
 
   "use strict";
 
-  var Button = function (element, options) {
-    this.init(element, options);
-  };
-
-  Button.prototype = {
-    init: function (element, options) {
-      return [element, options];
-    }
-  };
-
-  /* BUTTON PLUGIN DEFINITION
-   * ======================== */
-
-  $.fn.button = function (option) {
-    return this.each(function () {
-      var $this   = $(this),
-          data    = $this.data('button'),
-          options = typeof option === 'object' && option;
-
-      if (!data) {
-        $this.data('button', (data = new Button(this, options)));
-      }
-
-      if (typeof option === 'string') {
-        data[option]();
-      }
-    });
-  };
-
-  $.fn.button.Constructor = Button;
-
-  $.fn.button.defaults = {};
-
-}(window.jQuery));
-
-(function ($) {
-
-  "use strict";
-
   var Datetime = function (element, options) {
     this.init(element, options);
   };
@@ -586,9 +549,18 @@
   Datetime.prototype = {
     init: function (element, options) {
 
+      this.isPolyfill = element.type !== 'datetime-local';
+
       this.$element = $(element);
 
       this.options  = this.getOptions(options);
+
+      $('<button type="button" class="btn btn-link">Now</button>').insertAfter(this.$element).on('click', $.proxy(this.setNow, this));
+
+      // automatic polyfill
+      if ($.fn.datetime.defaults.polyfill && !this.isPolyfill) {
+        return;
+      }
 
       this.$element.attr('placeholder', this.options.format);
 
@@ -618,6 +590,10 @@
       }
     },
 
+    setNow: function () {
+      this.setDatetime(moment());
+    },
+
     setDatetime: function (datetime) {
       this.datetime = moment(datetime);
       this.updateInput();
@@ -628,7 +604,9 @@
     },
 
     getFormattedDatetime: function () {
-      return this.datetime && this.datetime.format(this.options.format);
+      // use datetime-local format if not polyfill
+      var format = this.isPolyfill ? this.options.format : 'YYYY-MM-DDTHH:mm';
+      return this.datetime && this.datetime.format(format);
     },
 
     updateInput: function () {
@@ -700,7 +678,7 @@
       }
       template += '</tbody></table>';
 
-      this.$calendar = $("<div class='wh-datetime'>" + template + "</div>");
+      this.$calendar = $("<div class='wy-datetime'>" + template + "</div>");
 
       this.$calendar.on('click.datetime.day', 'td:not(:empty)', $.proxy(function (event) {
         var datetime = moment(this.datetimeDate).date(parseInt($(event.target).text(), 10));
@@ -781,6 +759,7 @@
 
   $.fn.datetime.defaults = {
     polyfill: true,
+    // format
     format: 'MM/DD/YYYY hh:mm A'
   };
 
@@ -791,11 +770,6 @@
   $(window).on('load', function () {
     $('[type=datetime-local]').each(function () {
 
-      // automatic polyfill
-      if ($.fn.datetime.defaults.polyfill && this.type === 'datetime-local') {
-        return;
-      }
-
       var $element = $(this),
           data     = $element.data();
 
@@ -804,84 +778,6 @@
     });
   });
 
-
-}(window.jQuery));
-
-(function ($) {
-
-  "use strict";
-
-  var Defer = function (element, options) {
-    this.init(element, options);
-  };
-
-  Defer.prototype = {
-    init: function (element, options) {
-      return [element, options];
-    }
-  };
-
-  /* DEFER PLUGIN DEFINITION
-   * ======================= */
-
-  $.fn.defer = function (option) {
-    return this.each(function () {
-      var $this   = $(this),
-          data    = $this.data('defer'),
-          options = typeof option === 'object' && option;
-
-      if (!data) {
-        $this.data('defer', (data = new Defer(this, options)));
-      }
-
-      if (typeof option === 'string') {
-        data[option]();
-      }
-    });
-  };
-
-  $.fn.defer.Constructor = Defer;
-
-  $.fn.defer.defaults = {};
-
-}(window.jQuery));
-
-(function ($) {
-
-  "use strict";
-
-  var Menu = function (element, options) {
-    this.init(element, options);
-  };
-
-  Menu.prototype = {
-    init: function (element, options) {
-      return [element, options];
-    }
-  };
-
-  /* MENU PLUGIN DEFINITION
-   * ====================== */
-
-  $.fn.menu = function (option) {
-    return this.each(function () {
-      var $this   = $(this),
-          data    = $this.data('menu'),
-          options = typeof option === 'object' && option;
-
-      if (!data) {
-        $this.data('menu', (data = new Menu(this, options)));
-      }
-
-      if (typeof option === 'string') {
-        data[option]();
-      }
-    });
-  };
-
-  $.fn.menu.Constructor = Menu;
-
-  $.fn.menu.defaults = {};
 
 }(window.jQuery));
 
@@ -966,45 +862,6 @@
 
   "use strict";
 
-  var Toc = function (element, options) {
-    this.init(element, options);
-  };
-
-  Toc.prototype = {
-    init: function (element, options) {
-      return [element, options];
-    }
-  };
-
-  /* TOC PLUGIN DEFINITION
-   * ===================== */
-
-  $.fn.toc = function (option) {
-    return this.each(function () {
-      var $this   = $(this),
-          data    = $this.data('toc'),
-          options = typeof option === 'object' && option;
-
-      if (!data) {
-        $this.data('toc', (data = new Toc(this, options)));
-      }
-
-      if (typeof option === 'string') {
-        data[option]();
-      }
-    });
-  };
-
-  $.fn.toc.Constructor = Toc;
-
-  $.fn.toc.defaults = {};
-
-}(window.jQuery));
-
-(function ($) {
-
-  "use strict";
-
 
   /* TOOLTIP PUBLIC CLASS DEFINITION
    * =============================== */
@@ -1081,7 +938,7 @@
     },
 
     setContent: function (content) {
-      this.tip().find('.wh-tooltip-inner')[this.options.html ? 'html' : 'text'](content || this.getTitle());
+      this.tip().find('.wy-tooltip-inner')[this.options.html ? 'html' : 'text'](content || this.getTitle());
     },
 
     show: function () {
@@ -1136,7 +993,7 @@
 
   $.fn.tooltip.defaults = {
     placement: 'top',
-    template : '<div class="wh-tooltip"><div class="wh-tooltip-arrow"></div><div class="wh-tooltip-inner"></div></div>',
+    template : '<div class="wy-tooltip"><div class="wy-tooltip-arrow"></div><div class="wy-tooltip-inner"></div></div>',
     title    : '',
     html     : false
   };
@@ -1167,7 +1024,7 @@
   Upload.prototype = {
     init: function (element, options) {
 
-      this.$element = $(element).hide();
+      this.$element = $(element);
 
       this.options = this.getOptions(options);
 
@@ -1176,9 +1033,7 @@
       // we need this for OS file selection
       this.$fileinput = $('<input type="file" multiple>').hide().insertAfter(element).on({
         change: function () {
-          uploader.createThumbnails(this.files, function (thumb) {
-            uploader.$element.trigger('thumb.wh.upload', thumb);
-          });
+          uploader.upload(this.files);
         },
         click: function (event) {
           event.stopPropagation();
@@ -1197,7 +1052,7 @@
     },
 
     initTriggers: function () {
-      $("[data-upload-trigger='" + this.options.uploadGroup + "']").on('click', $.proxy(function () {
+      $("[data-upload-trigger='" + this.options.uploadGroup + "'] .image-desktop").on('click', $.proxy(function () {
         this.$fileinput.trigger('click.wh.upload');
       }, this));
     },
@@ -1264,12 +1119,59 @@
         drop: $.proxy(function (event) {
           event.preventDefault();
           dropzonelayer--;
-          this.createThumbnails(event.originalEvent.dataTransfer.files, $.proxy(function (thumb) {
-            this.$element.trigger('thumb.wh.upload', thumb);
-          }, this));
+          this.$element.trigger('dragdropdropzone.wh.upload');
+          this.upload(event.originalEvent.dataTransfer.files);
         }, this)
       });
 
+    },
+
+    upload: function (files) {
+
+      this.$element.trigger('start.wh.upload');
+
+      if (!files) {
+        this.$element.trigger('error.wh.upload', 'No file selected.');
+        return;
+      }
+
+      if (!this.options.uploadUrl) {
+        this.$element.trigger('error.wh.upload', 'No upload url specified.');
+        return;
+      }
+
+      var xhr  = new XMLHttpRequest(),
+          data = new FormData();
+
+      this.xhr = xhr;
+
+      this.xhr.upload.addEventListener("progress", $.proxy(function (event) {
+        if (event.lengthComputable) {
+          this.$element.trigger('progress.wh.upload', Math.ceil((event.loaded * 100) / event.total));
+        }
+      }, this), false);
+
+      this.xhr.addEventListener('readystatechange', $.proxy(function () {
+        if (this.xhr.readyState === 4) {
+          if (this.xhr.status === 200) {
+            this.$element.trigger('load.wh.upload', this.xhr.responseText);
+          } else {
+            this.$element.trigger('error.wh.upload', this.xhr.responseText);
+          }
+        }
+      }, this), false);
+
+      data.append('site', 'test');
+      data.append('token', '5e13aef1-8aa8-41b4-8619-2eaf62c0ae49');
+      data.append('payload', files[0]);
+
+      xhr.open("POST", this.options.uploadUrl);
+
+      xhr.send(data);
+
+      this.createThumbnails(files, $.proxy(function (thumb) {
+        this.$element.trigger('thumb.wh.upload', thumb);
+      }, this));
     },
 
     createThumbnails: function (files, callback) {
@@ -1362,44 +1264,5 @@
 
     });
   });
-
-}(window.jQuery));
-
-(function ($) {
-
-  "use strict";
-
-  var Validate = function (element, options) {
-    this.init(element, options);
-  };
-
-  Validate.prototype = {
-    init: function (element, options) {
-      return [element, options];
-    }
-  };
-
-  /* VALIDATE PLUGIN DEFINITION
-   * ========================== */
-
-  $.fn.validate = function (option) {
-    return this.each(function () {
-      var $this   = $(this),
-          data    = $this.data('validate'),
-          options = typeof option === 'object' && option;
-
-      if (!data) {
-        $this.data('validate', (data = new Validate(this, options)));
-      }
-
-      if (typeof option === 'string') {
-        data[option]();
-      }
-    });
-  };
-
-  $.fn.validate.Constructor = Validate;
-
-  $.fn.validate.defaults = {};
 
 }(window.jQuery));

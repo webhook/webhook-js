@@ -3,7 +3,9 @@
 <head>
   <meta charset="utf-8">
   <title>Webhook JS Demo</title>
-  <link rel="stylesheet" href="style.min.css"/>
+  <!-- build:css style.min.css -->
+    <link rel="stylesheet" href="style.css">
+  <!-- endbuild -->
 </head>
 <body>
 
@@ -37,10 +39,12 @@
               </div>
               <div class="image-error wy-alert wy-alert-danger"></div>
               <div class="image-url">
-                <div class="wy-input-prefix"><span class="wy-input-context"><i class="fa fa-globe"></i></span><input type="text" data-upload data-upload-group="example" data-upload-url="http://23.253.89.18:3000/upload-file/" data-upload-type="image" placeholder="Or paste URL"></div>
+                <div class="wy-input-prefix"><span class="wy-input-context"><i class="fa fa-globe"></i></span><input type="text" data-upload data-upload-group="example" data-upload-type="image" placeholder="Or paste URL"></div>
               </div>
             </div>
           </a>
+
+          <input type="text" id="uploadUrl" placeholder="upload url">
 
         </div>
       </div>
@@ -114,9 +118,22 @@
     </div>
   </section>
 
-  <script src="vendor.min.js"></script>
-  <script src="webhook.min.js"></script>
-  <script src="app.min.js"></script>
+  <!-- build:js vendor.min.js -->
+    <script src="../bower_components/jquery/jquery.js"></script>
+    <script src="../bower_components/moment/moment.js"></script>
+    <script src="../bower_components/exifreader/js/ExifReader.js"></script>
+  <!-- endbuild -->
+  <!-- build:js webhook.min.js -->
+    <script src="../src/webhook-affix.js"></script>
+    <script src="../src/webhook-autocomplete.js"></script>
+    <script src="../src/webhook-datetime.js"></script>
+    <script src="../src/webhook-tab.js"></script>
+    <script src="../src/webhook-tooltip.js"></script>
+    <script src="../src/webhook-upload.js"></script>
+  <!-- endbuild -->
+  <!-- build:js app.min.js -->
+    <script src="app.js"></script>
+  <!-- endbuild -->
 
 </body>
 </html>

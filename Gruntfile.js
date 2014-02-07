@@ -1,13 +1,10 @@
 'use strict';
 
 module.exports = function (grunt) {
-
-  var rest = require('connect-rest');
-
-  rest.post('/upload', function (request, content, callback) {
-    console.log( 'Upload called:' + JSON.stringify( request ) );
-    return callback(null, '{"error": null, "id": 555}', { minify: true });
-  });
+  // Load all grunt tasks
+  require('load-grunt-tasks')(grunt);
+  // Show elapsed time at the end
+  require('time-grunt')(grunt);
 
   // Project configuration.
   grunt.initConfig({
@@ -20,7 +17,8 @@ module.exports = function (grunt) {
       ' Licensed MIT */\n',
     // Task configuration.
     clean: {
-      files: ['dist']
+      dist: ['dist'],
+      'gh-pages': ['gh-pages']
     },
     concat: {
       options: {
@@ -28,7 +26,7 @@ module.exports = function (grunt) {
         stripBanners: true
       },
       dist: {
-        src: ['src/*.js'],
+        src: ['src/<%= pkg.name %>-*.js'],
         dest: 'dist/jquery.<%= pkg.name %>.js'
       }
     },
@@ -42,9 +40,16 @@ module.exports = function (grunt) {
       }
     },
     qunit: {
-      files: ['test/**/*.html']
+      all: {
+        options: {
+          urls: ['http://localhost:9000/test/<%= pkg.name %>.html']
+        }
+      }
     },
     jshint: {
+      options: {
+        reporter: require('jshint-stylish')
+      },
       gruntfile: {
         options: {
           jshintrc: '.jshintrc'
@@ -57,6 +62,12 @@ module.exports = function (grunt) {
         },
         src: ['src/**/*.js']
       },
+      demo: {
+        options: {
+          jshintrc: 'src/.jshintrc'
+        },
+        src: ['demo/**/*.js']
+      },
       test: {
         options: {
           jshintrc: 'test/.jshintrc'
@@ -64,88 +75,82 @@ module.exports = function (grunt) {
         src: ['test/**/*.js']
       }
     },
+    sass: {
+      options: {
+        loadPath: [
+          'bower_components/bourbon/app/assets/stylesheets/',
+          'bower_components/neat/app/assets/stylesheets/',
+          'bower_components/wyrm/sass/',
+          'bower_components/font-awesome/scss/'
+        ]
+      },
+      demo: {
+        src: ['demo/*.sass'],
+        dest: 'demo/style.css'
+      }
+    },
     watch: {
       options: {
-        livereload: true
+        livereload: true,
       },
       gruntfile: {
         files: '<%= jshint.gruntfile.src %>',
         tasks: ['jshint:gruntfile']
       },
-      js: {
+      src: {
         files: '<%= jshint.src.src %>',
-        tasks: ['jshint:src', 'concat']
+        tasks: ['jshint:src', 'qunit']
       },
-      sass: {
-        files: '<%= sass.dev.src %>',
-        tasks: ['sass']
+      demo: {
+        files: 'demo/**/*.*',
+        tasks: ['jshint:demo']
       },
       test: {
         files: '<%= jshint.test.src %>',
         tasks: ['jshint:test', 'qunit']
       },
-      livereload: {
-        files: ['gh-pages/*.html', 'gh-pages/js/*.js', 'gh-pages/css/*.css']
+      sass: {
+        files: '<%= sass.demo.src %>',
+        tasks: ['sass']
       }
     },
     connect: {
       server: {
         options: {
           hostname: '*',
-          port: 9000,
-          middleware: function(connect, options) {
-            var middlewares = [];
-
-            middlewares.push(rest.rester());
-
-            var directory = options.directory || options.base[options.base.length - 1];
-            if (!Array.isArray(options.base)) {
-              options.base = [options.base];
-            }
-            options.base.forEach(function(base) {
-              // Serve static files.
-              middlewares.push(connect.static(base));
-            });
-            // Make directory browse-able.
-            middlewares.push(connect.directory(directory));
-            return middlewares;
-          }
+          port: 9000
         }
       }
     },
-    sass: {
-      dist: {
-        options: {
-          style: 'compressed'
-        },
-        files: {
-          'dist/webhook-js.min.css': 'src/webhook-js.sass'
-        }
-      },
-      dev: {
-        options: {
-          style: 'expanded'
-        },
-        src: ['src/webhook-js.sass'],
-        dest: 'dist/webhook-js.css'
+    useminPrepare: {
+      html: 'demo/index.html',
+      options: {
+        dest: 'gh-pages/'
       }
+    },
+    usemin: {
+      html: ['gh-pages/index.html']
+    },
+    copy: {
+      files: {
+        expand: true,
+        cwd: 'demo/',
+        src: ['*.html', 'data/*', 'fonts/*'],
+        dest: 'gh-pages/'
+      }
+    },
+    'gh-pages': {
+      options: {
+        base: 'gh-pages'
+      },
+      src: ['**']
     }
   });
 
-  // These plugins provide necessary tasks.
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-qunit');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-connect');
-  grunt.loadNpmTasks('grunt-contrib-sass');
-  grunt.loadNpmTasks('grunt-contrib-copy');
-
   // Default task.
-  grunt.registerTask('default', ['test', 'clean', 'sass', 'concat', 'uglify']);
-  grunt.registerTask('test', ['jshint', 'connect', 'qunit']);
+  grunt.registerTask('default', ['jshint', 'connect', 'qunit', 'clean:dist', 'concat', 'uglify']);
+  grunt.registerTask('build', ['clean:gh-pages', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'copy', 'usemin']);
+  grunt.registerTask('deploy', ['build', 'gh-pages']);
   grunt.registerTask('server', ['connect', 'watch']);
-
+  grunt.registerTask('test', ['jshint', 'connect', 'qunit']);
 };

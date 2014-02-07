@@ -13,23 +13,6 @@
 
   "use strict";
 
-  // todo: extract CSRF stuff
-  function getCookie (name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-      var cookies = document.cookie.split(';');
-      for (var i = 0; i < cookies.length; i++) {
-        var cookie = jQuery.trim(cookies[i]);
-        // Does this cookie string begin with the name we want?
-        if (cookie.substring(0, name.length + 1) === (name + '=')) {
-          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-          break;
-        }
-      }
-    }
-    return cookieValue;
-  }
-
   var Upload = function (element, options) {
     this.init(element, options);
   };
@@ -65,7 +48,7 @@
     },
 
     initTriggers: function () {
-      $("[data-upload-trigger='" + this.options.uploadGroup + "']").on('click', $.proxy(function () {
+      $("[data-upload-trigger='" + this.options.uploadGroup + "'] .image-desktop").on('click', $.proxy(function () {
         this.$fileinput.trigger('click.wh.upload');
       }, this));
     },
@@ -141,33 +124,44 @@
 
     upload: function (files) {
 
-      // var reader = new FileReader();
+      this.$element.trigger('start.wh.upload');
+
+      if (!files) {
+        this.$element.trigger('error.wh.upload', 'No file selected.');
+        return;
+      }
+
+      if (!this.options.uploadUrl) {
+        this.$element.trigger('error.wh.upload', 'No upload url specified.');
+        return;
+      }
+
       var xhr  = new XMLHttpRequest(),
           data = new FormData();
 
       this.xhr = xhr;
 
-      // var self = this;
       this.xhr.upload.addEventListener("progress", $.proxy(function (event) {
         if (event.lengthComputable) {
           this.$element.trigger('progress.wh.upload', Math.ceil((event.loaded * 100) / event.total));
         }
       }, this), false);
 
-      this.xhr.upload.addEventListener("load", $.proxy(function () {
-        this.$element.trigger('progress.wh.upload', 100);
-        setTimeout($.proxy(function () {
-          this.$element.trigger('load.wh.upload', JSON.parse(this.xhr.responseText));
-        }, this));
+      this.xhr.addEventListener('readystatechange', $.proxy(function () {
+        if (this.xhr.readyState === 4) {
+          if (this.xhr.status === 200) {
+            this.$element.trigger('load.wh.upload', this.xhr.responseText);
+          } else {
+            this.$element.trigger('error.wh.upload', this.xhr.responseText);
+          }
+        }
       }, this), false);
 
-      data.append('asset_type', this.options.uploadType);
-      data.append('asset', files[0]);
+      data.append('site', 'test');
+      data.append('token', '5e13aef1-8aa8-41b4-8619-2eaf62c0ae49');
+      data.append('payload', files[0]);
 
       xhr.open("POST", this.options.uploadUrl);
-
-      // todo: extract CSRF stuff
-      xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
 
       xhr.send(data);
 
@@ -212,7 +206,7 @@
                 break;
             }
 
-            if ([2, 4, 5, 7].inArray(orientation)) {
+            if ($.inArray(orientation, [2, 4, 5, 7]) >= 0) {
               thumb.addClass('flip-h');
             }
           }
