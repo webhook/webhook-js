@@ -48,14 +48,15 @@
     },
 
     initTriggers: function () {
-      $("[data-upload-trigger='" + this.options.uploadGroup + "'] .image-desktop").on('click', $.proxy(function () {
+      var triggerElement = this.options.uploadTrigger || $("[data-upload-trigger='" + this.options.uploadGroup + "']");
+      triggerElement.find(".image-desktop").on('click', $.proxy(function () {
         this.$fileinput.trigger('click.wh.upload');
       }, this));
     },
 
     initDropzones: function () {
 
-      var dropzone = this.$dropzone = $("[data-upload-dropzone='" + this.options.uploadGroup + "']");
+      var dropzone = this.$dropzone = this.options.uploadDropzone || $("[data-upload-dropzone='" + this.options.uploadGroup + "']");
 
       if (!dropzone.length) {
         return;
