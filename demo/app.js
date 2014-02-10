@@ -18,7 +18,9 @@
       $(this).data('upload').$dropzone.find('.image-error').show().text(response);
     },
     'start.wh.upload': function () {
-      $(this).data('upload').options.uploadUrl = $('#uploadUrl').val();
+      $(this).data('upload').options.uploadUrl   = $('#uploadUrl').val();
+      $(this).data('upload').options.uploadSite  = $('#uploadSite').val();
+      $(this).data('upload').options.uploadToken = $('#uploadToken').val();
       $(this).data('upload').$dropzone.addClass('wy-form-uploading');
       $(this).data('upload').$dropzone.find('.image-error').hide();
       $(this).data('upload').$dropzone.find('.image-loading p').html('Uploading <span>0%</span>');
@@ -37,7 +39,7 @@
     },
     'load.wh.upload': function (event, response) {
       $(this).data('upload').$dropzone.removeClass('wy-form-uploading');
-      $(this).data('upload').$element.val(JSON.parse(response).url);
+      $(this).data('upload').$element.val(response.url);
     }
   });
 

@@ -51,6 +51,23 @@
       $("[data-upload-trigger='" + this.options.uploadGroup + "'] .image-desktop").on('click', $.proxy(function () {
         this.$fileinput.trigger('click.wh.upload');
       }, this));
+
+
+      this.$element.on('keyup', $.proxy(function () {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/path/to/image.png', true);
+        xhr.responseType = 'blob';
+
+        xhr.onload = function() {
+          if (this.status === 200) {
+            // Note: .response instead of .responseText
+            var blob = new Blob([this.response], {type: 'image/png'});
+            window.console.log(blob);
+          }
+        };
+
+        xhr.send();
+      }, this));
     },
 
     initDropzones: function () {
@@ -124,101 +141,107 @@
 
     upload: function (files) {
 
-      this.$element.trigger('start.wh.upload');
+      this.file = files[0];
 
-      if (!files) {
+      if (!this.file) {
         this.$element.trigger('error.wh.upload', 'No file selected.');
         return;
       }
+
+      this.$element.trigger('start.wh.upload');
 
       if (!this.options.uploadUrl) {
         this.$element.trigger('error.wh.upload', 'No upload url specified.');
         return;
       }
 
-      var xhr  = new XMLHttpRequest(),
-          data = new FormData();
+      var data = new FormData();
+      data.append('payload', this.file);
+      data.append('site', this.options.uploadSite);
+      data.append('token', this.options.uploadToken);
 
-      this.xhr = xhr;
+      var self = this;
 
-      this.xhr.upload.addEventListener("progress", $.proxy(function (event) {
-        if (event.lengthComputable) {
-          this.$element.trigger('progress.wh.upload', Math.ceil((event.loaded * 100) / event.total));
-        }
-      }, this), false);
+      $.ajax({
 
-      this.xhr.addEventListener('readystatechange', $.proxy(function () {
-        if (this.xhr.readyState === 4) {
-          if (this.xhr.status === 200) {
-            this.$element.trigger('load.wh.upload', this.xhr.responseText);
-          } else {
-            this.$element.trigger('error.wh.upload', this.xhr.responseText);
-          }
-        }
-      }, this), false);
+        // Upload progress
+        xhr: function () {
+          var xhr = new window.XMLHttpRequest();
+          xhr.upload.addEventListener("progress", function (event) {
+            if (event.lengthComputable) {
+              self.$element.trigger('progress.wh.upload', Math.ceil((event.loaded * 100) / event.total));
+            }
+          }, false);
+          return xhr;
+        },
 
-      data.append('site', 'test');
-      data.append('token', '5e13aef1-8aa8-41b4-8619-2eaf62c0ae49');
-      data.append('payload', files[0]);
+        url: this.options.uploadUrl,
+        type: 'post',
+        data: data,
+        dataType: 'json',
+        contentType: false,
+        processData: false
+      }).done($.proxy(function (response) {
+        this.$element.trigger('load.wh.upload', response);
+      }, this)).fail($.proxy(function (response) {
+        this.$element.trigger('error.wh.upload', response);
+      }, this));
 
-      xhr.open("POST", this.options.uploadUrl);
-
-      xhr.send(data);
-
-      this.createThumbnails(files, $.proxy(function (thumb) {
+      this.createThumbnail(this.file, $.proxy(function (thumb) {
         this.$element.trigger('thumb.wh.upload', thumb);
       }, this));
+
     },
 
-    createThumbnails: function (files, callback) {
-      $.each(files, $.proxy(function (index, file) {
-        var thumb = $('<img>').attr({
-          src: (window.URL || window.webkitURL).createObjectURL(file)
-        }).css({
-          'max-width': this.options.thumbmax,
-          'max-height': this.options.thumbmax
-        });
+    createThumbnail: function (file, callback) {
 
-        var reader = new FileReader();
+      var thumb = $('<img>').attr({
+        src: (window.URL || window.webkitURL).createObjectURL(file)
+      }).css({
+        'max-width': this.options.thumbmax,
+        'max-height': this.options.thumbmax
+      });
 
-        // Closure to capture the file information.
-        reader.onload = function(evt) {
-          try {
-            var exif = new ExifReader(),
-                orientation = 1;
+      var reader = new FileReader();
 
-            // Parse the Exif tags.
-            exif.load(evt.target.result);
-            orientation = exif.getTagValue('Orientation');
+      // Closure to capture the file information.
+      reader.onload = function(evt) {
+        try {
+          var exif = new ExifReader(),
+              orientation = 1;
 
-            switch (orientation) {
-              case 3:
-              case 4:
-                thumb.addClass('rotate-180');
-                break;
-              case 5:
-              case 6:
-                thumb.addClass('rotate-90');
-                break;
-              case 7:
-              case 8:
-                thumb.addClass('rotate-270');
-                break;
-            }
+          // Parse the Exif tags.
+          exif.load(evt.target.result);
+          orientation = exif.getTagValue('Orientation');
 
-            if ($.inArray(orientation, [2, 4, 5, 7]) >= 0) {
-              thumb.addClass('flip-h');
-            }
+          switch (orientation) {
+            case 3:
+            case 4:
+              thumb.addClass('rotate-180');
+              break;
+            case 5:
+            case 6:
+              thumb.addClass('rotate-90');
+              break;
+            case 7:
+            case 8:
+              thumb.addClass('rotate-270');
+              break;
           }
-          catch (error) {
-            window.console.log(error);
-          }
-          callback(thumb);
-        };
 
-        // Read in the image file as a data URL.
-        reader.readAsArrayBuffer(file);
-      }, this));
+          if ($.inArray(orientation, [2, 4, 5, 7]) >= 0) {
+            thumb.addClass('flip-h');
+          }
+        }
+        catch (error) {
+          window.console.log(error);
+        }
+        callback(thumb);
+      };
+
+      // Read in the image file as a data URL.
+      reader.readAsArrayBuffer(file);
+
     }
   };
 
