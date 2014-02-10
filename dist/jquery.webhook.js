@@ -1055,23 +1055,6 @@
       $("[data-upload-trigger='" + this.options.uploadGroup + "'] .image-desktop").on('click', $.proxy(function () {
         this.$fileinput.trigger('click.wh.upload');
       }, this));
-
-
-      this.$element.on('keyup', $.proxy(function () {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', '/path/to/image.png', true);
-        xhr.responseType = 'blob';
-
-        xhr.onload = function() {
-          if (this.status === 200) {
-            // Note: .response instead of .responseText
-            var blob = new Blob([this.response], {type: 'image/png'});
-            window.console.log(blob);
-          }
-        };
-
-        xhr.send();
-      }, this));
     },
 
     initDropzones: function () {
