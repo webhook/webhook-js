@@ -29,7 +29,7 @@
       // we need this for OS file selection
       this.$fileinput = $('<input type="file" multiple>').hide().insertAfter(element).on({
         change: function () {
-          uploader.upload(this.files);
+          uploader.upload(this.files[0]);
         },
         click: function (event) {
           event.stopPropagation();
@@ -123,11 +123,9 @@
 
     },
 
-    upload: function (files) {
+    upload: function (file) {
 
-      this.file = files[0];
-
-      if (!this.file) {
+      if (!file) {
         this.$element.trigger('error.wh.upload', 'No file selected.');
         return;
       }
@@ -139,8 +137,18 @@
         return;
       }
 
+      if (typeof file === 'string') {
+        this.uploadUrl(file);
+      } else {
+        this.uploadFile(file);
+      }
+
+    },
+
+    uploadFile: function (file) {
+
       var data = new FormData();
-      data.append('payload', this.file);
+      data.append('payload', file);
       data.append('site', this.options.uploadSite);
       data.append('token', this.options.uploadToken);
 
@@ -171,8 +179,27 @@
         this.$element.trigger('error.wh.upload', response);
       }, this));
 
-      this.createThumbnail(this.file, $.proxy(function (thumb) {
+      this.createThumbnail(file, $.proxy(function (thumb) {
         this.$element.trigger('thumb.wh.upload', thumb);
+      }, this));
+
+    },
+
+    uploadUrl: function (url) {
+
+      $.ajax({
+        url: this.options.uploadUrl,
+        type: 'post',
+        data: {
+          url  : url,
+          site : this.options.uploadSite,
+          token: this.options.uploadToken
+        },
+        dataType: 'json'
+      }).done($.proxy(function (response) {
+        this.$element.trigger('load.wh.upload', response);
+      }, this)).fail($.proxy(function (response) {
+        this.$element.trigger('error.wh.upload', response);
       }, this));
 
     },
@@ -233,6 +260,9 @@
    * ======================== */
 
   $.fn.upload = function (option) {
+
+    var uploadArguments = arguments;
+
     return this.each(function () {
       var $this   = $(this),
           data    = $this.data('upload'),
@@ -243,9 +273,10 @@
       }
 
       if (typeof option === 'string') {
-        data[option]();
+        data[option].apply(data, Array.prototype.slice.call(uploadArguments, 1));
       }
     });
+
   };
 
   $.fn.upload.Constructor = Upload;

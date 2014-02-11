@@ -22,27 +22,30 @@
           <a class="wy-form-upload" data-upload-dropzone="example" data-upload-trigger="example">
             <div class="wy-form-upload-content">
               <div class="image-drag">
-                <i class="fa fa-picture-o wy-form-upload-fa"></i>
-                <p>Drag or select image</p>
+                <span>Drag or select image</span>
               </div>
               <div class="image-desktop">
-                <i class="fa fa-desktop wy-form-upload-fa"></i>
-                <p>Select from desktop</p>
+                <span>Select from desktop</span>
               </div>
               <div class="image-drop">
-                <i class="fa fa-arrow-down wy-form-upload-fa"></i>
-                <p>Drop files here</p>
+                <span>Drop files here</span>
               </div>
               <div class="image-loading">
                 <div class="wy-spinner wy-spinner-margin"></div>
-                <p>Uploading <span>0%</span></p>
-              </div>
-              <div class="image-error wy-alert wy-alert-danger"></div>
-              <div class="image-url">
-                <div class="wy-input-prefix"><span class="wy-input-context"><i class="fa fa-globe"></i></span><input type="text" data-upload data-upload-group="example" data-upload-type="image" placeholder="Or paste URL"></div>
+                <span>Uploading <span>0%</span></span>
               </div>
             </div>
           </a>
+
+          <a class="wy-form-upload-url">
+            <input type="text" id="url"> <button class="btn">Upload</button>
+          </a>
+
+          <button class="btn btn-link">or URL?</button>
+
+          <hr>
+
+          <input class="full-width" data-upload data-upload-group="example" data-upload-type="image" readonly>
 
           <hr>
 
