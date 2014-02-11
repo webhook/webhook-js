@@ -1,4 +1,4 @@
-/*! webhook - v - 2014-02-10
+/*! webhook - v - 2014-02-11
 * https://github.com//webhook
 * Copyright (c) 2014 ; Licensed MIT */
 (function ($) {
@@ -1033,7 +1033,7 @@
       // we need this for OS file selection
       this.$fileinput = $('<input type="file" multiple>').hide().insertAfter(element).on({
         change: function () {
-          uploader.upload(this.files);
+          uploader.upload(this.files[0]);
         },
         click: function (event) {
           event.stopPropagation();
@@ -1127,14 +1127,7 @@
 
     },
 
-    upload: function (files) {
-
-      this.file = files[0];
-
-      if (!this.file) {
-        this.$element.trigger('error.wh.upload', 'No file selected.');
-        return;
-      }
+    upload: function (file) {
 
       this.$element.trigger('start.wh.upload');
 
@@ -1143,14 +1136,33 @@
         return;
       }
 
+      if (typeof file === 'string') {
+        this.uploadUrl(file);
+      } else {
+        this.uploadFile(file);
+      }
+
+    },
+
+    uploadFile: function (file) {
+
+      if (!file) {
+        this.$element.trigger('error.wh.upload', 'No file selected.');
+        return;
+      }
+
+      this.createThumbnail(file, $.proxy(function (thumb) {
+        this.$element.trigger('thumb.wh.upload', thumb);
+      }, this));
+
       var data = new FormData();
-      data.append('payload', this.file);
+      data.append('payload', file);
       data.append('site', this.options.uploadSite);
       data.append('token', this.options.uploadToken);
 
       var self = this;
 
-      $.ajax({
+      return $.ajax({
 
         // Upload progress
         xhr: function () {
@@ -1163,7 +1175,7 @@
           return xhr;
         },
 
-        url: this.options.uploadUrl,
+        url: this.options.uploadUrl + 'upload-file/',
         type: 'post',
         data: data,
         dataType: 'json',
@@ -1175,8 +1187,31 @@
         this.$element.trigger('error.wh.upload', response);
       }, this));
 
-      this.createThumbnail(this.file, $.proxy(function (thumb) {
-        this.$element.trigger('thumb.wh.upload', thumb);
+    },
+
+    uploadUrl: function (url) {
+
+      if (!url) {
+        this.$element.trigger('error.wh.upload', 'No URL given.');
+        return;
+      }
+
+      this.$element.trigger('progress.wh.upload', 100);
+
+      return $.ajax({
+        url: this.options.uploadUrl + 'upload-url/',
+        type: 'post',
+        data: {
+          url  : url,
+          site : this.options.uploadSite,
+          token: this.options.uploadToken
+        },
+        dataType: 'json'
+      }).done($.proxy(function (response) {
+        this.$element.trigger('load.wh.upload', response);
+        this.$element.trigger('thumb.wh.upload', $('<img>').attr('src', response.url));
+      }, this)).fail($.proxy(function (response) {
+        this.$element.trigger('error.wh.upload', response);
       }, this));
 
     },
@@ -1222,7 +1257,7 @@
           }
         }
         catch (error) {
-          window.console.log(error);
+          // Ignore for now
         }
         callback(thumb);
       };
@@ -1237,6 +1272,9 @@
    * ======================== */
 
   $.fn.upload = function (option) {
+
+    var uploadArguments = arguments;
+
     return this.each(function () {
       var $this   = $(this),
           data    = $this.data('upload'),
@@ -1247,9 +1285,10 @@
       }
 
       if (typeof option === 'string') {
-        data[option]();
+        data[option].apply(data, Array.prototype.slice.call(uploadArguments, 1));
       }
     });
+
   };
 
   $.fn.upload.Constructor = Upload;
