@@ -3892,3 +3892,6 @@ section {
   display: block; }
 .wy-form-upload .image-error {
   display: none; }
+
+.wy-form-upload-url {
+  display: none; }

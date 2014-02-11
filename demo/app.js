@@ -25,9 +25,11 @@
     },
     'error.wh.upload': function (event, response) {
       $(this).data('upload').$dropzone.removeClass('wy-form-uploading');
-      window.alert('Error!', response);
+      window.alert(response);
     },
     'start.wh.upload': function () {
+      $('.wy-form-upload-container').show();
+      $('.wy-form-upload-url').hide();
       $(this).data('upload').options.uploadUrl   = $('#uploadUrl').val();
       $(this).data('upload').options.uploadSite  = $('#uploadSite').val();
       $(this).data('upload').options.uploadToken = $('#uploadToken').val();
@@ -42,9 +44,9 @@
     },
     'progress.wh.upload': function (event, percentage) {
       if (percentage < 100) {
-        $(this).data('upload').$dropzone.find('.image-loading span').text(percentage + '%');
+        $(this).data('upload').$dropzone.find('.image-loading span').html('Uploading <span>' + percentage + '%</span>');
       } else {
-        $(this).data('upload').$dropzone.find('.image-loading p').text('Finishing up...');
+        $(this).data('upload').$dropzone.find('.image-loading span').text('Finishing up...');
       }
     },
     'load.wh.upload': function (event, response) {
@@ -53,8 +55,13 @@
     }
   });
 
-  $('.wy-form-upload-url button').on('click', function () {
+  $('.wy-form-upload-url .upload-url').on('click', function () {
     $('[data-upload]:input').upload('upload', $('#url').val());
+    $('#url').val('');
+  });
+
+  $('.upload-method-toggle').on('click', function () {
+    $('.wy-form-upload-container, .wy-form-upload-url').toggle();
   });
 
 })();

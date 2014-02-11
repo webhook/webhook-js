@@ -19,29 +19,33 @@
         <h2>Upload</h2>
         <div class="codeblock-example">
 
-          <a class="wy-form-upload" data-upload-dropzone="example" data-upload-trigger="example">
-            <div class="wy-form-upload-content">
-              <div class="image-drag">
-                <span>Drag or select image</span>
-              </div>
-              <div class="image-desktop">
-                <span>Select from desktop</span>
-              </div>
-              <div class="image-drop">
-                <span>Drop files here</span>
-              </div>
-              <div class="image-loading">
-                <div class="wy-spinner wy-spinner-margin"></div>
-                <span>Uploading <span>0%</span></span>
+          <div class="wy-form-upload-container">
+            <div class="wy-form-upload" data-upload-dropzone="example" data-upload-trigger="example">
+              <div class="wy-form-upload-content">
+                <div class="image-drag">
+                  <span>Drag or select image</span>
+                </div>
+                <div class="image-desktop">
+                  <span>Select from desktop</span>
+                </div>
+                <div class="image-drop">
+                  <span>Drop files here</span>
+                </div>
+                <div class="image-loading">
+                  <div class="wy-spinner wy-spinner-margin"></div>
+                  <span></span>
+                </div>
               </div>
             </div>
-          </a>
 
-          <a class="wy-form-upload-url">
-            <input type="text" id="url"> <button class="btn">Upload</button>
-          </a>
+            <button class="btn btn-link upload-method-toggle">or URL?</button>
+          </div>
 
-          <button class="btn btn-link">or URL?</button>
+          <div class="wy-form-upload-url">
+            <input type="text" id="url">
+            <button class="btn upload-url">Upload</button>
+            <button class="btn btn-link upload-method-toggle wy-text-danger fa fa-times-circle"> cancel</button>
+          </div>
 
           <hr>
 

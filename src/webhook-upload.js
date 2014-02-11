@@ -125,11 +125,6 @@
 
     upload: function (file) {
 
-      if (!file) {
-        this.$element.trigger('error.wh.upload', 'No file selected.');
-        return;
-      }
-
       this.$element.trigger('start.wh.upload');
 
       if (!this.options.uploadUrl) {
@@ -147,6 +142,15 @@
 
     uploadFile: function (file) {
 
+      if (!file) {
+        this.$element.trigger('error.wh.upload', 'No file selected.');
+        return;
+      }
+
+      this.createThumbnail(file, $.proxy(function (thumb) {
+        this.$element.trigger('thumb.wh.upload', thumb);
+      }, this));
+
       var data = new FormData();
       data.append('payload', file);
       data.append('site', this.options.uploadSite);
@@ -154,7 +158,7 @@
 
       var self = this;
 
-      $.ajax({
+      return $.ajax({
 
         // Upload progress
         xhr: function () {
@@ -167,7 +171,7 @@
           return xhr;
         },
 
-        url: this.options.uploadUrl,
+        url: this.options.uploadUrl + 'upload-file/',
         type: 'post',
         data: data,
         dataType: 'json',
@@ -179,16 +183,19 @@
         this.$element.trigger('error.wh.upload', response);
       }, this));
 
-      this.createThumbnail(file, $.proxy(function (thumb) {
-        this.$element.trigger('thumb.wh.upload', thumb);
-      }, this));
-
     },
 
     uploadUrl: function (url) {
 
-      $.ajax({
-        url: this.options.uploadUrl,
+      if (!url) {
+        this.$element.trigger('error.wh.upload', 'No URL given.');
+        return;
+      }
+
+      this.$element.trigger('progress.wh.upload', 100);
+
+      return $.ajax({
+        url: this.options.uploadUrl + 'upload-url/',
         type: 'post',
         data: {
           url  : url,
@@ -198,6 +205,7 @@
         dataType: 'json'
       }).done($.proxy(function (response) {
         this.$element.trigger('load.wh.upload', response);
+        this.$element.trigger('thumb.wh.upload', $('<img>').attr('src', response.url));
       }, this)).fail($.proxy(function (response) {
         this.$element.trigger('error.wh.upload', response);
       }, this));
@@ -245,7 +253,7 @@
           }
         }
         catch (error) {
-          window.console.log(error);
+          // Ignore for now
         }
         callback(thumb);
       };
