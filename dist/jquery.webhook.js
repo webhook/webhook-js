@@ -1135,6 +1135,7 @@
 
       if (!this.options.uploadUrl) {
         this.$element.trigger('error.wh.upload', 'No upload url specified.');
+        this.$element.trigger('done.wh.upload');
         return;
       }
 
@@ -1150,6 +1151,7 @@
 
       if (!file) {
         this.$element.trigger('error.wh.upload', 'No file selected.');
+        this.$element.trigger('done.wh.upload');
         return;
       }
 
@@ -1183,11 +1185,13 @@
         dataType: 'json',
         contentType: false,
         processData: false
-      }).done($.proxy(function (response) {
-        this.$element.trigger('load.wh.upload', response);
-      }, this)).fail($.proxy(function (response) {
-        this.$element.trigger('error.wh.upload', response);
-      }, this));
+      }).done(function (response) {
+        self.$element.trigger('load.wh.upload', response);
+      }).fail(function (response) {
+        self.$element.trigger('error.wh.upload', response);
+      }).always(function () {
+        self.$element.trigger('done.wh.upload');
+      });
 
     },
 
@@ -1200,6 +1204,8 @@
 
       this.$element.trigger('progress.wh.upload', 100);
 
+      var self = this;
+
       return $.ajax({
         url: this.options.uploadUrl + 'upload-url/',
         type: 'post',
@@ -1209,12 +1215,14 @@
           token: this.options.uploadToken
         },
         dataType: 'json'
-      }).done($.proxy(function (response) {
-        this.$element.trigger('load.wh.upload', response);
-        this.$element.trigger('thumb.wh.upload', $('<img>').attr('src', response.url));
-      }, this)).fail($.proxy(function (response) {
-        this.$element.trigger('error.wh.upload', response);
-      }, this));
+      }).done(function (response) {
+        self.$element.trigger('load.wh.upload', response);
+        self.$element.trigger('thumb.wh.upload', $('<img>').attr('src', response.url));
+      }).fail(function (response) {
+        self.$element.trigger('error.wh.upload', response);
+      }).always(function () {
+        self.$element.trigger('done.wh.upload');
+      });
 
     },
 
