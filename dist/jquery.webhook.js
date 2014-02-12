@@ -1052,10 +1052,12 @@
     },
 
     initTriggers: function () {
-      var triggerElement = this.options.uploadTrigger || $("[data-upload-trigger='" + this.options.uploadGroup + "']");
-      triggerElement.find(".image-desktop").on('click', $.proxy(function () {
-        this.$fileinput.trigger('click.wh.upload');
-      }, this));
+      this.$triggerElement = this.options.uploadTrigger || $("[data-upload-trigger='" + this.options.uploadGroup + "']");
+      this.$triggerElement.on({
+        click: $.proxy(function () {
+          this.$fileinput.trigger('click.wh.upload');
+        }, this)
+      });
     },
 
     initDropzones: function () {
@@ -1121,7 +1123,7 @@
           event.preventDefault();
           dropzonelayer--;
           this.$element.trigger('dragdropdropzone.wh.upload');
-          this.upload(event.originalEvent.dataTransfer.files);
+          this.upload(event.originalEvent.dataTransfer.files[0]);
         }, this)
       });
 
@@ -1220,9 +1222,6 @@
 
       var thumb = $('<img>').attr({
         src: (window.URL || window.webkitURL).createObjectURL(file)
-      }).css({
-        'max-width': this.options.thumbmax,
-        'max-height': this.options.thumbmax
       });
 
       var reader = new FileReader();
@@ -1259,6 +1258,7 @@
         catch (error) {
           // Ignore for now
         }
+
         callback(thumb);
       };
 
@@ -1293,9 +1293,7 @@
 
   $.fn.upload.Constructor = Upload;
 
-  $.fn.upload.defaults = {
-    thumbmax: 100
-  };
+  $.fn.upload.defaults = {};
 
  /* UPLOAD DATA-API
   * =============== */
