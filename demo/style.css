@@ -4295,12 +4295,5 @@ section {
   section:after {
     clear: both; }
 
-.wy-form-upload.wy-form-uploading .image-drag, .wy-form-upload.wy-form-uploading .image-drop, .wy-form-upload.wy-form-uploading .image-desktop, .wy-form-upload.wy-form-uploading .image-url {
-  display: none; }
-.wy-form-upload.wy-form-uploading .image-loading {
-  display: block; }
-.wy-form-upload .image-error {
-  display: none; }
-
 .wy-form-upload-url {
   display: none; }

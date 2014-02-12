@@ -30,16 +30,16 @@
     'dragleave.wh.upload': resetButton,
     'dragdrop.wh.upload': resetButton,
     'error.wh.upload': function (event, response) {
-      $('.wy-form-upload').removeClass('wy-form-uploading');
       window.alert(response);
     },
     'start.wh.upload': function () {
-      $('.wy-form-upload-container').show();
-      $('.wy-form-upload-url').hide();
       $(this).data('upload').options.uploadUrl   = $('#uploadUrl').val();
       $(this).data('upload').options.uploadSite  = $('#uploadSite').val();
       $(this).data('upload').options.uploadToken = $('#uploadToken').val();
-      $('.wy-form-upload').addClass('wy-form-uploading');
+      $('.wy-form-upload-container').show();
+      $('.wy-form-upload-url').hide();
+      $(this).data('upload').$triggerElement.hide();
+      $('.wy-form-upload .image-loading').css('display', 'inline-block');
       $('.wy-form-upload .image-loading span').html('Uploading <span>0%</span>');
     },
     'thumb.wh.upload': function (event, thumb) {
@@ -55,8 +55,11 @@
       }
     },
     'load.wh.upload': function (event, response) {
-      $('.wy-form-upload').removeClass('wy-form-uploading');
       $(this).data('upload').$element.val(response.url);
+    },
+    'done.wh.upload': function () {
+      $('.wy-form-upload .image-loading').hide();
+      $(this).data('upload').$triggerElement.show();
     }
   });
 
