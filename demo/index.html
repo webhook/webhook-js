@@ -17,39 +17,30 @@
 
       <div class="section" id="upload">
         <h2>Upload</h2>
+
         <div class="codeblock-example">
 
           <div class="wy-form-upload-container">
-            <div class="wy-form-upload" data-upload-dropzone="example" data-upload-trigger="example">
-              <div class="wy-form-upload-content">
-                <div class="image-drag">
-                  <span>Drag or select image</span>
-                </div>
-                <div class="image-desktop">
-                  <span>Select from desktop</span>
-                </div>
-                <div class="image-drop">
-                  <span>Drop files here</span>
-                </div>
-                <div class="image-loading">
-                  <div class="wy-spinner wy-spinner-margin"></div>
-                  <span></span>
-                </div>
+            <div class="wy-form-upload">
+              <button type="button" class="btn btn-neutral icon icon-image" data-upload-dropzone="example" data-upload-trigger="example"> Drag or select image</button>
+              <div class="image-loading btn btn-info">
+                <div class="wy-spinner"></div>
+                <span></span>
               </div>
             </div>
 
-            <button class="btn btn-link upload-method-toggle">or URL?</button>
+            <button type="button" class="btn btn-link upload-method-toggle">or use a URL?</button>
           </div>
 
-          <div class="wy-form-upload-url">
-            <input type="text" id="url">
-            <button class="btn upload-url">Upload</button>
-            <button class="btn btn-link upload-method-toggle wy-text-danger fa fa-times-circle"> cancel</button>
+          <div class="wy-form-upload-url wy-input-prefix">
+            <span class="wy-input-context">Paste URL <span class="icon icon-arrow-right"></span></span><input type="text">
+            <button type="button" class="btn btn-neutral btn-small upload-url">Fetch it!</button>
+            <button type="button" class="btn btn-small btn-link upload-method-toggle wy-text-danger icon icon-remove-sign"> Cancel</button>
           </div>
 
           <hr>
 
-          <input class="full-width" data-upload data-upload-group="example" data-upload-type="image" readonly>
+          <input class="full-width" data-upload data-upload-group="example" readonly>
 
           <hr>
 
