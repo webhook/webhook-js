@@ -1,12 +1,13 @@
 {
-  "name": "webhook",
-  "version": "",
-  "dependencies": {},
-  "devDependencies": {
-    "qunit": "1.x",
-    "jquery": "1.x",
+  "name": "webhook-js",
+  "version": "0.0.1",
+  "dependencies": {
     "exifreader": "latest",
     "moment": "latest",
+    "jquery": "1.x"
+  },
+  "devDependencies": {
+    "qunit": "1.x",
     "wyrm": "0.0.x"
   }
 }
