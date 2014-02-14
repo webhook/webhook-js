@@ -1,4 +1,4 @@
-/*! webhook - v - 2014-02-11
+/*! webhook - v - 2014-02-13
 * https://github.com//webhook
 * Copyright (c) 2014 ; Licensed MIT */
 (function ($) {
@@ -785,6 +785,132 @@
 
   "use strict";
 
+  var Dropzone = function (element) {
+    this.init(element);
+  };
+
+  Dropzone.prototype = {
+    init: function (element) {
+
+      this.$element = $(element);
+
+      this._observeWindow();
+      this._observeElement();
+
+    },
+
+    _observeWindow: function () {
+
+      var windowlayer = 0;
+
+      // prevent miss-drops
+      $(window).on({
+        dragover: function (event) {
+          event.preventDefault();
+        },
+        dragenter: $.proxy(function (event) {
+          event.preventDefault();
+          windowlayer++;
+          if (windowlayer) {
+            this.$element.trigger('dropzonewindowenter');
+          }
+        }, this),
+        dragleave: $.proxy(function (event) {
+          event.preventDefault();
+          windowlayer--;
+          if (!windowlayer) {
+            this.$element.trigger('dropzonewindowleave');
+          }
+        }, this),
+        drop: $.proxy(function (event) {
+          event.preventDefault();
+          windowlayer = 0;
+          this.$element.trigger('dropzonewindowdrop');
+        }, this)
+      });
+
+    },
+
+    _observeElement: function () {
+
+      var dropzonelayer = 0;
+
+      // Handle drag and drop from OS.
+      this.$element.on({
+        dragover: function (event) {
+          event.preventDefault();
+          event.originalEvent.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
+        },
+        dragenter: $.proxy(function (event) {
+          event.preventDefault();
+          dropzonelayer++;
+          if (dropzonelayer === 1) {
+            this.$element.trigger('dropzoneenter', event);
+          }
+        }, this),
+        dragleave: $.proxy(function (event) {
+          event.preventDefault();
+          dropzonelayer--;
+          if (!dropzonelayer) {
+            this.$element.trigger('dopzoneleave', event);
+          }
+        }, this),
+        drop: function (event) {
+          event.preventDefault();
+          dropzonelayer = 0;
+        }
+      });
+
+    }
+  };
+
+  /* DROPZONE PLUGIN DEFINITION
+   * ========================== */
+
+  $.fn.dropzone = function (option) {
+
+    var uploadArguments = arguments;
+
+    return this.each(function () {
+      var $this   = $(this),
+          data    = $this.data('dropzone'),
+          options = typeof option === 'object' && option;
+
+      if (!data) {
+        $this.data('dropzone', (data = new Dropzone(this, options)));
+      }
+
+      if (typeof option === 'string') {
+        data[option].apply(data, Array.prototype.slice.call(uploadArguments, 1));
+      }
+    });
+
+  };
+
+  $.fn.dropzone.Constructor = Dropzone;
+
+  $.fn.dropzone.defaults = {};
+
+ /* DROPZONE DATA-API
+  * ================= */
+
+  $(window).on('load', function () {
+    $('[data-dropzone]').each(function () {
+
+      var $element = $(this),
+          data     = $element.data();
+
+      $element.dropzone(data);
+
+    });
+  });
+
+}(window.jQuery));
+
+(function ($) {
+
+  "use strict";
+
   var Tab = function (element, options) {
     this.init(element, options);
   };
@@ -1026,116 +1152,47 @@
 
       this.$element = $(element);
 
-      this.options = this.getOptions(options);
+      this.options = this._getOptions(options);
+
+      this._initTriggers();
+
+      return [element, options];
+
+    },
+
+    _getOptions: function (options) {
+      return $.extend({}, $.fn.upload.defaults, this.$element.data(), options);
+    },
+
+    _initTriggers: function () {
 
       var uploader = this;
 
       // we need this for OS file selection
-      this.$fileinput = $('<input type="file" multiple>').hide().insertAfter(element).on({
+      this.$fileinput = $('<input type="file">').hide().appendTo('body').on({
         change: function () {
           uploader.upload(this.files[0]);
+          $(this).replaceWith($(this).clone(true));
         },
         click: function (event) {
           event.stopPropagation();
         }
       });
 
-      this.initTriggers();
-      this.initDropzones();
-
-      return [element, options];
-
+      this.$element.on('click', $.proxy(this.selectFile, this));
     },
 
-    getOptions: function (options) {
-      return $.extend({}, $.fn.upload.defaults, this.$element.data(), options);
-    },
-
-    initTriggers: function () {
-      this.$triggerElement = this.options.uploadTrigger || $("[data-upload-trigger='" + this.options.uploadGroup + "']");
-      this.$triggerElement.on({
-        click: $.proxy(function () {
-          this.$fileinput.trigger('click.wh.upload');
-        }, this)
-      });
-    },
-
-    initDropzones: function () {
-
-      var dropzone = this.$dropzone = this.options.uploadDropzone || $("[data-upload-dropzone='" + this.options.uploadGroup + "']");
-
-      if (!dropzone.length) {
-        return;
-      }
-
-      var windowlayer = 0;
-
-      // prevent miss-drops
-      $(window).on({
-        dragover: $.proxy(function (event) {
-          event.preventDefault();
-          this.$element.trigger('dragover.wh.upload');
-        }, this),
-        dragenter: $.proxy(function (event) {
-          event.preventDefault();
-          windowlayer++;
-          if (windowlayer) {
-            this.$element.trigger('dragenter.wh.upload');
-          }
-        }, this),
-        dragleave: $.proxy(function (event) {
-          event.preventDefault();
-          windowlayer--;
-          if (!windowlayer) {
-            this.$element.trigger('dragleave.wh.upload');
-          }
-        }, this),
-        drop: $.proxy(function (event) {
-          event.preventDefault();
-          windowlayer--;
-          this.$element.trigger('dragdrop.wh.upload');
-        }, this)
-      });
-
-      var dropzonelayer = 0;
-
-      // Handle drag and drop from OS.
-      dropzone.on({
-        dragover: function (event) {
-          event.preventDefault();
-          event.originalEvent.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
-        },
-        dragenter: $.proxy(function (event) {
-          event.preventDefault();
-          dropzonelayer++;
-          if (dropzonelayer) {
-            this.$element.trigger('dragenterdropzone.wh.upload');
-          }
-        }, this),
-        dragleave: $.proxy(function (event) {
-          event.preventDefault();
-          dropzonelayer--;
-          if (!dropzonelayer) {
-            this.$element.trigger('dragleavedropzone.wh.upload');
-          }
-        }, this),
-        drop: $.proxy(function (event) {
-          event.preventDefault();
-          dropzonelayer--;
-          this.$element.trigger('dragdropdropzone.wh.upload');
-          this.upload(event.originalEvent.dataTransfer.files[0]);
-        }, this)
-      });
-
+    selectFile: function () {
+      this.$fileinput.trigger('click');
     },
 
     upload: function (file) {
 
-      this.$element.trigger('start.wh.upload');
+      this.$element.trigger('start');
 
       if (!this.options.uploadUrl) {
-        this.$element.trigger('error.wh.upload', 'No upload url specified.');
-        this.$element.trigger('done.wh.upload');
+        this.$element.trigger('error', 'No upload url specified.');
+        this.$element.trigger('done');
         return;
       }
 
@@ -1150,13 +1207,13 @@
     uploadFile: function (file) {
 
       if (!file) {
-        this.$element.trigger('error.wh.upload', 'No file selected.');
-        this.$element.trigger('done.wh.upload');
+        this.$element.trigger('error', 'No file selected.');
+        this.$element.trigger('done');
         return;
       }
 
       this.createThumbnail(file, $.proxy(function (thumb) {
-        this.$element.trigger('thumb.wh.upload', thumb);
+        this.$element.trigger('thumb', thumb);
       }, this));
 
       var data = new FormData();
@@ -1173,7 +1230,7 @@
           var xhr = new window.XMLHttpRequest();
           xhr.upload.addEventListener("progress", function (event) {
             if (event.lengthComputable) {
-              self.$element.trigger('progress.wh.upload', Math.ceil((event.loaded * 100) / event.total));
+              self.$element.trigger('progress', Math.ceil((event.loaded * 100) / event.total));
             }
           }, false);
           return xhr;
@@ -1186,11 +1243,11 @@
         contentType: false,
         processData: false
       }).done(function (response) {
-        self.$element.trigger('load.wh.upload', response);
+        self.$element.trigger('load', response);
       }).fail(function (response) {
-        self.$element.trigger('error.wh.upload', response);
+        self.$element.trigger('error', response);
       }).always(function () {
-        self.$element.trigger('done.wh.upload');
+        self.$element.trigger('done');
       });
 
     },
@@ -1198,11 +1255,11 @@
     uploadUrl: function (url) {
 
       if (!url) {
-        this.$element.trigger('error.wh.upload', 'No URL given.');
+        this.$element.trigger('error', 'No URL given.');
         return;
       }
 
-      this.$element.trigger('progress.wh.upload', 100);
+      this.$element.trigger('progress', 100);
 
       var self = this;
 
@@ -1216,12 +1273,12 @@
         },
         dataType: 'json'
       }).done(function (response) {
-        self.$element.trigger('load.wh.upload', response);
-        self.$element.trigger('thumb.wh.upload', $('<img>').attr('src', response.url));
+        self.$element.trigger('load', response);
+        self.$element.trigger('thumb', $('<img>').attr('src', response.url));
       }).fail(function (response) {
-        self.$element.trigger('error.wh.upload', response);
+        self.$element.trigger('error', response);
       }).always(function () {
-        self.$element.trigger('done.wh.upload');
+        self.$element.trigger('done');
       });
 
     },
