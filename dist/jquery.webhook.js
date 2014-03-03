@@ -1,4 +1,4 @@
-/*! webhook - v - 2014-02-13
+/*! webhook - v - 2014-03-03
 * https://github.com//webhook
 * Copyright (c) 2014 ; Licensed MIT */
 (function ($) {
@@ -1212,9 +1212,11 @@
         return;
       }
 
-      this.createThumbnail(file, $.proxy(function (thumb) {
-        this.$element.trigger('thumb', thumb);
-      }, this));
+      if (file.type.match(/^image/)) {
+        this.createThumbnail(file, $.proxy(function (thumb) {
+          this.$element.trigger('thumb', thumb);
+        }, this));
+      }
 
       var data = new FormData();
       data.append('payload', file);
@@ -1256,6 +1258,7 @@
 
       if (!url) {
         this.$element.trigger('error', 'No URL given.');
+        this.$element.trigger('done');
         return;
       }
 
@@ -1274,7 +1277,11 @@
         dataType: 'json'
       }).done(function (response) {
         self.$element.trigger('load', response);
-        self.$element.trigger('thumb', $('<img>').attr('src', response.url));
+
+        if (/\.(?:jpe?g|png|gif)$/.test(response.url)) {
+          self.$element.trigger('thumb', $('<img>').attr('src', response.url));
+        }
+
       }).fail(function (response) {
         self.$element.trigger('error', response);
       }).always(function () {
