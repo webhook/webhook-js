@@ -34,20 +34,33 @@
 
     _initTriggers: function () {
 
-      var uploader = this;
-
       // we need this for OS file selection
-      this.$fileinput = $('<input type="file">').hide().appendTo('body').on({
+      this.$fileinput = $('<input type="file">').hide().appendTo('body').on();
+
+      if (this.options.multiple) {
+        this.$fileinput.attr('multiple', true);
+      }
+
+      this.observeFileInput();
+
+      this.$element.on('click', $.proxy(this.selectFile, this));
+    },
+
+    observeFileInput: function () {
+      var self = this;
+      this.$fileinput.on({
         change: function () {
-          uploader.upload(this.files[0]);
-          $(this).replaceWith($(this).clone(true));
+          $.each(this.files, $.proxy(function (index, file) {
+            this.upload(file);
+          }, self));
+          self.$fileinput = $(this).clone();
+          $(this).replaceWith(self.$fileInput);
+          self.observeFileInput();
         },
         click: function (event) {
           event.stopPropagation();
         }
       });
-
-      this.$element.on('click', $.proxy(this.selectFile, this));
     },
 
     selectFile: function () {
