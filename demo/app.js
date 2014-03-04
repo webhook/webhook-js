@@ -1,4 +1,4 @@
-/* global $:false */
+/* global $:false, Webhook:false */
 (function () {
 
   'use strict';
@@ -13,6 +13,80 @@
     });
   });
 
+
+  /* SELECT FILE */
+
+  var selectFileBtn = $('#select-file button.single').selectFile();
+  var selectFilesBtn = $('#select-file button.multiple').selectFile({ multiple: true });
+  var selectImagesBtn = $('#select-file button.images').selectFile({ multiple: true, accept: 'image/*' });
+
+  selectFileBtn.add(selectFilesBtn).add(selectImagesBtn).on('selectedFile', function (event, file) {
+    var fileelement = $('<li>').appendTo('#select-file .filenames').text(file.name);
+    setTimeout(function () {
+      fileelement.fadeOut(500, function () {
+        $(this).remove();
+      });
+    }, 5000);
+  });
+
+
+  /* DROPZONE */
+
+  $('.wy-alert[data-dropzone]').on('drop', function (event) {
+    var files = event.originalEvent.dataTransfer.files;
+    for (var i = 0; i < files.length; i++) {
+      $('<p>').appendTo(this).text(files[i].name);
+    }
+  });
+
+
+  /* UPLOAD */
+
+  // create uploader with required params
+  var uploader = new Webhook.Uploader($('#uploadUrl').val(), $('#uploadSite').val(), $('#uploadToken').val());
+
+  var uploadButton = $('#upload button.icon-image');
+
+  // when a file is selected, upload
+  uploadButton.selectFile().on('selectedFile', function (event, file) {
+
+    $('.wy-form-upload-container').show();
+    $('.wy-form-upload-url').hide();
+    $(this).hide();
+    $('.wy-form-upload .image-loading').css('display', 'inline-block');
+
+    // upload returns promise
+    var uploading = uploader.upload(file);
+
+    uploading.progress(function (event) {
+      var percentage = Math.ceil((event.loaded * 100) / event.total);
+      if (percentage < 100) {
+        $('.wy-form-upload .image-loading span').html('Uploading <span>' + percentage + '%</span>');
+      } else {
+        $('.wy-form-upload .image-loading span').text('Finishing up...');
+      }
+    });
+
+    uploading.done(function (response) {
+      $('#upload .output').val(response.url);
+    });
+
+    uploading.always(function () {
+      $('.wy-form-upload .image-loading').hide();
+      uploadButton.show();
+    });
+
+  });
+
+  $('.wy-form-upload-url .upload-url').on('click', function () {
+    uploadButton.trigger('selectedFile', $('.wy-form-upload-url input').val());
+    $('.wy-form-upload-url input').val('');
+  });
+
+  $('.upload-method-toggle').on('click', function () {
+    $('.wy-form-upload-container, .wy-form-upload-url').toggle();
+  });
+
   var resetButton = function () {
     $(this)
       .removeClass('icon-desktop icon-arrow-down btn-success')
@@ -20,7 +94,8 @@
       .text(' Drag or select image');
   };
 
-  $('[data-upload][data-dropzone]').on({
+  // Dropzone behavior
+  uploadButton.dropzone().on({
     dropzonewindowenter: function () {
       $(this)
         .removeClass('icon-image icon-desktop btn-neutral')
@@ -30,41 +105,13 @@
     dropzonewindowdrop: resetButton,
     dropzonewindowleave: resetButton,
     drop: function (event) {
-      $(this).upload('upload', event.originalEvent.dataTransfer.files[0]);
+      $(this).trigger('selectedFile', event.originalEvent.dataTransfer.files[0]);
       resetButton.call(this);
-    },
-    error: function (event, response) {
-      window.alert(response);
-    },
-    start: function () {
-      $(this).data('upload').options.uploadUrl   = $('#uploadUrl').val();
-      $(this).data('upload').options.uploadSite  = $('#uploadSite').val();
-      $(this).data('upload').options.uploadToken = $('#uploadToken').val();
-      $('.wy-form-upload-container').show();
-      $('.wy-form-upload-url').hide();
-      $(this).hide();
-      $('.wy-form-upload .image-loading').css('display', 'inline-block');
-      $('.wy-form-upload .image-loading span').html('Uploading <span>0%</span>');
-    },
-    thumb: function (event, thumb) {
-      var widget = $('.wy-form-upload');
-      widget.find('.wy-form-upload-image').remove();
-      $('<div class="wy-form-upload-image">').append(thumb).prependTo(widget);
-    },
-    progress: function (event, percentage) {
-      if (percentage < 100) {
-        $('.wy-form-upload .image-loading span').html('Uploading <span>' + percentage + '%</span>');
-      } else {
-        $('.wy-form-upload .image-loading span').text('Finishing up...');
-      }
-    },
-    load: function (event, response) {
-      $(this).data('upload').$element.val(response.url);
-    },
-    done: function () {
-      $('.wy-form-upload .image-loading').hide();
-      $(this).show();
-    },
+    }
+  });
+
+  // Just some additional styles
+  uploadButton.on({
     mouseenter: function () {
       $(this)
         .removeClass('icon-image icon-arrow-down btn-success')
@@ -72,22 +119,6 @@
         .text(' Select from desktop');
     },
     mouseleave: resetButton
-  });
-
-  $('.wy-form-upload-url .upload-url').on('click', function () {
-    $('[data-upload]:input').upload('upload', $('.wy-form-upload-url input').val());
-    $('.wy-form-upload-url input').val('');
-  });
-
-  $('.upload-method-toggle').on('click', function () {
-    $('.wy-form-upload-container, .wy-form-upload-url').toggle();
-  });
-
-  $('.wy-alert[data-dropzone]').on('drop', function (event) {
-    var files = event.originalEvent.dataTransfer.files;
-    for (var i = 0; i < files.length; i++) {
-      $('<p>').appendTo(this).text(files[i].name);
-    }
   });
 
 })();

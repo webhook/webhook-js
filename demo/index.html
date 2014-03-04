@@ -15,6 +15,20 @@
 
       <h1>Components</h1>
 
+      <div class="section" id="select-file">
+        <h2>Dropzone</h2>
+
+        <div class="codeblock-example">
+
+          <button type="button" class="btn btn-neutral single">Click for single file selection</button>
+          <button type="button" class="btn btn-neutral multiple">Click for multiple file selection</button>
+          <button type="button" class="btn btn-neutral images">Click for multiple image file selection</button>
+
+          <ul class="filenames"></ul>
+
+        </div>
+      </div>
+
       <div class="section" id="upload">
         <h2>Dropzone</h2>
 
@@ -35,7 +49,7 @@
 
           <div class="wy-form-upload-container">
             <div class="wy-form-upload">
-              <button type="button" class="btn btn-neutral icon icon-image" data-upload data-dropzone> Drag or select image</button>
+              <button type="button" class="btn btn-neutral icon icon-image"> Drag or select image</button>
               <div class="image-loading btn btn-info">
                 <div class="wy-spinner"></div>
                 <span></span>
@@ -53,7 +67,7 @@
 
           <hr>
 
-          <input class="full-width" readonly>
+          <input class="full-width output" readonly>
 
           <hr>
 
@@ -145,6 +159,7 @@
     <script src="../src/webhook-tab.js"></script>
     <script src="../src/webhook-tooltip.js"></script>
     <script src="../src/webhook-upload.js"></script>
+    <script src="../src/webhook-select-file.js"></script>
     <script src="../src/webhook-dropzone.js"></script>
   <!-- endbuild -->
   <!-- build:js app.min.js -->

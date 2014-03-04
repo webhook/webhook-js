@@ -1,4 +1,4 @@
-/*! webhook - v - 2014-03-03
+/*! webhook - v - 2014-03-04
 * https://github.com//webhook
 * Copyright (c) 2014 ; Licensed MIT */
 (function ($) {
@@ -911,6 +911,106 @@
 
   "use strict";
 
+  var SelectFile = function () {
+    this.init.apply(this, arguments);
+  };
+
+  SelectFile.prototype = {
+    init: function (element, options) {
+
+      this.$element = $(element);
+
+      this.options = this._getOptions(options);
+
+      // We need this for OS file selection
+      this.$fileinput = $('<input type="file">').hide().appendTo('body');
+
+      // Only accept certain filetypes?
+      if (this.options.accept) {
+        this.$fileinput.attr('accept', this.options.accept);
+      }
+
+      // Allow multiple file selection?
+      if (this.options.multiple) {
+        this.$fileinput.attr('multiple', true);
+      }
+
+      this.observeFileInput();
+
+      this.$element.on('click', $.proxy(this.selectFile, this));
+
+      return arguments;
+
+    },
+
+    _getOptions: function (options) {
+      return $.extend({}, $.fn.selectFile.defaults, this.$element.data(), options);
+    },
+
+    observeFileInput: function () {
+      var self = this;
+      this.$fileinput
+        .off('change')
+        .off('click')
+        .on('change', function () {
+
+          $.each(this.files, function (index, file) {
+            self.$element.trigger('selectedFile', file);
+          });
+
+          // reset file input
+          self.$fileinput = $(this).clone();
+          $(this).replaceWith(self.$fileInput);
+          self.observeFileInput();
+        })
+        .on('click', function (event) {
+          event.stopPropagation();
+        });
+    },
+
+    selectFile: function () {
+      this.$fileinput.trigger('click');
+    }
+
+  };
+
+
+  /* SELECT FILE PLUGIN DEFINITION
+   * ======================== */
+
+  $.fn.selectFile = function (option) {
+
+    var selectFileArguments = arguments;
+
+    return this.each(function () {
+      var $this   = $(this),
+          data    = $this.data('selectFile'),
+          options = typeof option === 'object' && option;
+
+      if (!data) {
+        $this.data('selectFile', (data = new SelectFile(this, options)));
+      }
+
+      if (typeof option === 'string') {
+        data[option].apply(data, Array.prototype.slice.call(selectFileArguments, 1));
+      }
+    });
+
+  };
+
+  $.fn.selectFile.Constructor = SelectFile;
+
+  $.fn.selectFile.defaults = {
+    multiple: false,
+    accept: null
+  };
+
+}(window.jQuery));
+
+(function ($) {
+
+  "use strict";
+
   var Tab = function (element, options) {
     this.init(element, options);
   };
@@ -1143,255 +1243,81 @@
 
   "use strict";
 
-  var Upload = function (element, options) {
-    this.init(element, options);
+  var Uploader = function () {
+    this.init.apply(this, arguments);
   };
 
-  Upload.prototype = {
-    init: function (element, options) {
-
-      this.$element = $(element);
-
-      this.options = this._getOptions(options);
-
-      this._initTriggers();
-
-      return [element, options];
-
-    },
-
-    _getOptions: function (options) {
-      return $.extend({}, $.fn.upload.defaults, this.$element.data(), options);
-    },
-
-    _initTriggers: function () {
-
-      // we need this for OS file selection
-      this.$fileinput = $('<input type="file">').hide().appendTo('body').on();
-
-      if (this.options.multiple) {
-        this.$fileinput.attr('multiple', true);
-      }
-
-      this.observeFileInput();
-
-      this.$element.on('click', $.proxy(this.selectFile, this));
-    },
-
-    observeFileInput: function () {
-      var self = this;
-      this.$fileinput.on({
-        change: function () {
-          $.each(this.files, $.proxy(function (index, file) {
-            this.upload(file);
-          }, self));
-          self.$fileinput = $(this).clone();
-          $(this).replaceWith(self.$fileInput);
-          self.observeFileInput();
-        },
-        click: function (event) {
-          event.stopPropagation();
-        }
-      });
-    },
-
-    selectFile: function () {
-      this.$fileinput.trigger('click');
+  Uploader.prototype = {
+    init: function (url, uploadSite, uploadToken, options) {
+      this.url         = url;
+      this.uploadSite  = uploadSite;
+      this.uploadToken = uploadToken;
+      this.options     = options;
     },
 
     upload: function (file) {
-
-      this.$element.trigger('start');
-
-      if (!this.options.uploadUrl) {
-        this.$element.trigger('error', 'No upload url specified.');
-        this.$element.trigger('done');
-        return;
-      }
-
       if (typeof file === 'string') {
-        this.uploadUrl(file);
+        return this.uploadUrl(file);
       } else {
-        this.uploadFile(file);
+        return this.uploadFile(file);
       }
-
     },
 
     uploadFile: function (file) {
 
-      if (!file) {
-        this.$element.trigger('error', 'No file selected.');
-        this.$element.trigger('done');
-        return;
-      }
-
-      if (file.type.match(/^image/)) {
-        this.createThumbnail(file, $.proxy(function (thumb) {
-          this.$element.trigger('thumb', thumb);
-        }, this));
-      }
-
       var data = new FormData();
       data.append('payload', file);
-      data.append('site', this.options.uploadSite);
-      data.append('token', this.options.uploadToken);
+      data.append('site', this.uploadSite);
+      data.append('token', this.uploadToken);
 
-      var self = this;
+      var dfd = $.Deferred();
 
-      return $.ajax({
+      $.ajax({
 
         // Upload progress
         xhr: function () {
           var xhr = new window.XMLHttpRequest();
           xhr.upload.addEventListener("progress", function (event) {
             if (event.lengthComputable) {
-              self.$element.trigger('progress', Math.ceil((event.loaded * 100) / event.total));
+              dfd.notify(event);
             }
           }, false);
           return xhr;
         },
 
-        url: this.options.uploadUrl + 'upload-file/',
+        url: this.url + 'upload-file/',
         type: 'post',
         data: data,
         dataType: 'json',
         contentType: false,
         processData: false
-      }).done(function (response) {
-        self.$element.trigger('load', response);
-      }).fail(function (response) {
-        self.$element.trigger('error', response);
+      }).done(function () {
+        dfd.resolve.apply(this, arguments);
+      }).fail(function () {
+        dfd.reject.apply(this, arguments);
       }).always(function () {
-        self.$element.trigger('done');
+        dfd.always.apply(this, arguments);
       });
+
+      return dfd;
 
     },
 
     uploadUrl: function (url) {
-
-      if (!url) {
-        this.$element.trigger('error', 'No URL given.');
-        this.$element.trigger('done');
-        return;
-      }
-
-      this.$element.trigger('progress', 100);
-
-      var self = this;
-
       return $.ajax({
-        url: this.options.uploadUrl + 'upload-url/',
+        url: this.url + 'upload-url/',
         type: 'post',
         data: {
           url  : url,
-          site : this.options.uploadSite,
-          token: this.options.uploadToken
+          site : this.uploadSite,
+          token: this.uploadToken
         },
         dataType: 'json'
-      }).done(function (response) {
-        self.$element.trigger('load', response);
-
-        if (/\.(?:jpe?g|png|gif)$/.test(response.url)) {
-          self.$element.trigger('thumb', $('<img>').attr('src', response.url));
-        }
-
-      }).fail(function (response) {
-        self.$element.trigger('error', response);
-      }).always(function () {
-        self.$element.trigger('done');
       });
-
-    },
-
-    createThumbnail: function (file, callback) {
-
-      var thumb = $('<img>').attr({
-        src: (window.URL || window.webkitURL).createObjectURL(file)
-      });
-
-      var reader = new FileReader();
-
-      // Closure to capture the file information.
-      reader.onload = function(evt) {
-        try {
-          var exif = new ExifReader(),
-              orientation = 1;
-
-          // Parse the Exif tags.
-          exif.load(evt.target.result);
-          orientation = exif.getTagValue('Orientation');
-
-          switch (orientation) {
-            case 3:
-            case 4:
-              thumb.addClass('rotate-180');
-              break;
-            case 5:
-            case 6:
-              thumb.addClass('rotate-90');
-              break;
-            case 7:
-            case 8:
-              thumb.addClass('rotate-270');
-              break;
-          }
-
-          if ($.inArray(orientation, [2, 4, 5, 7]) >= 0) {
-            thumb.addClass('flip-h');
-          }
-        }
-        catch (error) {
-          // Ignore for now
-        }
-
-        callback(thumb);
-      };
-
-      // Read in the image file as a data URL.
-      reader.readAsArrayBuffer(file);
-
     }
   };
 
-  /* UPLOAD PLUGIN DEFINITION
-   * ======================== */
-
-  $.fn.upload = function (option) {
-
-    var uploadArguments = arguments;
-
-    return this.each(function () {
-      var $this   = $(this),
-          data    = $this.data('upload'),
-          options = typeof option === 'object' && option;
-
-      if (!data) {
-        $this.data('upload', (data = new Upload(this, options)));
-      }
-
-      if (typeof option === 'string') {
-        data[option].apply(data, Array.prototype.slice.call(uploadArguments, 1));
-      }
-    });
-
-  };
-
-  $.fn.upload.Constructor = Upload;
-
-  $.fn.upload.defaults = {};
-
- /* UPLOAD DATA-API
-  * =============== */
-
-  $(window).on('load', function () {
-    $('[data-upload]:input').each(function () {
-
-      var $element = $(this),
-          data     = $element.data();
-
-      $element.upload(data);
-
-    });
-  });
+  window.Webhook = window.Webhook || {};
+  window.Webhook.Uploader = Uploader;
 
 }(window.jQuery));
