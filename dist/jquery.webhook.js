@@ -1,4 +1,4 @@
-/*! webhook - v - 2014-03-04
+/*! webhook - v - 2014-04-03
 * https://github.com//webhook
 * Copyright (c) 2014 ; Licensed MIT */
 (function ($) {
@@ -1269,6 +1269,12 @@
       data.append('payload', file);
       data.append('site', this.uploadSite);
       data.append('token', this.uploadToken);
+
+      if (this.options && this.options.data) {
+        $.each(this.options.data, function (key, value) {
+          data.append(key, value);
+        });
+      }
 
       var dfd = $.Deferred();
 

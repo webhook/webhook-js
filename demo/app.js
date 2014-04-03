@@ -43,7 +43,7 @@
   /* UPLOAD */
 
   // create uploader with required params
-  var uploader = new Webhook.Uploader($('#uploadUrl').val(), $('#uploadSite').val(), $('#uploadToken').val());
+  var uploader = new Webhook.Uploader($('#uploadUrl').val(), $('#uploadSite').val(), $('#uploadToken').val(), { data: { foo: 'bar' } });
 
   var uploadButton = $('#upload button.icon-image');
 

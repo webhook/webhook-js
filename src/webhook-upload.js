@@ -38,6 +38,12 @@
       data.append('site', this.uploadSite);
       data.append('token', this.uploadToken);
 
+      if (this.options && this.options.data) {
+        $.each(this.options.data, function (key, value) {
+          data.append(key, value);
+        });
+      }
+
       var dfd = $.Deferred();
 
       $.ajax({
