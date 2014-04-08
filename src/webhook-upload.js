@@ -78,14 +78,23 @@
     },
 
     uploadUrl: function (url) {
+
+      var data = {
+        url  : url,
+        site : this.uploadSite,
+        token: this.uploadToken
+      };
+
+      if (this.options && this.options.data) {
+        $.each(this.options.data, function (key, value) {
+          data[key] = value;
+        });
+      }
+
       return $.ajax({
         url: this.url + 'upload-url/',
         type: 'post',
-        data: {
-          url  : url,
-          site : this.uploadSite,
-          token: this.uploadToken
-        },
+        data: data,
         dataType: 'json'
       });
     }
