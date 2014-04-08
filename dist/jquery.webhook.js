@@ -1,4 +1,4 @@
-/*! webhook - v - 2014-04-03
+/*! webhook - v - 2014-04-08
 * https://github.com//webhook
 * Copyright (c) 2014 ; Licensed MIT */
 (function ($) {
@@ -1310,14 +1310,23 @@
     },
 
     uploadUrl: function (url) {
+
+      var data = {
+        url  : url,
+        site : this.uploadSite,
+        token: this.uploadToken
+      };
+
+      if (this.options && this.options.data) {
+        $.each(this.options.data, function (key, value) {
+          data[key] = value;
+        });
+      }
+
       return $.ajax({
         url: this.url + 'upload-url/',
         type: 'post',
-        data: {
-          url  : url,
-          site : this.uploadSite,
-          token: this.uploadToken
-        },
+        data: data,
         dataType: 'json'
       });
     }
