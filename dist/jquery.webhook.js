@@ -1,4 +1,4 @@
-/*! webhook - v - 2014-04-08
+/*! webhook - v - 2014-05-15
 * https://github.com//webhook
 * Copyright (c) 2014 ; Licensed MIT */
 (function ($) {
@@ -18,6 +18,8 @@
       if (!this.options.offset.top) {
         this.options.offset.top = this.$element.offset().top - 10;
       }
+
+      window.console.log(this.options);
 
       this.$window.on({
         'scroll.affix': $.proxy(this.checkPosition, this),
@@ -75,6 +77,8 @@
       } else {
         affix = false;
       }
+
+      window.console.log(affix, scrollTop, offsetTop);
 
       if (this.affixed === affix) {
         return;
@@ -1228,13 +1232,12 @@
  /* TOOLTIP DATA-API
   * ================ */
 
-  $(window).on('load', function () {
-    $('[data-toggle="tooltip"]').each(function () {
-      var $element = $(this),
-          data     = $element.data();
+  $(document).on('mouseenter', '[data-toggle="tooltip"]', function () {
+    var $element = $(this),
+        data     = $element.data();
 
-      $element.tooltip(data);
-    });
+    $element.tooltip(data);
+    $element.tooltip('show');
   });
 
 }(window.jQuery));
