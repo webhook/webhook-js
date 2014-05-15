@@ -150,13 +150,12 @@
  /* TOOLTIP DATA-API
   * ================ */
 
-  $(window).on('load', function () {
-    $('[data-toggle="tooltip"]').each(function () {
-      var $element = $(this),
-          data     = $element.data();
+  $(document).on('mouseenter', '[data-toggle="tooltip"]', function () {
+    var $element = $(this),
+        data     = $element.data();
 
-      $element.tooltip(data);
-    });
+    $element.tooltip(data);
+    $element.tooltip('show');
   });
 
 }(window.jQuery));
