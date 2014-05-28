@@ -9,7 +9,7 @@
 
 (function ($) {
 
-  "use strict";
+  'use strict';
 
   var SelectFile = function () {
     this.init.apply(this, arguments);

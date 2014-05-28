@@ -4,7 +4,7 @@
   "dependencies": {
     "exifreader": "latest",
     "moment": "latest",
-    "jquery": "1.x"
+    "jquery": "latest"
   },
   "devDependencies": {
     "qunit": "1.x",
