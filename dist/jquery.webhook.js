@@ -1,4 +1,4 @@
-/*! webhook - v - 2014-05-15
+/*! webhook - v - 2014-05-28
 * https://github.com//webhook
 * Copyright (c) 2014 ; Licensed MIT */
 (function ($) {
@@ -18,8 +18,6 @@
       if (!this.options.offset.top) {
         this.options.offset.top = this.$element.offset().top - 10;
       }
-
-      window.console.log(this.options);
 
       this.$window.on({
         'scroll.affix': $.proxy(this.checkPosition, this),
@@ -77,8 +75,6 @@
       } else {
         affix = false;
       }
-
-      window.console.log(affix, scrollTop, offsetTop);
 
       if (this.affixed === affix) {
         return;
@@ -913,7 +909,7 @@
 
 (function ($) {
 
-  "use strict";
+  'use strict';
 
   var SelectFile = function () {
     this.init.apply(this, arguments);
@@ -1244,7 +1240,7 @@
 
 (function ($) {
 
-  "use strict";
+  'use strict';
 
   var Uploader = function () {
     this.init.apply(this, arguments);
@@ -1282,24 +1278,25 @@
       var dfd = $.Deferred();
 
       $.ajax({
-
-        // Upload progress
-        xhr: function () {
-          var xhr = new window.XMLHttpRequest();
-          xhr.upload.addEventListener("progress", function (event) {
-            if (event.lengthComputable) {
-              dfd.notify(event);
-            }
-          }, false);
-          return xhr;
-        },
-
         url: this.url + 'upload-file/',
         type: 'post',
         data: data,
         dataType: 'json',
         contentType: false,
-        processData: false
+        processData: false,
+
+        // Upload progress
+        xhr: function () {
+          var xhr = $.ajaxSettings.xhr();
+          if (xhr.upload) {
+            xhr.upload.addEventListener('progress', function (event) {
+              if (event.lengthComputable) {
+                dfd.notify(event);
+              }
+            }, false);
+          }
+          return xhr;
+        }
       }).done(function () {
         dfd.resolve.apply(this, arguments);
       }).fail(function () {
